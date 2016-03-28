@@ -3,6 +3,8 @@ var GameLayer = cc.LayerColor.extend({
     this._super(new cc.Color( 127, 127, 127, 255));
     this.setPosition(new cc.Point(0, 0 ));
 
+    this.createBackgrounds();
+
     this.createPlayer();
 
     this.createEnemyType1();
@@ -15,6 +17,24 @@ var GameLayer = cc.LayerColor.extend({
     this.addKeyboardHandlers();
 
     return true;
+  },
+
+  createBackgrounds: function() { // can be further extracted (a lot!!)
+    this.background1 = new Background(1);
+    this.background2 = new Background(2);
+    this.background3 = new Background(3);
+    this.background1.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
+    GameLayer.SCREENHEIGHT / 2));
+    this.addChild(this.background1, 0);
+    this.background2.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
+    GameLayer.SCREENHEIGHT * 3 / 2));
+    this.addChild(this.background2, 0);
+    this.background3.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
+    GameLayer.SCREENHEIGHT * 5 / 2));
+    this.addChild(this.background3, 0);
+    this.background1.scheduleUpdate();
+    this.background2.scheduleUpdate();
+    this.background3.scheduleUpdate();
   },
 
   createPlayer: function() {
@@ -30,7 +50,7 @@ var GameLayer = cc.LayerColor.extend({
       this.enemiesType1[i] = new EnemyType1();
       var randomPosX = Math.floor(Math.random() * (range + 1)) + min;
       this.enemiesType1[i].setPos(i);
-      this.addChild(this.enemiesType1[i]);
+      this.addChild(this.enemiesType1[i], 1);
     }
   },
 
@@ -38,22 +58,22 @@ var GameLayer = cc.LayerColor.extend({
     this.enemiesType2 = new Array(2);
     this.enemiesType2[0] = new EnemyType2();
     this.enemiesType2[0].setPos(1);
-    this.addChild(this.enemiesType2[0]);
+    this.addChild(this.enemiesType2[0], 1);
 
     this.enemiesType2[1] = new EnemyType2();
     this.enemiesType2[1].setPos(2);
-    this.addChild(this.enemiesType2[1]);
+    this.addChild(this.enemiesType2[1], 1);
   },
 
   createEnemyType3: function() {
     this.enemiesType3 = new Array(2);
     this.enemiesType3[0] = new EnemyType3();
     this.enemiesType3[0].setPos(1);
-    this.addChild(this.enemiesType3[0]);
+    this.addChild(this.enemiesType3[0], 1);
 
     this.enemiesType3[1] = new EnemyType3();
     this.enemiesType3[1].setPos(2);
-    this.addChild(this.enemiesType3[1]);
+    this.addChild(this.enemiesType3[1], 1);
   },
 
   addKeyboardHandlers: function() {

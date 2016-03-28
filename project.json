@@ -18,6 +18,7 @@
     "src/Enemy.js",
     "src/Enemy1.js",
     "src/Enemy2.js",
-    "src/Enemy3.js"
+    "src/Enemy3.js",
+    "src/Background.js"
   ]
 }

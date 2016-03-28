@@ -3,7 +3,7 @@ var Player = cc.Sprite.extend({
     this._super();
     this.initWithFile('res/images/player.png' );
     this.direction = Player.DIR.STILL;
-    this.speed = 10;
+    this.speed = 12;
   },
 
   switchDirection: function(keyboardInput) {
@@ -12,6 +12,11 @@ var Player = cc.Sprite.extend({
 
   update(dt) {
     var pos = this.getPosition();
+    pos = this.movePlayer(pos);
+    this.setPosition(new cc.Point(pos.x, pos.y));
+  },
+
+  movePlayer: function(pos) {
     if(this.direction != Player.DIR.STILL) {
       switch (this.direction) {
       case Player.DIR.UP:
@@ -35,10 +40,8 @@ var Player = cc.Sprite.extend({
         }
         break;
       }
-
-    this.setPosition(new cc.Point(pos.x, pos.y));
-  }
-
+    }
+    return pos;
   }
 });
 
