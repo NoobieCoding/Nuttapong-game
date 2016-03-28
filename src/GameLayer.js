@@ -5,6 +5,14 @@ var GameLayer = cc.LayerColor.extend({
     this.player = new Player();
     this.player.setPosition(new cc.Point(screenWidth / 2, startPositionY));
     this.addChild(this.player, 1);
+    this.enemiesType1 = new Array(5);// temp
+    this.enemiesType2 = new Array(2);
+    this.enemiesType2[0] = new EnemyType2();
+    this.enemiesType2[0].setPosition(100, 1000);
+    this.addChild(this.enemiesType2[0]);
+    this.enemiesType2[1] = new EnemyType2();
+    this.enemiesType2[1].setPosition(1800, 1000);
+    this.addChild(this.enemiesType2[1]);
     return true;
   }
 });
@@ -19,4 +27,4 @@ var StartScene = cc.Scene.extend({
 });
 
 var screenWidth = 1920;
-var startPositionY = 100;
+var startPositionY = 150;
