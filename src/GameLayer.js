@@ -3,16 +3,29 @@ var GameLayer = cc.LayerColor.extend({
     this._super(new cc.Color( 127, 127, 127, 255));
     this.setPosition(new cc.Point(0, 0 ));
     this.player = new Player();
-    this.player.setPosition(new cc.Point(screenWidth / 2, startPositionY));
+    this.player.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
+    GameLayer.STARTPOSY));
     this.addChild(this.player, 1);
     this.enemiesType1 = new Array(5);// temp
     this.enemiesType2 = new Array(2);
     this.enemiesType2[0] = new EnemyType2();
-    this.enemiesType2[0].setPosition(100, 1000);
+    this.enemiesType2[0].setPosition(GameLayer.ENEMY2LANE.XLEFTSIDE,
+    GameLayer.ENEMY2LANE.YPOSITION);
     this.addChild(this.enemiesType2[0]);
     this.enemiesType2[1] = new EnemyType2();
     this.enemiesType2[1].setPosition(1800, 1000);
     this.addChild(this.enemiesType2[1]);
+
+    var range = GameLayer.ENEMY2LANE.XRIGHTSIDE - GameLayer.ENEMY2LANE.XLEFTSIDE;
+    var min = GameLayer.ENEMY2LANE.XLEFTSIDE;
+    console.log(range);
+    for(var i = 0; i < this.enemiesType1.length; i++) {
+      this.enemiesType1[i] = new EnemyType1();
+      var randomPosX = Math.floor(Math.random() * (range + 1)) + min;
+      this.enemiesType1[i].setPosition(new cc.Point(randomPosX, GameLayer.ENEMY1.FIRST_ENEMY_POSY + (i * GameLayer.ENEMY1.GAP_PER_ENEMIY)));
+      this.addChild(this.enemiesType1[i]);
+    }
+
     return true;
   }
 });
@@ -26,5 +39,16 @@ var StartScene = cc.Scene.extend({
   }
 });
 
-var screenWidth = 1920;
-var startPositionY = 150;
+GameLayer.SCREENWIDTH = 1920;
+GameLayer.STARTPOSY = 150;
+
+GameLayer.ENEMY2LANE = {
+  XLEFTSIDE: 100,
+  XRIGHTSIDE: 1800,
+  YPOSITION: 1000
+};
+
+GameLayer.ENEMY1 = {
+  FIRST_ENEMY_POSY: 700,
+  GAP_PER_ENEMIY: 200
+};
