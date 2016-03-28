@@ -17,6 +17,7 @@
     "src/Player.js",
     "src/Enemy.js",
     "src/Enemy1.js",
-    "src/Enemy2.js"
+    "src/Enemy2.js",
+    "src/Enemy3.js"
   ]
 }
