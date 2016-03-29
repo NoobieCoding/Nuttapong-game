@@ -29,20 +29,9 @@ var Background = cc.Sprite.extend({
     },
 
     rePosition: function() {
-      if(this.checkOutOfBoarder())
-      switch(this.order) {
-      case Background.ORDER.FIRST:
+      if(this.checkOutOfBoarder()) {
         this.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
         GameLayer.SCREENHEIGHT * 5 / 2));
-        break;
-      case Background.ORDER.SECOND:
-        this.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
-        GameLayer.SCREENHEIGHT * 5 / 2));
-        break;
-      case Background.ORDER.THIRD:
-        this.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
-        GameLayer.SCREENHEIGHT * 5 / 2));
-        break;
       }
     }
 });
