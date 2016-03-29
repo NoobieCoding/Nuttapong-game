@@ -16,6 +16,9 @@ var GameLayer = cc.LayerColor.extend({
     this.player.scheduleUpdate();
     this.addKeyboardHandlers();
 
+    this.enemiesType2[0].scheduleUpdate();
+    this.enemiesType2[1].scheduleUpdate();
+
     return true;
   },
 
@@ -48,7 +51,6 @@ var GameLayer = cc.LayerColor.extend({
     this.enemiesType1 = new Array(5);// temp
     for(var i = 0; i < this.enemiesType1.length; i++) {
       this.enemiesType1[i] = new EnemyType1();
-      var randomPosX = Math.floor(Math.random() * (range + 1)) + min;
       this.enemiesType1[i].setPos(i);
       this.addChild(this.enemiesType1[i], 1);
     }
