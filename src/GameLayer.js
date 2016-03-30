@@ -58,12 +58,12 @@ var GameLayer = cc.LayerColor.extend({
 
   createEnemyType2: function() {
     this.enemiesType2 = new Array(2);
-    this.enemiesType2[0] = new EnemyType2();
-    this.enemiesType2[0].setPos(1);
+    this.enemiesType2[0] = new EnemyType2(1);
+    this.enemiesType2[0].setPos();
     this.addChild(this.enemiesType2[0], 1);
 
-    this.enemiesType2[1] = new EnemyType2();
-    this.enemiesType2[1].setPos(2);
+    this.enemiesType2[1] = new EnemyType2(2);
+    this.enemiesType2[1].setPos();
     this.addChild(this.enemiesType2[1], 1);
   },
 
