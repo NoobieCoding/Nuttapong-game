@@ -17,7 +17,7 @@ var EnemyType2 = Enemy.extend({
   update: function(dt) {
     this.y -= this.speed;
     this.setPosition(new cc.Point(this.x, this.y));
-    if(this.y <= -100)
+    if(this.y <= -300)
       this.rePosition();
   },
 

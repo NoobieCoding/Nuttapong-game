@@ -19,6 +19,10 @@ var GameLayer = cc.LayerColor.extend({
     this.enemiesType2[0].scheduleUpdate();
     this.enemiesType2[1].scheduleUpdate();
 
+    for(var i = 0; i < this.enemiesType1.length; i++) {
+      this.enemiesType1[i].scheduleUpdate();
+    }
+
     return true;
   },
 
@@ -50,8 +54,8 @@ var GameLayer = cc.LayerColor.extend({
   createEnemyType1: function() {
     this.enemiesType1 = new Array(5);// temp
     for(var i = 0; i < this.enemiesType1.length; i++) {
-      this.enemiesType1[i] = new EnemyType1();
-      this.enemiesType1[i].setPos(i);
+      this.enemiesType1[i] = new EnemyType1(i);
+      this.enemiesType1[i].setPos();
       this.addChild(this.enemiesType1[i], 1);
     }
   },
