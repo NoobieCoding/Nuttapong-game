@@ -16,6 +16,9 @@ var GameLayer = cc.LayerColor.extend({
     this.player.scheduleUpdate();
     this.addKeyboardHandlers();
 
+    this.pauseStat = GameLayer.playStatus.play;
+    this.keyboardHandler = GameLayer.keyboardStatus.enable;
+
     this.enemiesType2[0].scheduleUpdate();
     this.enemiesType2[1].scheduleUpdate();
 
@@ -96,19 +99,37 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   onKeyDown: function(keyCode, event) {
-    if (keyCode == KEYCODE.W)
-      this.player.switchDirection(Player.DIR.UP);
-    else if (keyCode == KEYCODE.D)
-      this.player.switchDirection(Player.DIR.RIGHT);
-    else if (keyCode == KEYCODE.A)
-      this.player.switchDirection(Player.DIR.LEFT);
-    else if(keyCode == KEYCODE.S)
-      this.player.switchDirection(Player.DIR.DOWN);
+    if(this.keyboardHandler == GameLayer.keyboardStatus.enable) {
+      if (keyCode == KEYCODE.W)
+        this.player.switchDirection(Player.DIR.UP);
+      else if (keyCode == KEYCODE.D)
+        this.player.switchDirection(Player.DIR.RIGHT);
+      else if (keyCode == KEYCODE.A)
+        this.player.switchDirection(Player.DIR.LEFT);
+      else if(keyCode == KEYCODE.S)
+        this.player.switchDirection(Player.DIR.DOWN);
+      else if(keyCode == KEYCODE.SPACEBAR)
+        this.pauseGame();
+    }else if(keyCode == KEYCODE.SPACEBAR)
+        this.pauseGame();
   },
 
   onKeyUp: function(keyCode, event) {
     this.player.switchDirection(Player.DIR.STILL);
   },
+
+  pauseGame: function() {
+    if(this.pauseStat == GameLayer.playStatus.play) {
+      cc.director.pause();
+      this.pauseStat = GameLayer.playStatus.pause;
+      this.keyboardHandler = GameLayer.keyboardStatus.disable;
+    } else {
+      cc.director.resume();
+        this.pauseStat = GameLayer.playStatus.play;
+        this.keyboardHandler = GameLayer.keyboardStatus.enable;
+    }
+  }
+
 });
 
 var StartScene = cc.Scene.extend({
@@ -128,5 +149,16 @@ var KEYCODE = {
   A: 65,
   W: 87,
   S: 83,
-  D: 68
+  D: 68,
+  SPACEBAR: 32
+};
+
+GameLayer.playStatus = {
+  play: 1,
+  pause: 2
+};
+
+GameLayer.keyboardStatus = {
+  enable: true,
+  disable: false
 };
