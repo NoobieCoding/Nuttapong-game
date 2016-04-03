@@ -3,8 +3,8 @@ var EnemyType3 = Enemy.extend({
     this._super();
     this.initWithFile('res/images/enemy3.png' );
     this.order = thisEnemyOrder;
-    this.speed = 12;
-    this.xSpeed = 12;
+    this.speed = 10;
+    this.xSpeed = 20;
 
     if(this.order == 1)
       this.side = EnemyType3.LANESIDE.LEFT;
@@ -24,7 +24,7 @@ var EnemyType3 = Enemy.extend({
     this.changePosition();
     this.setPosition(new cc.Point(this.x, this.y));
     this.checkBounce();
-    if(this.y <= -8000)
+    if(this.y <= -6000)
       this.rePosition();
   },
 
@@ -62,7 +62,7 @@ var EnemyType3 = Enemy.extend({
 EnemyType3.ENEMY3 = {
   FIRST_ENEMY_POSX: 200,
   SECOND_ENEMY_POSX: 1720,
-  POSY: 1500
+  POSY: 2200
 };
 
 EnemyType3.LANESIDE = {

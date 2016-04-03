@@ -35,5 +35,5 @@ var EnemyType2 = Enemy.extend({
 EnemyType2.ENEMY2LANE = {
   XLEFTSIDE: 100,
   XRIGHTSIDE: 1820,
-  YPOSITION: 2000
+  YPOSITION: 2500
 };

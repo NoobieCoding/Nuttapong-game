@@ -10,6 +10,7 @@ var EnemyType1 = Enemy.extend({
       this.side = EnemyType1.ENEMY1.RIGHTSIDE;
     this.speed  = 12
     this.xSpeed = 12;
+    this.canRe = false;
   },
 
   setPos: function() {
@@ -21,8 +22,7 @@ var EnemyType1 = Enemy.extend({
     this.changePosition();
     this.setPosition(new cc.Point(this.x, this.y));
     this.checkBounce();
-    if(this.y <= -8000)
-      this.rePosition();
+    this.rePosition();
   },
 
   changePosition: function() {
@@ -40,12 +40,16 @@ var EnemyType1 = Enemy.extend({
   rePosition: function() {
     if(this.checkRespawnable()) {
       this.setPos();
+      this.canRe = false;
     }
   },
 
   checkRespawnable: function() {
-    return true; //temp
-  },
+    if(this.canRe)
+      return true;
+    else
+      return false;
+},
 
   checkBounce: function() {
     if(this.x <= EnemyType1.ENEMY1.LEFT_BOARDER) {
@@ -61,7 +65,7 @@ var min = 200;
 
 EnemyType1.ENEMY1 = {
   FIRST_ENEMY_POSY: 1200,
-  GAP_PER_ENEMIY: 300,
+  GAP_PER_ENEMIY: 250,
   MID_LANE_X: 960,
   LEFTSIDE: 1,
   RIGHTSIDE: 2,

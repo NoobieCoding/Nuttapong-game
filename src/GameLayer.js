@@ -28,7 +28,7 @@ var GameLayer = cc.LayerColor.extend({
 
     this.enemiesType3[0].scheduleUpdate();
     this.enemiesType3[1].scheduleUpdate();
-
+    this.scheduleUpdate();
     return true;
   },
 
@@ -131,6 +131,17 @@ var GameLayer = cc.LayerColor.extend({
         this.pauseStat = GameLayer.playStatus.play;
         this.keyboardHandler = GameLayer.keyboardStatus.enable;
     }
+  },
+
+  update: function(dt) {
+    this.checkEnemy1Respawn();
+  },
+
+  checkEnemy1Respawn: function() {
+    if(this.enemiesType1[4].y <= -800)
+      for(var i = 0; i < this.enemiesType1.length; i++) {
+        this.enemiesType1[i].canRe = true;
+      }
   }
 
 });

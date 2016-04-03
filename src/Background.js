@@ -41,4 +41,4 @@ Background.ORDER = {
   THIRD: 3
 };
 
-Background.SCROLLING_SPEED = 2.5;
+Background.SCROLLING_SPEED = 4.0;
