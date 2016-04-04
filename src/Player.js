@@ -1,9 +1,10 @@
 var Player = cc.Sprite.extend({
   ctor: function() {
     this._super();
-    this.initWithFile('res/images/player.png' );
+    this.initWithFile('res/images/player.png');
     this.direction = Player.DIR.STILL;
     this.speed = 25;
+    this.creathHealthBar();
   },
 
   switchDirection: function(keyboardInput) {
@@ -42,7 +43,16 @@ var Player = cc.Sprite.extend({
       }
     }
     return pos;
-  }
+  },
+
+  creathHealthBar: function() {
+    this.healthBar = new Array(3);
+    for(var i = 0; i < this.healthBar.length; i++) {
+      this.healthBar[i] = new Health(i + 1);
+      this.healthBar[i].setPos();
+      this.addChild(this.healthBar[i]);
+    }
+  },
 });
 
 Player.DIR = {
