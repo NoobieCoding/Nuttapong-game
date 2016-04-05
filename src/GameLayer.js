@@ -2,25 +2,12 @@ var GameLayer = cc.LayerColor.extend({
   init: function() {
     this._super(new cc.Color( 127, 127, 127, 255));
     this.setPosition(new cc.Point(0, 0 ));
-
     this.createObjects();
-
-    this.player.scheduleUpdate();
     this.addKeyboardHandlers();
-
+    this.updateObject();
+    this.scheduleUpdate();
     this.pauseStat = GameLayer.playStatus.play;
     this.keyboardHandler = GameLayer.keyboardStatus.enable;
-
-    this.enemiesType2[0].scheduleUpdate();
-    this.enemiesType2[1].scheduleUpdate();
-
-    for(var i = 0; i < this.enemiesType1.length; i++) {
-      this.enemiesType1[i].scheduleUpdate();
-    }
-
-    this.enemiesType3[0].scheduleUpdate();
-    this.enemiesType3[1].scheduleUpdate();
-    this.scheduleUpdate();
     return true;
   },
 
@@ -32,21 +19,13 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   createBackgrounds: function() {
-    this.background1 = new Background(1);
-    this.background2 = new Background(2);
-    this.background3 = new Background(3);
-    this.background1.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
-    GameLayer.SCREENHEIGHT / 2));
-    this.addChild(this.background1, 0);
-    this.background2.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
-    GameLayer.SCREENHEIGHT * 3 / 2));
-    this.addChild(this.background2, 0);
-    this.background3.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
-    GameLayer.SCREENHEIGHT * 5 / 2));
-    this.addChild(this.background3, 0);
-    this.background1.scheduleUpdate();
-    this.background2.scheduleUpdate();
-    this.background3.scheduleUpdate();
+    this.backgrounds = new Array(3);
+    for(var i = 0; i < this.backgrounds.length; i++) {
+      this.backgrounds[i] = new Background(i + 1);
+      this.backgrounds[i].setPos();
+      this.addChild(this.backgrounds[i], 0);
+      this.backgrounds[i].scheduleUpdate();
+    }
   },
 
   createPlayer: function() {
@@ -74,24 +53,20 @@ var GameLayer = cc.LayerColor.extend({
 
   createEnemyType2: function() {
     this.enemiesType2 = new Array(2);
-    this.enemiesType2[0] = new EnemyType2(1);
-    this.enemiesType2[0].setPos();
-    this.addChild(this.enemiesType2[0], 1);
-
-    this.enemiesType2[1] = new EnemyType2(2);
-    this.enemiesType2[1].setPos();
-    this.addChild(this.enemiesType2[1], 1);
+    for(var i = 0; i < this.enemiesType2.length; i++) {
+      this.enemiesType2[i] = new EnemyType2(i + 1);
+      this.enemiesType2[i].setPos();
+      this.addChild(this.enemiesType2[i], 1);
+    }
   },
 
   createEnemyType3: function() {
     this.enemiesType3 = new Array(2);
-    this.enemiesType3[0] = new EnemyType3(1);
-    this.enemiesType3[0].setPos();
-    this.addChild(this.enemiesType3[0], 1);
-
-    this.enemiesType3[1] = new EnemyType3(2);
-    this.enemiesType3[1].setPos();
-    this.addChild(this.enemiesType3[1], 1);
+    for(var i = 0; i < this.enemiesType3.length; i++) {
+      this.enemiesType3[i] = new EnemyType3(i + 1);
+      this.enemiesType3[i].setPos();
+      this.addChild(this.enemiesType3[i], 1);
+    }
   },
 
   createScoreLabel: function() {
@@ -105,6 +80,22 @@ var GameLayer = cc.LayerColor.extend({
     this.scoreLabel = cc.LabelTTF.create('Score', 'Arial', 50);
     this.scoreLabel.setPosition(new cc.Point(200, GameLayer.SCREENHEIGHT - 60));
     this.addChild(this.scoreLabel, 2);
+  },
+
+  updateObject: function() {
+    this.player.scheduleUpdate();
+    this.updateEnemies();
+  },
+
+  updateEnemies: function() {
+    for(var i = 0; i < this.enemiesType1.length; i++) {
+      this.enemiesType1[i].scheduleUpdate();
+    }
+
+    for(var i = 0; i < this.enemiesType2.length; i++) {
+      this.enemiesType2[i].scheduleUpdate();
+      this.enemiesType3[i].scheduleUpdate();
+    }
   },
 
   addKeyboardHandlers: function() {

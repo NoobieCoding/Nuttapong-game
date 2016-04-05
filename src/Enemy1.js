@@ -1,21 +1,32 @@
 var EnemyType1 = Enemy.extend({
   ctor: function(order) {
     this._super();
-    this.initWithFile('res/images/enemy1.png' );
+    this.initWithFile('res/images/enemy1.png');
     this.order = order;
-    this.randomPosX = Math.floor(Math.random() * (range + 1)) + min;
-    if(this.randomPosX <= EnemyType1.ENEMY1.MID_LANE_X)
-      this.side = EnemyType1.ENEMY1.LEFTSIDE;
-    else
-      this.side = EnemyType1.ENEMY1.RIGHTSIDE;
+    this.randomPosition();
+    this.determineSide();
     this.speed  = 12
     this.xSpeed = 12;
     this.canRe = false;
   },
 
+  randomPosition: function() {
+    var range = 1520;
+    var min = 200;
+    this.randomPosX = Math.floor(Math.random() * (range + 1)) + min;
+  },
+
+  determineSide: function() {
+    if(this.randomPosX <= EnemyType1.ENEMY1.MID_LANE_X)
+      this.side = EnemyType1.ENEMY1.LEFTSIDE;
+    else
+      this.side = EnemyType1.ENEMY1.RIGHTSIDE;
+  },
+
   setPos: function() {
-    this.setPosition(new cc.Point(this.randomPosX,
-    EnemyType1.ENEMY1.FIRST_ENEMY_POSY + (this.order * EnemyType1.ENEMY1.GAP_PER_ENEMIY)));
+    var xPos = this.randomPosX;
+    var yPos = EnemyType1.ENEMY1.FIRST_ENEMY_POSY + (this.order * EnemyType1.ENEMY1.GAP_PER_ENEMIY)
+    this.setPosition(new cc.Point(xPos, yPos));
   },
 
   update: function(dt) {
@@ -58,10 +69,7 @@ var EnemyType1 = Enemy.extend({
     if(this.x >= EnemyType1.ENEMY1.RIGHT_BOARDER)
       this.side = EnemyType1.ENEMY1.RIGHTSIDE;
   }
-
 });
-var range = 1520;
-var min = 200;
 
 EnemyType1.ENEMY1 = {
   FIRST_ENEMY_POSY: 1200,

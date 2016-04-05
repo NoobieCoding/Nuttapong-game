@@ -21,28 +21,40 @@ var Player = cc.Sprite.extend({
     if(this.direction != Player.DIR.STILL) {
       switch (this.direction) {
       case Player.DIR.UP:
-        if(pos.y <= GameLayer.SCREENHEIGHT - 150) {
-          pos.y += this.speed;
-        }
+        this.moveup(pos);
         break;
       case Player.DIR.DOWN:
-        if(pos.y >= 150) {
-          pos.y -= this.speed;
-        }
+        this.moveDown(pos);
         break;
       case Player.DIR.LEFT:
-        if(pos.x >= 60) {
-          pos.x -= this.speed;
-        }
+        this.moveLeft(pos);
         break;
       case Player.DIR.RIGHT:
-        if(pos.x <= GameLayer.SCREENWIDTH - 60) {
-          pos.x += this.speed;
-        }
+        this.moveRight(pos);
         break;
       }
     }
     return pos;
+  },
+
+  moveup: function(pos) {
+    if(pos.y <= GameLayer.SCREENHEIGHT - 150)
+      pos.y += this.speed;
+  },
+
+  moveDown: function(pos) {
+    if(pos.y >= 160)
+      pos.y -= this.speed;
+  },
+
+  moveLeft: function(pos) {
+    if(pos.x >= 120)
+      pos.x -= this.speed;
+  },
+
+  moveRight: function(pos) {
+    if(pos.x <= GameLayer.SCREENWIDTH - 120)
+      pos.x += this.speed;
   },
 
   creathHealthBar: function() {

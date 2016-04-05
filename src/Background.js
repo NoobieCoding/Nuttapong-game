@@ -19,6 +19,23 @@ var Background = cc.Sprite.extend({
     }
   },
 
+  setPos: function() {
+    var posX = GameLayer.SCREENWIDTH / 2;
+    var posY;
+    switch(this.order) {
+    case Background.ORDER.FIRST:
+      posY = GameLayer.SCREENHEIGHT / 2;
+      break;
+    case Background.ORDER.SECOND:
+      posY = GameLayer.SCREENHEIGHT * 3 / 2;
+      break;
+    case Background.ORDER.THIRD:
+      posY = GameLayer.SCREENHEIGHT * 5 / 2;
+      break;
+    }
+    this.setPosition(new cc.Point(posX, posY));
+  },
+
   update: function(dt) {
     this.y -= Background.SCROLLING_SPEED;
     this.rePosition();
