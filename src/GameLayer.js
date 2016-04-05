@@ -3,15 +3,7 @@ var GameLayer = cc.LayerColor.extend({
     this._super(new cc.Color( 127, 127, 127, 255));
     this.setPosition(new cc.Point(0, 0 ));
 
-    this.createBackgrounds();
-
-    this.createPlayer();
-
-    this.createEnemyType1();
-
-    this.createEnemyType2();
-
-    this.createEnemyType3();
+    this.createObjects();
 
     this.player.scheduleUpdate();
     this.addKeyboardHandlers();
@@ -32,7 +24,14 @@ var GameLayer = cc.LayerColor.extend({
     return true;
   },
 
-  createBackgrounds: function() { // can be further extracted (a lot!!)
+  createObjects: function() {
+    this.createBackgrounds();
+    this.createPlayer();
+    this.createEnemies();
+    this.createScoreLabel();
+  },
+
+  createBackgrounds: function() {
     this.background1 = new Background(1);
     this.background2 = new Background(2);
     this.background3 = new Background(3);
@@ -52,13 +51,20 @@ var GameLayer = cc.LayerColor.extend({
 
   createPlayer: function() {
     this.player = new Player();
-    this.player.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
-    GameLayer.STARTPOSY));
+    var xPos = GameLayer.SCREENWIDTH / 2;
+    var yPos = GameLayer.STARTPOSY;
+    this.player.setPosition(new cc.Point(xPos, yPos));
     this.addChild(this.player, 1);
   },
 
+  createEnemies: function() {
+    this.createEnemyType1();
+    this.createEnemyType2();
+    this.createEnemyType3();
+  },
+
   createEnemyType1: function() {
-    this.enemiesType1 = new Array(5);// temp
+    this.enemiesType1 = new Array(5);
     for(var i = 0; i < this.enemiesType1.length; i++) {
       this.enemiesType1[i] = new EnemyType1(i);
       this.enemiesType1[i].setPos();
@@ -86,6 +92,19 @@ var GameLayer = cc.LayerColor.extend({
     this.enemiesType3[1] = new EnemyType3(2);
     this.enemiesType3[1].setPos();
     this.addChild(this.enemiesType3[1], 1);
+  },
+
+  createScoreLabel: function() {
+    this.createHeadLineLabel();
+    this.scoreLabel = cc.LabelTTF.create('0', 'Arial', 50);
+    this.scoreLabel.setPosition(new cc.Point(200, GameLayer.SCREENHEIGHT - 120));
+    this.addChild(this.scoreLabel, 2);
+  },
+
+  createHeadLineLabel: function() {
+    this.scoreLabel = cc.LabelTTF.create('Score', 'Arial', 50);
+    this.scoreLabel.setPosition(new cc.Point(200, GameLayer.SCREENHEIGHT - 60));
+    this.addChild(this.scoreLabel, 2);
   },
 
   addKeyboardHandlers: function() {
@@ -128,8 +147,8 @@ var GameLayer = cc.LayerColor.extend({
       this.keyboardHandler = GameLayer.keyboardStatus.disable;
     } else {
       cc.director.resume();
-        this.pauseStat = GameLayer.playStatus.play;
-        this.keyboardHandler = GameLayer.keyboardStatus.enable;
+      this.pauseStat = GameLayer.playStatus.play;
+      this.keyboardHandler = GameLayer.keyboardStatus.enable;
     }
   },
 
@@ -138,11 +157,11 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   checkEnemy1Respawn: function() {
-    if(this.enemiesType1[4].y <= -800)
+    if(this.enemiesType1[4].y <= GameLayer.RESPAWNY)
       for(var i = 0; i < this.enemiesType1.length; i++) {
         this.enemiesType1[i].canRe = true;
       }
-  }
+  },
 
 });
 
@@ -151,13 +170,14 @@ var StartScene = cc.Scene.extend({
     this._super();
     var layer = new GameLayer();
     layer.init();
-    this.addChild( layer );
+    this.addChild(layer);
   }
 });
 
 GameLayer.SCREENWIDTH = 1920;
 GameLayer.SCREENHEIGHT = 1080;
 GameLayer.STARTPOSY = 150;
+GameLayer.RESPAWNY = -800;
 
 var KEYCODE = {
   A: 65,

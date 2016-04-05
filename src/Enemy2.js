@@ -1,23 +1,23 @@
 var EnemyType2 = Enemy.extend({
   ctor: function(order) {
     this._super();
-    this.initWithFile('res/images/enemy2.png' );
+    this.initWithFile('res/images/enemy2.png');
     this.speed = 15;
     this.order = order;
   },
 
   setPos: function() {
     if(this.order == 1)  {
-      this.setPosition(EnemyType2.ENEMY2LANE.XLEFTSIDE, EnemyType2.ENEMY2LANE.YPOSITION);
+      this.setPosition(EnemyType2.LANE.XLEFTSIDE, EnemyType2.LANE.YPOSITION);
     } else {
-      this.setPosition(EnemyType2.ENEMY2LANE.XRIGHTSIDE, EnemyType2.ENEMY2LANE.YPOSITION);
+      this.setPosition(EnemyType2.LANE.XRIGHTSIDE, EnemyType2.LANE.YPOSITION);
     }
   },
 
   update: function(dt) {
     this.y -= this.speed;
     this.setPosition(new cc.Point(this.x, this.y));
-    if(this.y <= -300)
+    if(this.y <= EnemyType2.LANE.YREPOSITION)
       this.rePosition();
   },
 
@@ -32,8 +32,9 @@ var EnemyType2 = Enemy.extend({
   }
 });
 
-EnemyType2.ENEMY2LANE = {
+EnemyType2.LANE = {
   XLEFTSIDE: 100,
   XRIGHTSIDE: 1820,
-  YPOSITION: 2500
+  YPOSITION: 2500,
+  YREPOSITION: -300
 };

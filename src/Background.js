@@ -8,13 +8,13 @@ var Background = cc.Sprite.extend({
   initFiles: function() {
     switch(this.order) {
     case Background.ORDER.FIRST:
-      this.initWithFile('res/images/background1.png' );
+      this.initWithFile('res/images/background1.png');
       break;
     case Background.ORDER.SECOND:
-      this.initWithFile('res/images/background2.png' );
+      this.initWithFile('res/images/background2.png');
       break;
     case Background.ORDER.THIRD:
-      this.initWithFile('res/images/background3.png' );
+      this.initWithFile('res/images/background3.png');
       break;
     }
   },
@@ -29,10 +29,10 @@ var Background = cc.Sprite.extend({
     },
 
     rePosition: function() {
-      if(this.checkOutOfBoarder()) {
-        this.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2,
-        GameLayer.SCREENHEIGHT * 5 / 2));
-      }
+      var xPos = GameLayer.SCREENWIDTH / 2;
+      var yPos = GameLayer.SCREENHEIGHT * 5 / 2
+      if(this.checkOutOfBoarder())
+        this.setPosition(new cc.Point(xPos, yPos));
     }
 });
 Background.ORDER = {

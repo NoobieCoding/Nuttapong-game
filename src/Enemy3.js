@@ -1,16 +1,19 @@
 var EnemyType3 = Enemy.extend({
   ctor: function(thisEnemyOrder) {
     this._super();
-    this.initWithFile('res/images/enemy3.png' );
+    this.initWithFile('res/images/enemy3.png');
     this.order = thisEnemyOrder;
     this.speed = 10;
     this.xSpeed = 20;
+    this.determineSide();
+  },
 
+  determineSide: function() {
     if(this.order == 1)
       this.side = EnemyType3.LANESIDE.LEFT;
     else
       this.side = EnemyType3.LANESIDE.RIGHT;
-},
+  },
 
   setPos: function() {
     if(this.order == 1)  {
