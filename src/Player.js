@@ -65,6 +65,7 @@ var Player = cc.Sprite.extend({
       this.addChild(this.healthBar[i]);
     }
   },
+
 });
 
 Player.DIR = {

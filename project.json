@@ -21,6 +21,7 @@
     "src/Enemy3.js",
     "src/Background.js",
     "src/Health.js",
-    "src/ColDetect.js"
+    "src/ColDetect.js",
+    "src/Bullet.js"
   ]
 }

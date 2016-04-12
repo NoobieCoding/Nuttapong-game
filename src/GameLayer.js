@@ -122,8 +122,10 @@ var GameLayer = cc.LayerColor.extend({
       else if(keyCode == KEYCODE.S)
         this.player.switchDirection(Player.DIR.DOWN);
       else if(keyCode == KEYCODE.SPACEBAR)
+        this.shoot();
+      else if(keyCode == KEYCODE.P)
         this.pauseGame();
-    }else if(keyCode == KEYCODE.SPACEBAR)
+    }else if(keyCode == KEYCODE.P)
         this.pauseGame();
   },
 
@@ -178,6 +180,18 @@ var GameLayer = cc.LayerColor.extend({
       }
   },
 
+  shoot: function() {
+    this.createBullet()
+    console.log('shoot!!!!!');
+    this.bullet.scheduleUpdate();
+  },
+
+  createBullet: function() {
+    this.bullet = new Bullet();
+    this.bullet.setPosition(new cc.Point(this.player.x + addedXForBullet, this.player.y + playerYRadius));
+    this.addChild(this.bullet, 2);
+  }
+
 });
 
 var StartScene = cc.Scene.extend({
@@ -199,6 +213,7 @@ var KEYCODE = {
   W: 87,
   S: 83,
   D: 68,
+  P: 80,
   SPACEBAR: 32
 };
 
@@ -211,3 +226,7 @@ GameLayer.keyboardStatus = {
   enable: true,
   disable: false
 };
+
+var playerYRadius = 120;
+
+var addedXForBullet = 23;
