@@ -1,7 +1,7 @@
 var GameLayer = cc.LayerColor.extend({
   init: function() {
-    this._super(new cc.Color( 127, 127, 127, 255));
-    this.setPosition(new cc.Point(0, 0 ));
+    this._super(new cc.Color(127, 127, 127, 255));
+    this.setPosition(new cc.Point(0, 0));
     this.createObjects();
     this.addKeyboardHandlers();
     this.updateObject();
@@ -145,6 +145,30 @@ var GameLayer = cc.LayerColor.extend({
 
   update: function(dt) {
     this.checkEnemy1Respawn();
+    this.checkCollision();
+  },
+
+  checkCollision: function() {
+    if(this.isCollide()) {
+      this.pauseGame();
+    }
+  },
+
+  isCollide: function() {
+    if(this.checkHitEnemy(this.enemiesType1) ||
+    this.checkHitEnemy(this.enemiesType2) ||
+    this.checkHitEnemy(this.enemiesType3))
+      return true;
+    else
+      return false;
+  },
+
+  checkHitEnemy: function(enemies) {
+    for(var i = 0; i < enemies.length; i++) {
+      if(enemies[i].hit(this.player))
+        return true;
+    }
+    return false;
   },
 
   checkEnemy1Respawn: function() {

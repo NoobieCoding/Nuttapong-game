@@ -36,11 +36,6 @@ var EnemyType1 = Enemy.extend({
     this.rePosition();
   },
 
-  changePosition: function() {
-    this.y -= this.speed;
-    this.changeXPosition();
-  },
-
   changeXPosition: function() {
     if(this.side == EnemyType1.ENEMY1.LEFTSIDE)
       this.x += this.xSpeed;
@@ -49,18 +44,11 @@ var EnemyType1 = Enemy.extend({
   },
 
   rePosition: function() {
-    if(this.checkRespawnable()) {
+    if(this.canRe) {
       this.setPos();
       this.canRe = false;
     }
   },
-
-  checkRespawnable: function() {
-    if(this.canRe)
-      return true;
-    else
-      return false;
-},
 
   checkBounce: function() {
     if(this.x <= EnemyType1.ENEMY1.LEFT_BOARDER) {

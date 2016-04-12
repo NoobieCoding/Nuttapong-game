@@ -17,9 +17,9 @@ var EnemyType3 = Enemy.extend({
 
   setPos: function() {
     if(this.order == 1)  {
-      this.setPosition(EnemyType3.ENEMY3.FIRST_ENEMY_POSX, EnemyType3.ENEMY3.POSY);
+      this.setPosition(EnemyType3.LANEPOS.FIRST_ENEMY_POSX, EnemyType3.LANEPOS.START_POSY);
     } else {
-      this.setPosition(EnemyType3.ENEMY3.SECOND_ENEMY_POSX, EnemyType3.ENEMY3.POSY);
+      this.setPosition(EnemyType3.LANEPOS.SECOND_ENEMY_POSX, EnemyType3.LANEPOS.START_POSY);
     }
   },
 
@@ -27,13 +27,8 @@ var EnemyType3 = Enemy.extend({
     this.changePosition();
     this.setPosition(new cc.Point(this.x, this.y));
     this.checkBounce();
-    if(this.y <= -6000)
+    if(this.y <= EnemyType3.LANEPOS.RE_POSY)
       this.rePosition();
-  },
-
-  changePosition: function() {
-    this.y -= this.speed;
-    this.changeXPosition();
   },
 
   changeXPosition: function() {
@@ -44,13 +39,7 @@ var EnemyType3 = Enemy.extend({
   },
 
   rePosition: function() {
-    if(this.checkRespawnable()) {
       this.setPos();
-    }
-  },
-
-  checkRespawnable: function() {
-    return true; //temp
   },
 
   checkBounce: function() {
@@ -62,10 +51,12 @@ var EnemyType3 = Enemy.extend({
   }
 });
 
-EnemyType3.ENEMY3 = {
+EnemyType3.LANEPOS = {
   FIRST_ENEMY_POSX: 200,
   SECOND_ENEMY_POSX: 1720,
-  POSY: 2200
+  START_POSY: 2200,
+  RE_POSY: -4000
+
 };
 
 EnemyType3.LANESIDE = {

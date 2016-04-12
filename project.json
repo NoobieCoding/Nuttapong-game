@@ -20,6 +20,7 @@
     "src/Enemy2.js",
     "src/Enemy3.js",
     "src/Background.js",
-    "src/Health.js"
+    "src/Health.js",
+    "src/ColDetect.js"
   ]
 }

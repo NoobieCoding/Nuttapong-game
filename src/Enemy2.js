@@ -15,21 +15,19 @@ var EnemyType2 = Enemy.extend({
   },
 
   update: function(dt) {
-    this.y -= this.speed;
-    this.setPosition(new cc.Point(this.x, this.y));
+    this.changePosition();
     if(this.y <= EnemyType2.LANE.YREPOSITION)
       this.rePosition();
   },
 
-  rePosition: function() {
-    if(this.checkRespawnable()) {
-      this.setPos();
-    }
+  changePosition: function() {
+    this.y -= this.speed;
+    this.setPosition(new cc.Point(this.x, this.y));
   },
 
-  checkRespawnable: function() {
-    return true; //temp
-  }
+  rePosition: function() {
+      this.setPos();
+  },
 });
 
 EnemyType2.LANE = {
