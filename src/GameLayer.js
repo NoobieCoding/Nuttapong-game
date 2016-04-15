@@ -129,6 +129,8 @@ var GameLayer = cc.LayerColor.extend({
         this.shoot();
       else if(keyCode == KEYCODE.P)
         this.pauseGame();
+      else if(keyCode == KEYCODE.TEMP)
+        this.player.addHp();
     }else if(keyCode == KEYCODE.P)
         this.pauseGame();
       else if(keyCode == KEYCODE.ESC)
@@ -304,7 +306,8 @@ var KEYCODE = {
   D: 68,
   P: 80,
   SPACEBAR: 32,
-  ESC: 27
+  ESC: 27,
+  TEMP: 192//temp temp temp eiseis
 };
 
 GameLayer.playStatus = {

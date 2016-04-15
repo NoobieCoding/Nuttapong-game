@@ -86,6 +86,20 @@ var Player = cc.Sprite.extend({
       this.removeChild(this.healthBar[1]);
     else if(this.hp == 0)
       this.removeChild(this.healthBar[0]);
+  },
+
+  addHp: function() {
+    this.hp += 1
+    this.addHealthSprite();
+  },
+
+  addHealthSprite: function() {
+    if(this.hp == 1)
+      this.addChild(this.healthBar[0]);
+    else if (this.hp == 2)
+      this.addChild(this.healthBar[1]);
+    else if(this.hp == 3)
+      this.addChild(this.healthBar[2]);
   }
 });
 
