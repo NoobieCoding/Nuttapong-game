@@ -6,7 +6,7 @@ var res = {
   enemy2_png: 'res/images/enemy2.png',
   enemy3_png: 'res/images/enemy3.png',
   player_png: 'res/images/player.png',
-  hearth_png: 'res/images/hearth.png'
+  hearth_png: 'res/images/barrier.png'
 };
 
 var g_resources = [];

@@ -130,7 +130,7 @@ var GameLayer = cc.LayerColor.extend({
       else if(keyCode == KEYCODE.P)
         this.pauseGame();
       else if(keyCode == KEYCODE.TEMP)
-        this.player.addHp();
+        this.player.addBarrier();
     }else if(keyCode == KEYCODE.P)
         this.pauseGame();
       else if(keyCode == KEYCODE.ESC)
@@ -162,9 +162,9 @@ var GameLayer = cc.LayerColor.extend({
 
   checkPlayerCollision: function() {
     if(this.isCollide()) {
-      this.player.reduceHp();
+      this.player.reduceBarrier();
     }
-    if(this.player.hp < 0)
+    if(this.player.barrier < 0)
       this.gameOver();
   },
 
@@ -276,7 +276,7 @@ var GameLayer = cc.LayerColor.extend({
 
   resetHealth: function() {
     //this.removeChild(this.player.healthBar);
-    this.player.creathHealthBar();
+    this.player.creathBarrierBar();
   },
 
   setScore: function() {

@@ -4,7 +4,7 @@ var Player = cc.Sprite.extend({
     this.initWithFile('res/images/player.png');
     this.direction = Player.DIR.STILL;
     this.speed = 30;
-    this.creathHealthBar();
+    this.creathBarrierBar();
     this.setPos();
   },
 
@@ -64,42 +64,42 @@ var Player = cc.Sprite.extend({
       pos.x += this.speed;
   },
 
-  creathHealthBar: function() {
-    this.hp = 3;
-    this.healthBar = new Array(3);
-    for(var i = 0; i < this.healthBar.length; i++) {
-      this.healthBar[i] = new Health(i + 1);
-      this.healthBar[i].setPos();
-      this.addChild(this.healthBar[i]);
+  creathBarrierBar: function() {
+    this.barrier = 3;
+    this.barrierBar = new Array(3);
+    for(var i = 0; i < this.barrierBar.length; i++) {
+      this.barrierBar[i] = new Barrier(i + 1);
+      this.barrierBar[i].setPos();
+      this.addChild(this.barrierBar[i]);
     }
   },
 
-  reduceHp: function() {
-    this.hp -= 1;
-    this.reduceHealthSprite();
+  reduceBarrier: function() {
+    this.barrier -= 1;
+    this.reduceBarrierSprite();
   },
 
-  reduceHealthSprite: function() {
-    if(this.hp == 2)
-      this.removeChild(this.healthBar[2]);
-    else if(this.hp == 1)
-      this.removeChild(this.healthBar[1]);
-    else if(this.hp == 0)
-      this.removeChild(this.healthBar[0]);
+  reduceBarrierSprite: function() {
+    if(this.barrier == 2)
+      this.removeChild(this.barrierBar[2]);
+    else if(this.barrier == 1)
+      this.removeChild(this.barrierBar[1]);
+    else if(this.barrier == 0)
+      this.removeChild(this.barrierBar[0]);
   },
 
-  addHp: function() {
-    this.hp += 1
-    this.addHealthSprite();
+  addBarrier: function() {
+    this.barrier += 1
+    this.addbarrierSprite();
   },
 
-  addHealthSprite: function() {
-    if(this.hp == 1)
-      this.addChild(this.healthBar[0]);
-    else if (this.hp == 2)
-      this.addChild(this.healthBar[1]);
-    else if(this.hp == 3)
-      this.addChild(this.healthBar[2]);
+  addbarrierSprite: function() {
+    if(this.barrier == 1)
+      this.addChild(this.barrierBar[0]);
+    else if (this.barrier == 2)
+      this.addChild(this.barrierBar[1]);
+    else if(this.barrier == 3)
+      this.addChild(this.barrierBar[2]);
   }
 });
 
