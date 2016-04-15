@@ -7,11 +7,10 @@ var EnemyType2 = Enemy.extend({
   },
 
   setPos: function() {
-    if(this.order == 1)  {
+    if(this.order == 1)
       this.setPosition(EnemyType2.LANE.XLEFTSIDE, EnemyType2.LANE.YPOSITION);
-    } else {
+    else
       this.setPosition(EnemyType2.LANE.XRIGHTSIDE, EnemyType2.LANE.YPOSITION);
-    }
   },
 
   update: function(dt) {
@@ -25,9 +24,6 @@ var EnemyType2 = Enemy.extend({
     this.setPosition(new cc.Point(this.x, this.y));
   },
 
-  rePosition: function() {
-      this.setPos();
-  },
 });
 
 EnemyType2.LANE = {

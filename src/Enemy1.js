@@ -45,6 +45,7 @@ var EnemyType1 = Enemy.extend({
 
   rePosition: function() {
     if(this.canRe) {
+      this.respawn();
       this.setPos();
       this.canRe = false;
     }

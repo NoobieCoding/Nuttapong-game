@@ -3,12 +3,19 @@ var Player = cc.Sprite.extend({
     this._super();
     this.initWithFile('res/images/player.png');
     this.direction = Player.DIR.STILL;
-    this.speed = 25;
+    this.speed = 30;
     this.creathHealthBar();
+    this.setPos();
   },
 
   switchDirection: function(keyboardInput) {
     this.direction = keyboardInput;
+  },
+
+  setPos: function() {
+    var xPos = GameLayer.SCREENWIDTH / 2;
+    var yPos = GameLayer.STARTPOSY;
+    this.setPosition(new cc.Point(xPos, yPos));
   },
 
   update(dt) {
@@ -58,6 +65,7 @@ var Player = cc.Sprite.extend({
   },
 
   creathHealthBar: function() {
+    this.hp = 3;
     this.healthBar = new Array(3);
     for(var i = 0; i < this.healthBar.length; i++) {
       this.healthBar[i] = new Health(i + 1);
@@ -66,6 +74,19 @@ var Player = cc.Sprite.extend({
     }
   },
 
+  reduceHp: function() {
+    this.hp -= 1;
+    this.reduceHealthSprite();
+  },
+
+  reduceHealthSprite: function() {
+    if(this.hp == 2)
+      this.removeChild(this.healthBar[2]);
+    else if(this.hp == 1)
+      this.removeChild(this.healthBar[1]);
+    else if(this.hp == 0)
+      this.removeChild(this.healthBar[0]);
+  }
 });
 
 Player.DIR = {

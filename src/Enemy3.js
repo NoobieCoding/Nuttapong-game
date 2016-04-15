@@ -16,11 +16,11 @@ var EnemyType3 = Enemy.extend({
   },
 
   setPos: function() {
-    if(this.order == 1)  {
+    if(this.order == 1)
       this.setPosition(EnemyType3.LANEPOS.FIRST_ENEMY_POSX, EnemyType3.LANEPOS.START_POSY);
-    } else {
+    else
       this.setPosition(EnemyType3.LANEPOS.SECOND_ENEMY_POSX, EnemyType3.LANEPOS.START_POSY);
-    }
+
   },
 
   update: function(dt) {
@@ -38,14 +38,10 @@ var EnemyType3 = Enemy.extend({
       this.x -= this.xSpeed;
   },
 
-  rePosition: function() {
-      this.setPos();
-  },
-
   checkBounce: function() {
-    if(this.x <= EnemyType3.BOARDER.LEFT) {
+    if(this.x <= EnemyType3.BOARDER.LEFT)
       this.side = EnemyType3.LANESIDE.LEFT;
-    }
+
     if(this.x >= EnemyType3.BOARDER.RIGHT)
       this.side = EnemyType3.LANESIDE.RIGHT;
   }
