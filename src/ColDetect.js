@@ -21,7 +21,7 @@ var bulletEnemyCollisionCondition = function(bullet, enemy) {
   if(bullet.y >= bulletMaxY)
     return false;
   return Math.abs(bullet.x - enemy.x) <= enemyAndBulletDistanceX &&
-  Math.abs(bullet.y - enemy.y) <= enemyAndBulletDistanceY && bullet.y < GameLayer.SCREENHEIGHT + bulletRadiusY;
+  Math.abs(bullet.y - enemy.y) <= enemyAndBulletDistanceY && bullet.y < GameLayer.SCREENHEIGHT - bulletRadiusY;
 };
 
 var playerAndEnemyDistanceX = 85;

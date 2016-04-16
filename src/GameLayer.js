@@ -211,11 +211,20 @@ var GameLayer = cc.LayerColor.extend({
 
   checkBulletsOutOfScreen: function() {
     for(var i = 0; i < this.bullets.length; i++) {
-      if(this.bullets[i].y >= bulletOutOfScreenY) {
-        this.removeChild(this.bullets[i], true);
-        this.bullets.splice(i);
-      }
+      this.checkEachBulletOutOfScreen(this.bullets[i]);
     }
+  },
+
+  checkEachBulletOutOfScreen: function(bullet) {
+    if(bullet != null) {
+      if(bullet.y >= bulletOutOfScreenY)
+        this.removeBullet(bullet);
+    }
+  },
+
+  removeBullet: function(bullet) {
+    this.removeChild(bullet, true);
+    bullet = null;
   },
 
   checkBulletsCollision: function() {
@@ -227,14 +236,15 @@ var GameLayer = cc.LayerColor.extend({
 
   isBulletsCollide: function() {
     for(var i = 0; i < this.bullets.length; i++) {
-      if(this.checkHitCondition(this.bullets[i])) {
-        this.removeChild(this.bullets[i], true);
-        this.bullets.splice(i);
-        return true;
+      if(this.bullets[i] != null) {
+        if(this.checkHitCondition(this.bullets[i])) {
+          this.removeChild(this.bullets[i], true);
+          this.bullets[i] = null;
+          return true;
+        }
       }
-      else
-        return false;
     }
+    return false;
   },
 
   gameOver: function() {
