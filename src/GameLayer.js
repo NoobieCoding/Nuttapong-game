@@ -10,6 +10,7 @@ var GameLayer = cc.LayerColor.extend({
     this.pauseStat = GameLayer.playStatus.play;
     this.keyboardHandler = GameLayer.keyboardStatus.enable;
     this.bullets = [];
+    this.bonusItems = [];
     return true;
   },
 
@@ -229,6 +230,7 @@ var GameLayer = cc.LayerColor.extend({
 
   checkBulletsCollision: function() {
     if(this.isBulletsCollide()) {
+      this.randomDropBonusItem();
       this.score += 100;
       this.setScore();
     }
@@ -291,8 +293,20 @@ var GameLayer = cc.LayerColor.extend({
 
   setScore: function() {
     this.numScoreLabel.setString(this.score);
-  }
+  },
 
+  randomDropBonusItem: function() {
+    var range = 7;
+    var min = 1;
+    var random = Math.floor(Math.random() * (range + 1)) + min;
+    if(random == 1)
+      this.dropBonusItem();
+  },
+
+  dropBonusItem: function() {
+    this.bonusItem = new BonusItem();
+    this.addChild(this.bonusItem);
+  }
 });
 
 var GameScene = cc.Scene.extend({
@@ -307,7 +321,7 @@ var GameScene = cc.Scene.extend({
 GameLayer.SCREENWIDTH = 1920;
 GameLayer.SCREENHEIGHT = 1080;
 GameLayer.STARTPOSY = 150;
-GameLayer.RESPAWNY = -800;
+GameLayer.RESPAWNY = -300;
 
 var KEYCODE = {
   A: 65,

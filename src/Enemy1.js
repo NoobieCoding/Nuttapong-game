@@ -5,8 +5,8 @@ var EnemyType1 = Enemy.extend({
     this.order = order;
     this.randomPosition();
     this.determineSide();
-    this.speed  = 12
-    this.xSpeed = 12;
+    this.speed  = 8
+    this.xSpeed = 15;
     this.canRe = false;
   },
 
@@ -66,6 +66,6 @@ EnemyType1.ENEMY1 = {
   MID_LANE_X: 960,
   LEFTSIDE: 1,
   RIGHTSIDE: 2,
-  LEFT_BOARDER: 300,
-  RIGHT_BOARDER: 1620
+  LEFT_BOARDER: 40,
+  RIGHT_BOARDER: 1880
 };

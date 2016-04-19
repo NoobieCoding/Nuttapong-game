@@ -27,18 +27,18 @@ var Player = cc.Sprite.extend({
   movePlayer: function(pos) {
     if(this.direction != Player.DIR.STILL) {
       switch (this.direction) {
-      case Player.DIR.UP:
-        this.moveup(pos);
-        break;
-      case Player.DIR.DOWN:
-        this.moveDown(pos);
-        break;
-      case Player.DIR.LEFT:
-        this.moveLeft(pos);
-        break;
-      case Player.DIR.RIGHT:
-        this.moveRight(pos);
-        break;
+        case Player.DIR.UP:
+          this.moveup(pos);
+          break;
+        case Player.DIR.DOWN:
+          this.moveDown(pos);
+          break;
+        case Player.DIR.LEFT:
+          this.moveLeft(pos);
+          break;
+        case Player.DIR.RIGHT:
+          this.moveRight(pos);
+          break;
       }
     }
     return pos;
