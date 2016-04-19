@@ -134,7 +134,7 @@ var GameLayer = cc.LayerColor.extend({
     }else if(keyCode == KEYCODE.P)
         this.pauseGame();
       else if(keyCode == KEYCODE.ESC)
-        cc.director.popScene(theMenu);
+      //  cc.director.popScene(theMenu);
   },
 
   onKeyUp: function(keyCode, event) {
