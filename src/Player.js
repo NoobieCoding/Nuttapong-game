@@ -3,7 +3,7 @@ var Player = cc.Sprite.extend({
     this._super();
     this.initWithFile('res/images/player.png');
     this.direction = Player.DIR.STILL;
-    this.speed = 30;
+    this.speed = 38;
     this.creathBarrierBar();
     this.setPos();
   },

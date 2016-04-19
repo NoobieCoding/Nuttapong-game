@@ -26,7 +26,7 @@ var bulletEnemyCollisionCondition = function(bullet, enemy) {
 
 var playerAndEnemyDistanceX = 85;
 var playerAndEnemyDistanceY = 140;
-var enemyAndBulletDistanceX = 65;
-var enemyAndBulletDistanceY = 75;
+var enemyAndBulletDistanceX = 70;
+var enemyAndBulletDistanceY = 80;
 var bulletRadiusY = 25;
 var bulletMaxY = 1200;

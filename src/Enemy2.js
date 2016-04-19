@@ -2,7 +2,7 @@ var EnemyType2 = Enemy.extend({
   ctor: function(order) {
     this._super();
     this.initWithFile('res/images/enemy2.png');
-    this.speed = 15;
+    this.speed = 20;
     this.order = order;
   },
 
