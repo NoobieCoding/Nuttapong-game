@@ -100,7 +100,11 @@ var Player = cc.Sprite.extend({
       this.addChild(this.barrierBar[1]);
     else if(this.barrier == 3)
       this.addChild(this.barrierBar[2]);
-  }
+  },
+
+  addSpeed: function() {
+    this.speed += 1;
+  },
 });
 
 Player.DIR = {

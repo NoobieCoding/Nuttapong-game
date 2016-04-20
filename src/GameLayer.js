@@ -156,12 +156,14 @@ var GameLayer = cc.LayerColor.extend({
 
   update: function(dt) {
     this.checkEnemy1Respawn();
-    this.checkPlayerCollision();
+    this.checkPlayerEnemyCollision();
     this.checkBulletsOutOfScreen();
+    this.checkBonusItemsOutOfScreen();
     this.checkBulletsCollision();
+    this.checkBonusItemsCollision();
   },
 
-  checkPlayerCollision: function() {
+  checkPlayerEnemyCollision: function() {
     if(this.isCollide()) {
       this.player.reduceBarrier();
     }
@@ -219,13 +221,13 @@ var GameLayer = cc.LayerColor.extend({
   checkEachBulletOutOfScreen: function(bullet) {
     if(bullet != null) {
       if(bullet.y >= bulletOutOfScreenY)
-        this.removeBullet(bullet);
+        this.removeObject(bullet);
     }
   },
 
-  removeBullet: function(bullet) {
-    this.removeChild(bullet, true);
-    bullet = null;
+  removeObject: function(object) {
+    this.removeChild(object, true);
+    object = null;
   },
 
   checkBulletsCollision: function() {
@@ -298,14 +300,45 @@ var GameLayer = cc.LayerColor.extend({
   randomDropBonusItem: function() {
     var range = 7;
     var min = 1;
-    var random = Math.floor(Math.random() * (range + 1)) + min;
-    if(random == 1)
+    var randomValue = random(range, min);
+    if(randomValue == 1)
       this.dropBonusItem();
   },
 
   dropBonusItem: function() {
-    this.bonusItem = new BonusItem();
-    this.addChild(this.bonusItem);
+    var bonusItem = new BonusItem();
+    bonusItem.setPlayer(this.player);
+    this.addChild(bonusItem);
+    this.bonusItems.push(bonusItem);
+  },
+
+  checkBonusItemsOutOfScreen: function() {
+    for(var i = 0; i < this.bonusItems.length; i++) {
+      this.checkEachBonusItemsOutOfScreen(this.bonusItems[i]);
+    }
+  },
+
+  checkEachBonusItemsOutOfScreen: function(bonusItem) {
+    if(bonusItem != null) {
+      if(bonusItem.y <= bonusItemOutOfScreenY)
+        this.removeObject(bonusItem);
+    }
+  },
+
+  checkBonusItemsCollision: function() {
+    for(var i = 0; i < this.bonusItems.length;i++) {
+      if(this.bonusItems[i] != null)
+        this.bonusItems[i] = this.checkEachBonusItemCollision(this.bonusItems[i]);
+    }
+  },
+
+  checkEachBonusItemCollision: function(bonusItem) {
+    if(bonusItem.hit(this.player)) {
+      bonusItem.applyEffect();
+      this.removeChild(bonusItem, true);
+      bonusItem = null;
+    }
+    return bonusItem;
   }
 });
 
@@ -347,3 +380,4 @@ GameLayer.keyboardStatus = {
 var playerYRadius = 120;
 var addedXForBullet = 23;
 var bulletOutOfScreenY = 1200;
+var bonusItemOutOfScreenY = -100;

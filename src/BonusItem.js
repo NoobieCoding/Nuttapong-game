@@ -11,12 +11,16 @@ var BonusItem = cc.Sprite.extend({
   randomType: function() {
     var range = 2;
     var min = 1;
-    var type = random(range, min);
-    this.initPicture(type);
+    this.type = random(range, min);
+    this.initPicture(this.type);
   },
 
-  initPicture: function(type) {
-    switch (type) {
+  setPlayer: function(player) {
+    this.player = player;
+  },
+
+  initPicture: function() {
+    switch (this.type) {
       case 1:
         this.initWithFile('res/images/bonus item.png');
         break;
@@ -43,6 +47,29 @@ var BonusItem = cc.Sprite.extend({
   update: function(dt) {
     this.y -= this.speed;
     this.setPosition(this.x, this.y);
+  },
+
+  hit: function(player) {
+    if(checkPlayerBonusItemCollision(player, this)) {
+      return true;
+    }
+    else
+      return false;
+  },
+
+  applyEffect: function() {
+    console.log('applied');
+    switch (this.type) {
+      case 1:
+        this.player.addBarrier();
+        break;
+      case 2:
+        this.player.addSpeed();
+        break;
+      case 3:
+        //rapid bullet (finish with keyboard control first)
+        break;
+    }
   }
 });
 
