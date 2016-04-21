@@ -1,7 +1,6 @@
 var BonusItem = cc.Sprite.extend({
   ctor: function(type) {
     this._super();
-    console.log('create');
     this.randomType();
     this.setPos();
     this.speed = 10;
@@ -58,7 +57,6 @@ var BonusItem = cc.Sprite.extend({
   },
 
   applyEffect: function() {
-    console.log('applied');
     switch (this.type) {
       case 1:
         this.player.addBarrier();

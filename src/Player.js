@@ -3,9 +3,11 @@ var Player = cc.Sprite.extend({
     this._super();
     this.initWithFile('res/images/player.png');
     this.direction = Player.DIR.STILL;
+    this.state = Player.ALIVE;
     this.speed = 38;
     this.creathBarrierBar();
     this.setPos();
+    this.scheduleUpdate();
   },
 
   switchDirection: function(keyboardInput) {
@@ -114,3 +116,6 @@ Player.DIR = {
   LEFT: 3,
   DOWN: 4
 };
+
+Player.ALIVE = 1;
+Player.DEAD = 2;

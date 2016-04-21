@@ -88,7 +88,6 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   updateObject: function() {
-    this.player.scheduleUpdate();
     this.updateEnemies();
   },
 
@@ -117,22 +116,33 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   onKeyDown: function(keyCode, event) {
+    if(keyCode == KEYCODE.R && this.player.state == Player.DEATH)
+      this.resetGame();
     if(this.keyboardHandler == GameLayer.keyboardStatus.enable) {
-      if (keyCode == KEYCODE.W)
-        this.player.switchDirection(Player.DIR.UP);
-      else if (keyCode == KEYCODE.D)
-        this.player.switchDirection(Player.DIR.RIGHT);
-      else if (keyCode == KEYCODE.A)
-        this.player.switchDirection(Player.DIR.LEFT);
-      else if(keyCode == KEYCODE.S)
-        this.player.switchDirection(Player.DIR.DOWN);
-      else if(keyCode == KEYCODE.SPACEBAR)
-        this.shoot();
-      else if(keyCode == KEYCODE.P)
-        this.pauseGame();
-      else if(keyCode == KEYCODE.TEMP)
-        this.player.addBarrier();
-    }else if(keyCode == KEYCODE.P)
+      this.keyWhenNotPaused(keyCode);
+    }else
+      this.keyWhenPaused(keyCode);
+  },
+
+  keyWhenNotPaused: function(keyCode) {
+    if (keyCode == KEYCODE.W)
+      this.player.switchDirection(Player.DIR.UP);
+    else if (keyCode == KEYCODE.D)
+      this.player.switchDirection(Player.DIR.RIGHT);
+    else if (keyCode == KEYCODE.A)
+      this.player.switchDirection(Player.DIR.LEFT);
+    else if(keyCode == KEYCODE.S)
+      this.player.switchDirection(Player.DIR.DOWN);
+    else if(keyCode == KEYCODE.SPACEBAR)
+      this.shoot();
+    else if(keyCode == KEYCODE.P)
+      this.pauseGame();
+    else if(keyCode == KEYCODE.TEMP)
+      this.player.addBarrier();
+  },
+
+  keyWhenPaused: function(keyCode) {
+    if(keyCode == KEYCODE.P)
         this.pauseGame();
     //  else if(keyCode == KEYCODE.ESC)
       //  cc.director.popScene(theMenu);
@@ -253,17 +263,20 @@ var GameLayer = cc.LayerColor.extend({
 
   gameOver: function() {
     this.removeChild(this.player, true);
-    this.pauseGame();
+    this.keyboardHandler = GameLayer.keyboardStatus.disable;
+    this.player.state = Player.DEATH;
   },
 
-  reset: function() {
+  resetGame: function() {
+    this.keyboardHandler = GameLayer.keyboardStatus.enable;
+    cc.director.resume();
+    this.player.state = Player.ALIVE;
     this.score = 0;
+    this.setScore();
     this.createPlayer();
     this.resetBackgroundsPos();
     this.resetAllEnemiesPos();
-    this.resetHealth();
     this.clearObjectsInScreen();
-    this.pauseGame();
   },
 
   resetAllEnemiesPos: function() {
@@ -273,7 +286,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   resetEnemiesPos: function(enemies) {
-    for(var i = 0; i < enemie.length; i++) {
+    for(var i = 0; i < enemies.length; i++) {
       enemies[i].setPos();
     }
   },
@@ -285,12 +298,22 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   clearObjectsInScreen: function() {
-
+    this.clearBullets();
+    this.clearBonusItems();
   },
 
-  resetHealth: function() {
-    //this.removeChild(this.player.healthBar);
-    this.player.creathBarrierBar();
+  clearBullets: function() {
+    for(var i = 0; i < this.bullets.length;i++) {
+      this.removeChild(this.bullets[i], true);
+      this.bullets[i] = null;
+    }
+  },
+
+  clearBonusItems: function(){
+    for(var i = 0; i < this.bonusItems.length;i++) {
+      this.removeChild(this.bonusItems[i], true);
+      this.bonusItems[i] = null;
+    }
   },
 
   setScore: function() {
@@ -362,6 +385,7 @@ var KEYCODE = {
   S: 83,
   D: 68,
   P: 80,
+  R: 82,
   SPACEBAR: 32,
   ESC: 27,
   TEMP: 192//temp temp temp eiseis
