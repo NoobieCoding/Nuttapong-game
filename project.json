@@ -25,6 +25,6 @@
     "src/ColDetect.js",
     "src/Bullet.js",
     "src/BonusItem.js",
-    "src/GameOverText.js"
+    "src/Pictures.js"
   ]
 }

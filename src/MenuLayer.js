@@ -3,6 +3,7 @@ var MenuLayer = cc.LayerColor.extend({
     this._super(new cc.Color(126, 0, 122, 255));
     this.setPosition(new cc.Point(0, 0));
     this.addKeyboardHandlers();
+    this.addComponents();
   },
 
   addKeyboardHandlers: function() {
@@ -20,6 +21,21 @@ var MenuLayer = cc.LayerColor.extend({
         cc.director.pushScene(new GameScene());
       }
   },
+
+  addComponents: function() {
+    this.addTitle();
+    this.addPressEnterToStartSprite();
+  },
+
+  addTitle: function() {
+    this.title = new Picture(Picture.PIC.title);
+    this.title.setPosition(new cc.Point(MenuLayer.TITLE.xPos, MenuLayer.TITLE.yPos));
+    this.addChild(this.title);
+  },
+
+  addPressEnterToStartSprite: function() {
+
+  }
 });
 
 var MenuScene = cc.Scene.extend({
@@ -31,3 +47,8 @@ var MenuScene = cc.Scene.extend({
   }
 });
 var ENTER = 13;
+
+MenuLayer.TITLE = {
+  xPos: GameLayer.SCREENWIDTH / 2,
+  yPos: 750
+};

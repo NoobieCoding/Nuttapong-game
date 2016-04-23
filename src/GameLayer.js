@@ -314,7 +314,8 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   createGameOverText: function() {
-    this.gameOverText = new GameOverText();
+    this.gameOverText = new Picture(Picture.PIC.gameOverText);
+    this.gameOverText.setPosition(new cc.Point(GameLayer.SCREENWIDTH / 2, GameLayer.SCREENHEIGHT / 2));
     this.addChild(this.gameOverText);
   },
 
