@@ -148,8 +148,9 @@ var GameLayer = cc.LayerColor.extend({
         this.removeChild(this.player);
         this.resetGame();
     }
-    //  else if(keyCode == KEYCODE.ESC)
-      //  cc.director.popScene(theMenu);
+    else if(keyCode == KEYCODE.ESC)
+      cc.director.pushScene(new MenuScene());
+      cc.director.resume();
   },
 
   onKeyUp: function(keyCode, event) {
