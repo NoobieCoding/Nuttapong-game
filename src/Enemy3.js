@@ -3,6 +3,8 @@ var EnemyType3 = Enemy.extend({
     this._super();
     this.initWithFile('res/images/enemy3.png');
     this.order = thisEnemyOrder;
+    this.originalHP = EnemyType3.HP;
+    this.hp = this.originalHP;
     this.speed = 10;
     this.xSpeed = 20;
     this.determineSide();
@@ -64,3 +66,5 @@ EnemyType3.BOARDER = {
   LEFT: 300,
   RIGHT: 1620
 };
+
+EnemyType3.HP = 1;

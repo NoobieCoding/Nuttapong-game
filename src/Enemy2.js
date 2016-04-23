@@ -2,6 +2,8 @@ var EnemyType2 = Enemy.extend({
   ctor: function(order) {
     this._super();
     this.initWithFile('res/images/enemy2.png');
+    this.originalHP = EnemyType2.HP;
+    this.hp = this.originalHP;
     this.speed = 20;
     this.order = order;
   },
@@ -32,3 +34,4 @@ EnemyType2.LANE = {
   YPOSITION: 2500,
   YREPOSITION: -300
 };
+EnemyType2.HP = 3;

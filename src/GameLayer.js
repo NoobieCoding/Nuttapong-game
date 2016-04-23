@@ -144,6 +144,10 @@ var GameLayer = cc.LayerColor.extend({
   keyWhenPaused: function(keyCode) {
     if(keyCode == KEYCODE.P)
         this.pauseGame();
+    else if(keyCode == KEYCODE.R) {
+        this.removeChild(this.player);
+        this.resetGame();
+    }
     //  else if(keyCode == KEYCODE.ESC)
       //  cc.director.popScene(theMenu);
   },
@@ -169,7 +173,7 @@ var GameLayer = cc.LayerColor.extend({
     this.checkPlayerEnemyCollision();
     this.checkBulletsOutOfScreen();
     this.checkBonusItemsOutOfScreen();
-    this.checkBulletsCollision();
+    this.isBulletsCollide();
     this.checkBonusItemsCollision();
   },
 
@@ -177,7 +181,7 @@ var GameLayer = cc.LayerColor.extend({
     if(this.isCollide()) {
       this.player.reduceBarrier();
     }
-    if(this.player.barrier < 0)
+    if(this.player.barrier < 0 && this.player.state == Player.ALIVE)
       this.gameOver();
   },
 
@@ -197,11 +201,21 @@ var GameLayer = cc.LayerColor.extend({
   checkHitEnemy: function(focusObject,enemies) {
     for(var i = 0; i < enemies.length; i++) {
       if(enemies[i].hit(focusObject) && enemies[i].state == Enemy.STATE.normal) {
-        enemies[i].gotDestroyed();
+        this.enemyIsHit(focusObject, enemies[i]);
         return true;
       }
     }
     return false;
+  },
+
+  enemyIsHit: function(focusObject, enemy) {
+    if(focusObject instanceof Player)
+      enemy.gotDestroyed();
+    else {
+      enemy.gotHit();
+      if(enemy.state == Enemy.STATE.destroyed)
+        this.afterEnemygotDestroyed();
+    }
   },
 
   checkEnemy1Respawn: function() {
@@ -240,12 +254,10 @@ var GameLayer = cc.LayerColor.extend({
     object = null;
   },
 
-  checkBulletsCollision: function() {
-    if(this.isBulletsCollide()) {
+  afterEnemygotDestroyed: function() {
       this.randomDropBonusItem();
       this.score += 100;
       this.setScore();
-    }
   },
 
   isBulletsCollide: function() {
@@ -265,6 +277,7 @@ var GameLayer = cc.LayerColor.extend({
     this.removeChild(this.player, true);
     this.keyboardHandler = GameLayer.keyboardStatus.disable;
     this.player.state = Player.DEATH;
+    this.createGameOverText();
   },
 
   resetGame: function() {
@@ -272,11 +285,21 @@ var GameLayer = cc.LayerColor.extend({
     cc.director.resume();
     this.player.state = Player.ALIVE;
     this.score = 0;
+    this.removeGameOverText();
     this.setScore();
     this.createPlayer();
     this.resetBackgroundsPos();
     this.resetAllEnemiesPos();
     this.clearObjectsInScreen();
+  },
+
+  createGameOverText: function() {
+    this.gameOverText = new GameOverText();
+    this.addChild(this.gameOverText);
+  },
+
+  removeGameOverText: function() {
+    this.removeChild(this.gameOverText, true);
   },
 
   resetAllEnemiesPos: function() {

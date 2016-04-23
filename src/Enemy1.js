@@ -5,6 +5,8 @@ var EnemyType1 = Enemy.extend({
     this.order = order;
     this.randomPosition();
     this.determineSide();
+    this.originalHP = EnemyType1.HP;
+    this.hp = this.originalHP;
     this.speed  = 8
     this.xSpeed = 15;
     this.canRe = false;
@@ -69,3 +71,4 @@ EnemyType1.ENEMY1 = {
   LEFT_BOARDER: 40,
   RIGHT_BOARDER: 1880
 };
+EnemyType1.HP = 1;

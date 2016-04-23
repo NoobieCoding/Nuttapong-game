@@ -37,6 +37,12 @@ var Enemy = cc.Sprite.extend({
       return false;
   },
 
+  gotHit: function() {
+    this.hp -= 1;
+    if(this.hp <= 0)
+      this.gotDestroyed();
+  },
+
   gotDestroyed: function() {
     this.state = Enemy.STATE.destroyed;
     this.setVisible(false);
@@ -45,6 +51,7 @@ var Enemy = cc.Sprite.extend({
   respawn: function() {
     this.setVisible(true);
     this.state = Enemy.STATE.normal;
+    this.hp = this.originalHP;
   }
 });
 Enemy.STATE = {
