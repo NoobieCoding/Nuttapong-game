@@ -103,6 +103,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   addKeyboardHandlers: function() {
+    this.keys = [];
     var self = this;
     cc.eventManager.addListener({
       event: cc.EventListener.KEYBOARD,
@@ -116,44 +117,61 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   onKeyDown: function(keyCode, event) {
-    if(keyCode == KEYCODE.R && this.player.state == Player.DEATH)
-      this.resetGame();
-    if(this.keyboardHandler == GameLayer.keyboardStatus.enable) {
-      this.keyWhenNotPaused(keyCode);
-    }else
-      this.keyWhenPaused(keyCode);
+    this.keys[keyCode] = KEYBOARD.keyDown;
+    this.doKeysAction(keyCode);
+
   },
 
-  keyWhenNotPaused: function(keyCode) {
-    if (keyCode == KEYCODE.W)
-      this.player.switchDirection(Player.DIR.UP);
-    else if (keyCode == KEYCODE.D)
-      this.player.switchDirection(Player.DIR.RIGHT);
-    else if (keyCode == KEYCODE.A)
-      this.player.switchDirection(Player.DIR.LEFT);
-    else if(keyCode == KEYCODE.S)
-      this.player.switchDirection(Player.DIR.DOWN);
-    else if(keyCode == KEYCODE.SPACEBAR)
-      this.shoot();
-    else if(keyCode == KEYCODE.P)
+  doKeysAction: function(keyCode) {
+    if(this.keys[KEYCODE.R] && this.player.state == Player.DEATH)
+      this.resetGame();
+    if(this.keyboardHandler == GameLayer.keyboardStatus.enable)
+      this.keyActionWhenNotPaused(keyCode);
+    else
+      this.keyActionWhenPaused(keyCode);
+  },
+
+  keyActionWhenNotPaused: function() {
+    if(this.keys[KEYCODE.P])
       this.pauseGame();
-    else if(keyCode == KEYCODE.TEMP)
+    if(this.keys[KEYCODE.TEMP])
       this.player.addBarrier();
   },
 
-  keyWhenPaused: function(keyCode) {
-    if(keyCode == KEYCODE.P)
+  keyActionWhenPaused: function() {
+    if(this.keys[KEYCODE.P])
         this.pauseGame();
-    else if(keyCode == KEYCODE.R) {
+    else if(this.keys[KEYCODE.R]) {
         this.removeChild(this.player);
         this.resetGame();
     }
-    else if(keyCode == KEYCODE.ESC)
+    else if(this.keys[KEYCODE.ESC]) {
       cc.director.pushScene(new MenuScene());
       cc.director.resume();
+    }
+  },
+
+  movementAndShootAction: function() {
+    if( this.keyboardHandler == GameLayer.keyboardStatus.enable) {
+      this.MmovementAction();
+      if(this.keys[KEYCODE.SPACEBAR])
+        this.shoot();
+    }
+  },
+
+  MmovementAction: function() {
+    if (this.keys[KEYCODE.W])
+      this.player.switchDirection(Player.DIR.UP);
+    if (this.keys[KEYCODE.D])
+      this.player.switchDirection(Player.DIR.RIGHT);
+    if (this.keys[KEYCODE.A])
+      this.player.switchDirection(Player.DIR.LEFT);
+    if(this.keys[KEYCODE.S])
+      this.player.switchDirection(Player.DIR.DOWN);
   },
 
   onKeyUp: function(keyCode, event) {
+    this.keys[keyCode] = KEYBOARD.keyReleased;
     this.player.switchDirection(Player.DIR.STILL);
   },
 
@@ -170,6 +188,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   update: function(dt) {
+    this.movementAndShootAction();
     this.checkEnemy1Respawn();
     this.checkPlayerEnemyCollision();
     this.checkBulletsOutOfScreen();
@@ -423,6 +442,10 @@ GameLayer.playStatus = {
 GameLayer.keyboardStatus = {
   enable: true,
   disable: false
+};
+var KEYBOARD = {
+  keyDown: true,
+  keyReleased: false
 };
 
 var playerYRadius = 120;

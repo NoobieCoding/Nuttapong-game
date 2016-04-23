@@ -105,7 +105,7 @@ var Player = cc.Sprite.extend({
   },
 
   addSpeed: function() {
-    this.speed += 1;
+    this.speed += 1.5;
   },
 });
 
