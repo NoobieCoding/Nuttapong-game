@@ -24,6 +24,7 @@ var MenuLayer = cc.LayerColor.extend({
 
   addComponents: function() {
     this.addTitle();
+    this.addDifficultyOption();
     this.addPressEnterToStartSprite();
   },
 
@@ -33,8 +34,23 @@ var MenuLayer = cc.LayerColor.extend({
     this.addChild(this.title);
   },
 
-  addPressEnterToStartSprite: function() {
+  addDifficultyOption: function() {
+    this.createDifficultyLabel();
+  },
 
+  createDifficultyLabel: function() {
+    this.difficultyLabel = cc.LabelTTF.create('Normal', 'Arial', 40);
+    this.difficultyLabel.setPosition(new cc.Point(MenuLayer.DIFFICULTY_LABEL.xPos,
+    MenuLayer.DIFFICULTY_LABEL.yPos));
+    this.addChild(this.difficultyLabel);
+  },
+
+  addPressEnterToStartSprite: function() {
+    this.pressEnterSprite = new Picture(Picture.PIC.pressEnterPic);
+    this.pressEnterSprite.setPosition(new cc.Point(MenuLayer.PRESS_ENTER.xPos,
+    MenuLayer.PRESS_ENTER.yPos));
+    this.addChild(this.pressEnterSprite);
+    this.pressEnterSprite.runAction(cc.RepeatForever.create(new cc.Blink(1, 1)));
   }
 });
 
@@ -52,3 +68,13 @@ MenuLayer.TITLE = {
   xPos: GameLayer.SCREENWIDTH / 2,
   yPos: 750
 };
+
+MenuLayer.DIFFICULTY_LABEL = {
+  xPos: GameLayer.SCREENWIDTH / 2,
+  yPos: 400
+};
+
+MenuLayer.PRESS_ENTER = {
+  xPos: GameLayer.SCREENWIDTH / 2,
+  yPos: 250
+}

@@ -13,11 +13,15 @@ var Picture = cc.Sprite.extend({
       case Picture.PIC.title:
         this.initWithFile('res/images/logo.png');
         break;
+      case Picture.PIC.pressEnterPic:
+        this.initWithFile('res/images/enterLabel.png');
+        break;
     }
   }
 });
 
 Picture.PIC = {
   gameOverPic: 1,
-  title: 2
+  title: 2,
+  pressEnterPic: 3
 };
