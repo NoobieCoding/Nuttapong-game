@@ -6,6 +6,7 @@ var EnemyType2 = Enemy.extend({
     this.hp = this.originalHP;
     this.speed = 20;
     this.order = order;
+    this.setDifficulty();
   },
 
   setPos: function() {
@@ -34,4 +35,4 @@ EnemyType2.LANE = {
   YPOSITION: 2500,
   YREPOSITION: -300
 };
-EnemyType2.HP = 3;
+EnemyType2.HP = 20;

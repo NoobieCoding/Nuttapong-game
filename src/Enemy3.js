@@ -8,6 +8,7 @@ var EnemyType3 = Enemy.extend({
     this.speed = 10;
     this.xSpeed = 20;
     this.determineSide();
+    this.setDifficulty();
   },
 
   determineSide: function() {
@@ -67,4 +68,4 @@ EnemyType3.BOARDER = {
   RIGHT: 1620
 };
 
-EnemyType3.HP = 1;
+EnemyType3.HP = 10;

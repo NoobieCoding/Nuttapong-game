@@ -39,7 +39,7 @@ var MenuLayer = cc.LayerColor.extend({
   },
 
   createDifficultyLabel: function() {
-    this.difficultyLabel = cc.LabelTTF.create('Normal', 'Arial', 40);
+    this.difficultyLabel = new DifficultyLabel();
     this.difficultyLabel.setPosition(new cc.Point(MenuLayer.DIFFICULTY_LABEL.xPos,
     MenuLayer.DIFFICULTY_LABEL.yPos));
     this.addChild(this.difficultyLabel);

@@ -4,6 +4,12 @@ var Enemy = cc.Sprite.extend({
     this.state = Enemy.STATE.normal;
   },
 
+  setDifficulty: function() {
+    if(currentDifficulty == DIFFICULTY.easy) {
+      this.speed -= 5;
+    }
+  },
+
   changePosition: function() {
     this.y -= this.speed;
     this.changeXPosition();

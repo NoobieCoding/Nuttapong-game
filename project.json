@@ -25,6 +25,7 @@
     "src/ColDetect.js",
     "src/Bullet.js",
     "src/BonusItem.js",
-    "src/Pictures.js"
+    "src/Pictures.js",
+    "src/DifficultyLabel.js"
   ]
 }

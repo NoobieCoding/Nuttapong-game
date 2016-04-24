@@ -51,14 +51,14 @@
  }
  *
  */
+ var DIFFICULTY = {
+   easy: 1,
+   normal: 2
+ };
+
+ var currentDifficulty = DIFFICULTY.easy;
 
 cc.game.onStart = function(){
-    var difficultiesLevel = {
-      easy: 1,
-      normal: 2
-    };
-
-    var currentDifficulty = difficultiesLevel.normal;
     if(!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
         document.body.removeChild(document.getElementById("cocosLoading"));
 
