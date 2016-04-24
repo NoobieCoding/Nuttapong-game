@@ -10,11 +10,14 @@ var Picture = cc.Sprite.extend({
       case Picture.PIC.gameOverPic:
         this.initWithFile('res/images/gameovertext.png');
         break;
-      case Picture.PIC.title:
+      case Picture.PIC.titlePic:
         this.initWithFile('res/images/logo.png');
         break;
       case Picture.PIC.pressEnterPic:
         this.initWithFile('res/images/enterLabel.png');
+        break;
+      case Picture.PIC.soundOptionPic:
+        this.initWithFile('res/images/soundIcon.png');
         break;
     }
   }
@@ -22,6 +25,7 @@ var Picture = cc.Sprite.extend({
 
 Picture.PIC = {
   gameOverPic: 1,
-  title: 2,
-  pressEnterPic: 3
+  titlePic: 2,
+  pressEnterPic: 3,
+  soundOptionPic: 4
 };

@@ -17,19 +17,21 @@ var MenuLayer = cc.LayerColor.extend({
   },
 
   onKeyDown: function(keyCode, event) {
-      if (keyCode == ENTER) {
+      if (keyCode == ENTER)
         cc.director.pushScene(new GameScene());
-      }
+    //  else if(keyCode == keyCode.H)
+        //open help
   },
 
   addComponents: function() {
     this.addTitle();
     this.addDifficultyOption();
     this.addPressEnterToStartSprite();
+    this.addSoundOption();
   },
 
   addTitle: function() {
-    this.title = new Picture(Picture.PIC.title);
+    this.title = new Picture(Picture.PIC.titlePic);
     this.title.setPosition(new cc.Point(MenuLayer.TITLE.xPos, MenuLayer.TITLE.yPos));
     this.addChild(this.title);
   },
@@ -51,6 +53,13 @@ var MenuLayer = cc.LayerColor.extend({
     MenuLayer.PRESS_ENTER.yPos));
     this.addChild(this.pressEnterSprite);
     this.pressEnterSprite.runAction(cc.RepeatForever.create(new cc.Blink(1, 1)));
+  },
+
+  addSoundOption: function() {
+    this.soundOption = new Picture(Picture.PIC.soundOptionPic);
+    this.soundOption.setPosition(new cc.Point(MenuLayer.SOUND_OPTION.xPos,
+    MenuLayer.SOUND_OPTION.yPos));
+    this.addChild(this.soundOption);
   }
 });
 
@@ -77,4 +86,9 @@ MenuLayer.DIFFICULTY_LABEL = {
 MenuLayer.PRESS_ENTER = {
   xPos: GameLayer.SCREENWIDTH / 2,
   yPos: 250
-}
+};
+
+MenuLayer.SOUND_OPTION = {
+  xPos: 1820,
+  yPos: 50
+};

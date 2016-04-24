@@ -349,15 +349,15 @@ var GameLayer = cc.LayerColor.extend({
   clearBullets: function() {
     for(var i = 0; i < this.bullets.length;i++) {
       this.removeChild(this.bullets[i], true);
-      this.bullets[i] = null;
     }
+    this.bullets = [];
   },
 
   clearBonusItems: function(){
     for(var i = 0; i < this.bonusItems.length;i++) {
       this.removeChild(this.bonusItems[i], true);
-      this.bonusItems[i] = null;
     }
+    this.bonusItems = [];
   },
 
   setScore: function() {
