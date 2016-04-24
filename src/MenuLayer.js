@@ -19,8 +19,8 @@ var MenuLayer = cc.LayerColor.extend({
   onKeyDown: function(keyCode, event) {
       if (keyCode == ENTER)
         cc.director.pushScene(new GameScene());
-    //  else if(keyCode == keyCode.H)
-        //open help
+      else if(keyCode == MenuLayer.HKEY)
+        this.showMessageBox();
   },
 
   addComponents: function() {
@@ -28,6 +28,7 @@ var MenuLayer = cc.LayerColor.extend({
     this.addDifficultyOption();
     this.addPressEnterToStartSprite();
     this.addSoundOption();
+    this.addHowtoPlaySprite();
   },
 
   addTitle: function() {
@@ -60,6 +61,23 @@ var MenuLayer = cc.LayerColor.extend({
     this.soundOption.setPosition(new cc.Point(MenuLayer.SOUND_OPTION.xPos,
     MenuLayer.SOUND_OPTION.yPos));
     this.addChild(this.soundOption);
+    this.soundOption.addMouseListener();
+  },
+
+  addHowtoPlaySprite: function() {
+    this.howToPlaySprite = new Picture(Picture.PIC.howToPlayPic);
+    this.howToPlaySprite.setPosition(new cc.Point(MenuLayer.HOW_TO_PIC.xPos,
+    MenuLayer.HOW_TO_PIC.yPos));
+    this.addChild(this.howToPlaySprite);
+  },
+
+  showMessageBox: function() {
+    alert('-Press AWSD to move the player \n'
+        + '-Press SPACEBAR to shoot \n'
+        + '-Press P to pause or resume the game \n'
+        + '-When the game is pause press R to restart or ESC to exit to menu screen \n'
+        + '-You can change the difficulty of the game by clicking at the difficulty text below title \n'
+        + '-You can click at sound icon to turn on/off the sound');
   }
 });
 
@@ -92,3 +110,10 @@ MenuLayer.SOUND_OPTION = {
   xPos: 1820,
   yPos: 50
 };
+
+MenuLayer.HOW_TO_PIC = {
+    xPos: 300,
+    yPos: 800
+};
+
+MenuLayer.HKEY = 72;

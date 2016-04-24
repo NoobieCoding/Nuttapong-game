@@ -51,12 +51,18 @@
  }
  *
  */
- var DIFFICULTY = {
-   easy: 1,
-   normal: 2
- };
+  var DIFFICULTY = {
+    easy: 1,
+    normal: 2
+  };
 
- var currentDifficulty = DIFFICULTY.easy;
+  var SOUND = {
+    enable: true,
+    disable: false
+  };
+  var currentDifficulty = DIFFICULTY.normal;
+
+  var soundStatus = SOUND.enable;
 
 cc.game.onStart = function(){
     if(!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it

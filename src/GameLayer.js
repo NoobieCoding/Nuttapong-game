@@ -281,7 +281,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   isBulletsCollide: function() {
-    for(var i = 0; i < this.bullets.length; i++) {
+    for(var i = this.bullets.indexOf(null); i < this.bullets.length; i++) {
       if(this.bullets[i] != null) {
         if(this.checkHitCondition(this.bullets[i])) {
           this.removeChild(this.bullets[i], true);
@@ -393,7 +393,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   checkBonusItemsCollision: function() {
-    for(var i = 0; i < this.bonusItems.length;i++) {
+    for(var i = this.bonusItems.indexOf(null); i < this.bonusItems.length;i++) {
       if(this.bonusItems[i] != null)
         this.bonusItems[i] = this.checkEachBonusItemCollision(this.bonusItems[i]);
     }

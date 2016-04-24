@@ -21,15 +21,13 @@ var DifficultyLabel = cc.Sprite.extend({
     cc.eventManager.addListener({
       event: cc.EventListener.MOUSE,
       onMouseDown: function(event) {
-        if (event.getButton() == cc.EventMouse.BUTTON_LEFT) {
+        if (event.getButton() == cc.EventMouse.BUTTON_LEFT)
           self.doPressAction(event);
-        }
       }
     }, this);
   },
 
   doPressAction: function(event) {
-    console.log(this.clickAroundThisLabel(event));
     if(event.getButton() == cc.EventMouse.BUTTON_LEFT && this.clickAroundThisLabel(event))
       this.changeDifficulty();
   },
@@ -37,7 +35,7 @@ var DifficultyLabel = cc.Sprite.extend({
   clickAroundThisLabel: function(event) {
     var pressedX = event.getLocationX();
     var pressedY = event.getLocationY();
-    console.log(this.x);
+
     return (pressedX < this.x + DifficultyLabel.RADIUS.x)&&
     (pressedX > this.x - DifficultyLabel.RADIUS.x) &&
     (pressedY < this.y + DifficultyLabel.RADIUS.y) &&
