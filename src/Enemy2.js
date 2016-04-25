@@ -6,6 +6,7 @@ var EnemyType2 = Enemy.extend({
     this.hp = this.originalHP;
     this.speed = 20;
     this.order = order;
+    this.score = 150;
     this.setDifficulty();
   },
 

@@ -240,8 +240,10 @@ var GameLayer = cc.LayerColor.extend({
       enemy.gotDestroyed();
     else {
       enemy.gotHit();
-      if(enemy.state == Enemy.STATE.destroyed)
+      if(enemy.state == Enemy.STATE.destroyed) {
+        this.score = this.score + Math.round(enemy.getScore() * this.scoreFactor);
         this.afterEnemygotDestroyed();
+      }
     }
   },
 
@@ -286,7 +288,6 @@ var GameLayer = cc.LayerColor.extend({
 
   afterEnemygotDestroyed: function() {
       this.randomDropBonusItem();
-      this.score = this.score + Math.round(100 * this.scoreFactor);
       this.scoreFactor += 0.2;
       this.checkBeatHighScore();
       this.setScore();

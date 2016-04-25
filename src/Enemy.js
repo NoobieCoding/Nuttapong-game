@@ -58,6 +58,10 @@ var Enemy = cc.Sprite.extend({
     this.setVisible(true);
     this.state = Enemy.STATE.normal;
     this.hp = this.originalHP;
+  },
+
+  getScore: function() {
+    return this.score;
   }
 });
 Enemy.STATE = {
