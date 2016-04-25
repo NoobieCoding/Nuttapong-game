@@ -13,6 +13,7 @@ var GameLayer = cc.LayerColor.extend({
     this.bullets = [];
     this.bonusItems = [];
     this.timer = 0;
+    this.scoreFactor = 1;
     return true;
   },
 
@@ -205,6 +206,7 @@ var GameLayer = cc.LayerColor.extend({
   checkPlayerEnemyCollision: function() {
     if(this.isCollide()) {
       this.player.reduceBarrier();
+      this.scoreFactor = 1;
     }
     if(this.player.barrier < 0 && this.player.state == Player.ALIVE)
       this.gameOver();
@@ -251,7 +253,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   shoot: function() {
-    if(this.timer >= GameLayer.BULLET_DELAY) {
+    if(this.timer >= GameLayer.bulletDelay) {
       this.createBullet()
       this.timer = 0;
     }
@@ -284,7 +286,8 @@ var GameLayer = cc.LayerColor.extend({
 
   afterEnemygotDestroyed: function() {
       this.randomDropBonusItem();
-      this.score += 100;
+      this.score = this.score + Math.round(100 * this.scoreFactor);
+      this.scoreFactor += 0.2;
       this.checkBeatHighScore();
       this.setScore();
   },
@@ -488,7 +491,7 @@ GameLayer.HIGH_SCORE = {
   gap: 60
 };
 
-GameLayer.BULLET_DELAY = 5;
+GameLayer.bulletDelay = 5;
 var KEYBOARD = {
   keyDown: true,
   keyReleased: false

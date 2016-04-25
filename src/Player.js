@@ -112,7 +112,7 @@ var Player = cc.Sprite.extend({
   },
 
   addBulletSpeed: function() {
-    GameLayer.BULLET_DELAY = 1;
+    GameLayer.bulletDelay = 1;
     this.bulletBonusTimer = 100;
   },
 
@@ -122,7 +122,7 @@ var Player = cc.Sprite.extend({
     }
 
     if(this.bulletBonusTimer <= 0)
-      GameLayer.BULLET_DELAY = 5;
+      GameLayer.bulletDelay = 5;
   }
 });
 
