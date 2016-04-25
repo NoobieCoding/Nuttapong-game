@@ -72,4 +72,4 @@ EnemyType1.ENEMY1 = {
   LEFT_BOARDER: 40,
   RIGHT_BOARDER: 1880
 };
-EnemyType1.HP = 6;
+EnemyType1.HP = 2;

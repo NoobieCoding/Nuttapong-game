@@ -65,7 +65,7 @@ var BonusItem = cc.Sprite.extend({
         this.player.addSpeed();
         break;
       case 3:
-        //rapid bullet (finish with keyboard control first)
+        this.player.addBulletSpeed();
         break;
     }
   }

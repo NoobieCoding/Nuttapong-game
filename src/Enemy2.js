@@ -35,4 +35,4 @@ EnemyType2.LANE = {
   YPOSITION: 2500,
   YREPOSITION: -300
 };
-EnemyType2.HP = 20;
+EnemyType2.HP = 7;

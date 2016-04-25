@@ -68,4 +68,4 @@ EnemyType3.BOARDER = {
   RIGHT: 1620
 };
 
-EnemyType3.HP = 10;
+EnemyType3.HP = 3;

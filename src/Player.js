@@ -24,6 +24,7 @@ var Player = cc.Sprite.extend({
     var pos = this.getPosition();
     pos = this.movePlayer(pos);
     this.setPosition(new cc.Point(pos.x, pos.y));
+    this.checkBonusBulletEnd();
   },
 
   movePlayer: function(pos) {
@@ -107,8 +108,22 @@ var Player = cc.Sprite.extend({
   },
 
   addSpeed: function() {
-    this.speed += 1.5;
+    this.speed += 1.75;
   },
+
+  addBulletSpeed: function() {
+    GameLayer.BULLET_DELAY = 1;
+    this.bulletBonusTimer = 100;
+  },
+
+  checkBonusBulletEnd: function() {
+    if(this.bulletBonusTimer > 0) {
+      this.bulletBonusTimer -= 0.2;
+    }
+
+    if(this.bulletBonusTimer <= 0)
+      GameLayer.BULLET_DELAY = 5;
+  }
 });
 
 Player.DIR = {

@@ -12,6 +12,7 @@ var GameLayer = cc.LayerColor.extend({
     this.keyboardHandler = GameLayer.keyboardStatus.enable;
     this.bullets = [];
     this.bonusItems = [];
+    this.timer = 0;
     return true;
   },
 
@@ -155,13 +156,13 @@ var GameLayer = cc.LayerColor.extend({
 
   movementAndShootAction: function() {
     if( this.keyboardHandler == GameLayer.keyboardStatus.enable) {
-      this.MmovementAction();
+      this.movementAction();
       if(this.keys[KEYCODE.SPACEBAR])
         this.shoot();
     }
   },
 
-  MmovementAction: function() {
+  movementAction: function() {
     if (this.keys[KEYCODE.W])
       this.player.switchDirection(Player.DIR.UP);
     if (this.keys[KEYCODE.D])
@@ -185,7 +186,8 @@ var GameLayer = cc.LayerColor.extend({
     } else {
       cc.director.resume();
       this.pauseStat = GameLayer.playStatus.play;
-      this.keyboardHandler = GameLayer.keyboardStatus.enable;
+      if(this.player.state == Player.ALIVE)
+        this.keyboardHandler = GameLayer.keyboardStatus.enable;
     }
   },
 
@@ -197,6 +199,7 @@ var GameLayer = cc.LayerColor.extend({
     this.checkBonusItemsOutOfScreen();
     this.isBulletsCollide();
     this.checkBonusItemsCollision();
+    this.timer += 1;
   },
 
   checkPlayerEnemyCollision: function() {
@@ -248,7 +251,10 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   shoot: function() {
-    this.createBullet()
+    if(this.timer >= GameLayer.BULLET_DELAY) {
+      this.createBullet()
+      this.timer = 0;
+    }
   },
 
   createBullet: function() {
@@ -482,6 +488,7 @@ GameLayer.HIGH_SCORE = {
   gap: 60
 };
 
+GameLayer.BULLET_DELAY = 5;
 var KEYBOARD = {
   keyDown: true,
   keyReleased: false
