@@ -64,6 +64,10 @@
 
   var soundStatus = SOUND.enable;
 
+  var easyHighScore = 0;
+  var normalHighScore = 0;
+  var currentHighScore = 0;
+
 cc.game.onStart = function(){
     if(!cc.sys.isNative && document.getElementById("cocosLoading")) //If referenced loading.js, please remove it
         document.body.removeChild(document.getElementById("cocosLoading"));
@@ -85,3 +89,14 @@ cc.game.onStart = function(){
     }, this);
 };
 cc.game.run();
+
+determineDifficultyOfCurrentHighScore = function() {
+  if(currentDifficulty == DIFFICULTY.easy)
+    easyHighScore = currentHighScore;
+  else if(currentDifficulty == DIFFICULTY.normal)
+    normalHighScore = currentHighScore;
+};
+
+random = function(range, min) {
+    return Math.floor(Math.random() * (range + 1)) + min;
+};

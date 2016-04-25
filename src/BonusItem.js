@@ -71,8 +71,4 @@ var BonusItem = cc.Sprite.extend({
   }
 });
 
-random = function(range, min) {
-    return Math.floor(Math.random() * (range + 1)) + min;
-};
-
 BonusItem.START_Y = 1200;

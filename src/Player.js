@@ -91,8 +91,10 @@ var Player = cc.Sprite.extend({
   },
 
   addBarrier: function() {
-    this.barrier += 1
-    this.addbarrierSprite();
+    if(this.barrier < 3) {
+      this.barrier += 1
+      this.addbarrierSprite();
+    }
   },
 
   addbarrierSprite: function() {

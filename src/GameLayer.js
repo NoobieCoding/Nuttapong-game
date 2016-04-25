@@ -2,6 +2,7 @@ var GameLayer = cc.LayerColor.extend({
   init: function() {
     this._super(new cc.Color(127, 127, 127, 255));
     this.setPosition(new cc.Point(0, 0));
+    this.highScore = currentHighScore;
     this.createObjects();
     this.addKeyboardHandlers();
     this.updateObject();
@@ -19,6 +20,7 @@ var GameLayer = cc.LayerColor.extend({
     this.createPlayer();
     this.createEnemies();
     this.createScoreLabel();
+    this.createHighScoreLabel();
   },
 
   createBackgrounds: function() {
@@ -277,6 +279,7 @@ var GameLayer = cc.LayerColor.extend({
   afterEnemygotDestroyed: function() {
       this.randomDropBonusItem();
       this.score += 100;
+      this.checkBeatHighScore();
       this.setScore();
   },
 
@@ -298,6 +301,8 @@ var GameLayer = cc.LayerColor.extend({
     this.keyboardHandler = GameLayer.keyboardStatus.disable;
     this.player.state = Player.DEATH;
     this.createGameOverText();
+    currentHighScore = this.highScore;
+    determineDifficultyOfCurrentHighScore();
   },
 
   resetGame: function() {
@@ -365,7 +370,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   randomDropBonusItem: function() {
-    var range = 7;
+    var range = 6;
     var min = 1;
     var randomValue = random(range, min);
     if(randomValue == 1)
@@ -406,6 +411,32 @@ var GameLayer = cc.LayerColor.extend({
       bonusItem = null;
     }
     return bonusItem;
+  },
+
+  createHighScoreLabel: function() {
+    this.createHighScoreHeadLineLabel();
+    this.createHighScoreNumberLabel();
+  },
+
+  createHighScoreHeadLineLabel: function() {
+    this.highScoreHeadLineLabel = new cc.LabelTTF.create('High score', 'Arial', 50);
+    this.highScoreHeadLineLabel.setPosition(new cc.Point(GameLayer.HIGH_SCORE.xPos,
+    GameLayer.HIGH_SCORE.yPos));
+    this.addChild(this.highScoreHeadLineLabel,2);
+  },
+
+  createHighScoreNumberLabel: function() {
+    this.highScoreNumberLabel = new cc.LabelTTF.create(this.highScore+'', 'Arial', 50);
+    this.highScoreNumberLabel.setPosition(new cc.Point(GameLayer.HIGH_SCORE.xPos,
+    GameLayer.HIGH_SCORE.yPos - GameLayer.HIGH_SCORE.gap));
+    this.addChild(this.highScoreNumberLabel,2);
+  },
+
+  checkBeatHighScore: function() {
+    if(this.score > this.highScore) {
+      this.highScore = this.score;
+      this.highScoreNumberLabel.setString(this.highScore);
+    }
   }
 });
 
@@ -432,7 +463,7 @@ var KEYCODE = {
   R: 82,
   SPACEBAR: 32,
   ESC: 27,
-  TEMP: 192//temp temp temp eiseis
+  TEMP: 192
 };
 
 GameLayer.playStatus = {
@@ -444,6 +475,13 @@ GameLayer.keyboardStatus = {
   enable: true,
   disable: false
 };
+
+GameLayer.HIGH_SCORE = {
+  xPos: 500,
+  yPos: GameLayer.SCREENHEIGHT - 60,
+  gap: 60
+};
+
 var KEYBOARD = {
   keyDown: true,
   keyReleased: false

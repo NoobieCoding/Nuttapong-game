@@ -29,6 +29,8 @@ var MenuLayer = cc.LayerColor.extend({
     this.addPressEnterToStartSprite();
     this.addSoundOption();
     this.addHowtoPlaySprite();
+    this.addHighScoreLabel(DIFFICULTY.easy);
+    this.addHighScoreLabel(DIFFICULTY.normal);
   },
 
   addTitle: function() {
@@ -77,7 +79,45 @@ var MenuLayer = cc.LayerColor.extend({
         + '-Press P to pause or resume the game \n'
         + '-When the game is pause press R to restart or ESC to exit to menu screen \n'
         + '-You can change the difficulty of the game by clicking at the difficulty text below title \n'
-        + '-You can click at sound icon to turn on/off the sound');
+        + '-You can click at a sound icon to turn on/off the sound');
+  },
+
+  addHighScoreLabel: function(difficulty) {
+    if(difficulty == DIFFICULTY.easy) {
+      this.createEasyHighScoreHeadLineLabel();
+      this.createEasyHighScoreNumberLabel();
+    } else if(difficulty == DIFFICULTY.normal) {
+      this.createNormalHighScoreHeadLineLabel();
+      this.createNormalHighScoreNumberLabel();
+    }
+  },
+
+  createEasyHighScoreHeadLineLabel: function() {
+    this.easyHighScoreHeadLineLabel = new cc.LabelTTF.create('High score<Easy>', 'Arial', 50);
+    this.easyHighScoreHeadLineLabel.setPosition(new cc.Point(MenuLayer.HIGH_SCORE.easyXPos,
+    MenuLayer.HIGH_SCORE.yPos));
+    this.addChild(this.easyHighScoreHeadLineLabel);
+  },
+
+  createEasyHighScoreNumberLabel: function() {
+    this.easyHighScoreNumberLabel = new cc.LabelTTF.create(easyHighScore+'', 'Arial', 50);
+    this.easyHighScoreNumberLabel.setPosition(new cc.Point(MenuLayer.HIGH_SCORE.easyXPos,
+    MenuLayer.HIGH_SCORE.yPos - MenuLayer.HIGH_SCORE.gap));
+    this.addChild(this.easyHighScoreNumberLabel);
+  },
+
+  createNormalHighScoreHeadLineLabel: function() {
+    this.normalHighScoreHeadLineLabel = new cc.LabelTTF.create('High score<Normal>', 'Arial', 50);
+    this.normalHighScoreHeadLineLabel.setPosition(new cc.Point(MenuLayer.HIGH_SCORE.normalXPos,
+    MenuLayer.HIGH_SCORE.yPos));
+    this.addChild(this.normalHighScoreHeadLineLabel);
+  },
+
+  createNormalHighScoreNumberLabel: function() {
+    this.normalHighScoreNumberLabel = new cc.LabelTTF.create(normalHighScore+'', 'Arial', 50);
+    this.normalHighScoreNumberLabel.setPosition(new cc.Point(MenuLayer.HIGH_SCORE.normalXPos,
+    MenuLayer.HIGH_SCORE.yPos - MenuLayer.HIGH_SCORE.gap));
+    this.addChild(this.normalHighScoreNumberLabel);
   }
 });
 
@@ -112,8 +152,15 @@ MenuLayer.SOUND_OPTION = {
 };
 
 MenuLayer.HOW_TO_PIC = {
-    xPos: 300,
-    yPos: 800
+  xPos: 1600,
+  yPos: 300
+};
+
+MenuLayer.HIGH_SCORE = {
+  easyXPos: 300,
+  normalXPos: 1620,
+  yPos: 1000,
+  gap: 60
 };
 
 MenuLayer.HKEY = 72;
