@@ -25,6 +25,7 @@ var Player = cc.Sprite.extend({
     pos = this.movePlayer(pos);
     this.setPosition(new cc.Point(pos.x, pos.y));
     this.checkBonusBulletEnd();
+    this.checkBonusSpeedEnd();
   },
 
   movePlayer: function(pos) {
@@ -108,7 +109,8 @@ var Player = cc.Sprite.extend({
   },
 
   addSpeed: function() {
-    this.speed += 1.75;
+    this.speedBonusTimer = 100;
+    this.turnOnTurbo();
   },
 
   addBulletSpeed: function() {
@@ -123,6 +125,25 @@ var Player = cc.Sprite.extend({
 
     if(this.bulletBonusTimer <= 0)
       GameLayer.bulletDelay = 5;
+  },
+
+  checkBonusSpeedEnd: function() {
+    if(this.speedBonusTimer > 0) {
+      this.speedBonusTimer -= 0.2;
+    }
+
+    if(this.speedBonusTimer <= 0)
+      this.turnOffTurbo();
+  },
+
+  turnOnTurbo: function() {
+    this.speed = 60;
+    this.initWithFile('res/images/playerTurboMode.png')
+  },
+
+  turnOffTurbo: function() {
+    this.speed = Player.DEFAULT_SPEED;
+    this.initWithFile('res/images/player.png');
   }
 });
 
@@ -136,3 +157,4 @@ Player.DIR = {
 
 Player.ALIVE = 1;
 Player.DEAD = 2;
+Player.DEFAULT_SPEED = 38;
