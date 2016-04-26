@@ -151,6 +151,7 @@ var GameLayer = cc.LayerColor.extend({
     }
     else if(this.keys[KEYCODE.ESC]) {
       cc.director.pushScene(new MenuScene());
+      this.resetBulletDelay();
       cc.director.resume();
     }
   },
@@ -320,6 +321,7 @@ var GameLayer = cc.LayerColor.extend({
     cc.director.resume();
     this.player.state = Player.ALIVE;
     this.score = 0;
+    this.resetBulletDelay();
     this.removeGameOverText();
     this.setScore();
     this.createPlayer();
@@ -447,6 +449,10 @@ var GameLayer = cc.LayerColor.extend({
       this.highScore = this.score;
       this.highScoreNumberLabel.setString(this.highScore);
     }
+  },
+
+  resetBulletDelay: function() {
+    GameLayer.bulletDelay = 5;
   }
 });
 
