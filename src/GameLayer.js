@@ -27,7 +27,7 @@ var GameLayer = cc.LayerColor.extend({
 
   createBackgrounds: function() {
     this.backgrounds = new Array(3);
-    for(var i = 0; i < this.backgrounds.length; i++) {
+    for (var i = 0; i < this.backgrounds.length; i++) {
       this.backgrounds[i] = new Background(i + 1);
       this.backgrounds[i].setPos();
       this.addChild(this.backgrounds[i], 0);
@@ -48,7 +48,7 @@ var GameLayer = cc.LayerColor.extend({
 
   createEnemyType1: function() {
     this.enemiesType1 = new Array(5);
-    for(var i = 0; i < this.enemiesType1.length; i++) {
+    for (var i = 0; i < this.enemiesType1.length; i++) {
       this.enemiesType1[i] = new EnemyType1(i);
       this.enemiesType1[i].setPos();
       this.addChild(this.enemiesType1[i], 1);
@@ -57,7 +57,7 @@ var GameLayer = cc.LayerColor.extend({
 
   createEnemyType2: function() {
     this.enemiesType2 = new Array(2);
-    for(var i = 0; i < this.enemiesType2.length; i++) {
+    for (var i = 0; i < this.enemiesType2.length; i++) {
       this.enemiesType2[i] = new EnemyType2(i + 1);
       this.enemiesType2[i].setPos();
       this.addChild(this.enemiesType2[i], 1);
@@ -66,7 +66,7 @@ var GameLayer = cc.LayerColor.extend({
 
   createEnemyType3: function() {
     this.enemiesType3 = new Array(2);
-    for(var i = 0; i < this.enemiesType3.length; i++) {
+    for (var i = 0; i < this.enemiesType3.length; i++) {
       this.enemiesType3[i] = new EnemyType3(i + 1);
       this.enemiesType3[i].setPos();
       this.addChild(this.enemiesType3[i], 1);
@@ -96,11 +96,11 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   updateEnemies: function() {
-    for(var i = 0; i < this.enemiesType1.length; i++) {
+    for (var i = 0; i < this.enemiesType1.length; i++) {
       this.enemiesType1[i].scheduleUpdate();
     }
 
-    for(var i = 0; i < this.enemiesType2.length; i++) {
+    for (var i = 0; i < this.enemiesType2.length; i++) {
       this.enemiesType2[i].scheduleUpdate();
       this.enemiesType3[i].scheduleUpdate();
     }
@@ -127,29 +127,29 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   doKeysAction: function(keyCode) {
-    if(this.keys[KEYCODE.R] && this.player.state == Player.DEATH)
+    if (this.keys[KEYCODE.R] && this.player.state == Player.DEATH)
       this.resetGame();
-    if(this.keyboardHandler == GameLayer.keyboardStatus.enable)
+    if (this.keyboardHandler == GameLayer.keyboardStatus.enable)
       this.keyActionWhenNotPaused(keyCode);
     else
       this.keyActionWhenPaused(keyCode);
   },
 
   keyActionWhenNotPaused: function() {
-    if(this.keys[KEYCODE.P])
+    if (this.keys[KEYCODE.P])
       this.pauseGame();
-    if(this.keys[KEYCODE.TEMP])
+    if (this.keys[KEYCODE.TEMP])
       this.player.addBarrier();
   },
 
   keyActionWhenPaused: function() {
-    if(this.keys[KEYCODE.P])
+    if (this.keys[KEYCODE.P])
         this.pauseGame();
-    else if(this.keys[KEYCODE.R]) {
+    else if (this.keys[KEYCODE.R]) {
         this.removeChild(this.player);
         this.resetGame();
     }
-    else if(this.keys[KEYCODE.ESC]) {
+    else if (this.keys[KEYCODE.ESC]) {
       cc.director.pushScene(new MenuScene());
       this.resetBulletDelay();
       cc.director.resume();
@@ -157,9 +157,9 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   movementAndShootAction: function() {
-    if( this.keyboardHandler == GameLayer.keyboardStatus.enable) {
+    if (this.keyboardHandler == GameLayer.keyboardStatus.enable) {
       this.movementAction();
-      if(this.keys[KEYCODE.SPACEBAR])
+      if (this.keys[KEYCODE.SPACEBAR])
         this.shoot();
     }
   },
@@ -181,7 +181,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   pauseGame: function() {
-    if(this.pauseStat == GameLayer.playStatus.play) {
+    if (this.pauseStat == GameLayer.playStatus.play) {
       cc.director.pause();
       this.pauseStat = GameLayer.playStatus.pause;
       this.keyboardHandler = GameLayer.keyboardStatus.disable;
@@ -205,16 +205,16 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   checkPlayerEnemyCollision: function() {
-    if(this.isCollide()) {
+    if (this.isCollide()) {
       this.player.reduceBarrier();
       this.scoreFactor = 1;
     }
-    if(this.player.barrier < 0 && this.player.state == Player.ALIVE)
+    if (this.player.barrier < 0 && this.player.state == Player.ALIVE)
       this.gameOver();
   },
 
   isCollide: function() {
-    if(this.checkHitCondition(this.player))
+    if (this.checkHitCondition(this.player))
       return true;
     else
       return false;
@@ -227,8 +227,8 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   checkHitEnemy: function(focusObject,enemies) {
-    for(var i = 0; i < enemies.length; i++) {
-      if(enemies[i].hit(focusObject) && enemies[i].state == Enemy.STATE.normal) {
+    for (var i = 0; i < enemies.length; i++) {
+      if (enemies[i].hit(focusObject) && enemies[i].state == Enemy.STATE.normal) {
         this.enemyIsHit(focusObject, enemies[i]);
         return true;
       }
@@ -237,11 +237,11 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   enemyIsHit: function(focusObject, enemy) {
-    if(focusObject instanceof Player)
+    if (focusObject instanceof Player)
       enemy.gotDestroyed();
     else {
       enemy.gotHit();
-      if(enemy.state == Enemy.STATE.destroyed) {
+      if (enemy.state == Enemy.STATE.destroyed) {
         this.score = this.score + Math.round(enemy.getScore() * this.scoreFactor);
         this.afterEnemygotDestroyed();
       }
@@ -249,14 +249,14 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   checkEnemy1Respawn: function() {
-    if(this.enemiesType1[4].y <= GameLayer.RESPAWNY)
-      for(var i = 0; i < this.enemiesType1.length; i++) {
+    if (this.enemiesType1[4].y <= GameLayer.RESPAWNY)
+      for (var i = 0; i < this.enemiesType1.length; i++) {
         this.enemiesType1[i].canRe = true;
       }
   },
 
   shoot: function() {
-    if(this.timer >= GameLayer.bulletDelay) {
+    if (this.timer >= GameLayer.bulletDelay) {
       this.createBullet()
       this.timer = 0;
     }
@@ -270,14 +270,14 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   checkBulletsOutOfScreen: function() {
-    for(var i = 0; i < this.bullets.length; i++) {
+    for (var i = 0; i < this.bullets.length; i++) {
       this.checkEachBulletOutOfScreen(this.bullets[i]);
     }
   },
 
   checkEachBulletOutOfScreen: function(bullet) {
-    if(bullet != null) {
-      if(bullet.y >= bulletOutOfScreenY)
+    if (bullet != null) {
+      if (bullet.y >= bulletOutOfScreenY)
         this.removeObject(bullet);
     }
   },
@@ -295,9 +295,9 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   isBulletsCollide: function() {
-    for(var i = this.bullets.indexOf(null); i < this.bullets.length; i++) {
-      if(this.bullets[i] != null) {
-        if(this.checkHitCondition(this.bullets[i])) {
+    for (var i = this.bullets.indexOf(null); i < this.bullets.length; i++) {
+      if (this.bullets[i] != null) {
+        if (this.checkHitCondition(this.bullets[i])) {
           this.removeChild(this.bullets[i], true);
           this.bullets[i] = null;
           return true;
@@ -347,13 +347,13 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   resetEnemiesPos: function(enemies) {
-    for(var i = 0; i < enemies.length; i++) {
+    for (var i = 0; i < enemies.length; i++) {
       enemies[i].setPos();
     }
   },
 
   resetBackgroundsPos: function() {
-    for(var i = 0; i < this.backgrounds.length; i++) {
+    for (var i = 0; i < this.backgrounds.length; i++) {
       this.backgrounds[i].setPos();
     }
   },
@@ -364,14 +364,14 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   clearBullets: function() {
-    for(var i = 0; i < this.bullets.length;i++) {
+    for (var i = 0; i < this.bullets.length;i++) {
       this.removeChild(this.bullets[i], true);
     }
     this.bullets = [];
   },
 
   clearBonusItems: function(){
-    for(var i = 0; i < this.bonusItems.length;i++) {
+    for (var i = 0; i < this.bonusItems.length;i++) {
       this.removeChild(this.bonusItems[i], true);
     }
     this.bonusItems = [];
@@ -385,7 +385,7 @@ var GameLayer = cc.LayerColor.extend({
     var range = 6;
     var min = 1;
     var randomValue = random(range, min);
-    if(randomValue == 1)
+    if (randomValue == 1)
       this.dropBonusItem();
   },
 
@@ -397,27 +397,27 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   checkBonusItemsOutOfScreen: function() {
-    for(var i = 0; i < this.bonusItems.length; i++) {
+    for (var i = 0; i < this.bonusItems.length; i++) {
       this.checkEachBonusItemsOutOfScreen(this.bonusItems[i]);
     }
   },
 
   checkEachBonusItemsOutOfScreen: function(bonusItem) {
-    if(bonusItem != null) {
-      if(bonusItem.y <= bonusItemOutOfScreenY)
+    if (bonusItem != null) {
+      if (bonusItem.y <= bonusItemOutOfScreenY)
         this.removeObject(bonusItem);
     }
   },
 
   checkBonusItemsCollision: function() {
-    for(var i = this.bonusItems.indexOf(null); i < this.bonusItems.length;i++) {
-      if(this.bonusItems[i] != null)
+    for (var i = this.bonusItems.indexOf(null); i < this.bonusItems.length;i++) {
+      if (this.bonusItems[i] != null)
         this.bonusItems[i] = this.checkEachBonusItemCollision(this.bonusItems[i]);
     }
   },
 
   checkEachBonusItemCollision: function(bonusItem) {
-    if(bonusItem.hit(this.player)) {
+    if (bonusItem.hit(this.player)) {
       bonusItem.applyEffect();
       this.removeChild(bonusItem, true);
       bonusItem = null;
@@ -445,7 +445,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   checkBeatHighScore: function() {
-    if(this.score > this.highScore) {
+    if (this.score > this.highScore) {
       this.highScore = this.score;
       this.highScoreNumberLabel.setString(this.highScore);
     }

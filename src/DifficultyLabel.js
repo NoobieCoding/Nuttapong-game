@@ -28,7 +28,7 @@ var DifficultyLabel = cc.Sprite.extend({
   },
 
   doPressAction: function(event) {
-    if(event.getButton() == cc.EventMouse.BUTTON_LEFT && this.clickAroundThisLabel(event))
+    if (event.getButton() == cc.EventMouse.BUTTON_LEFT && this.clickAroundThisLabel(event))
       this.changeDifficulty();
   },
 
@@ -43,7 +43,7 @@ var DifficultyLabel = cc.Sprite.extend({
   },
 
   changeDifficulty: function() {
-      if(currentDifficulty == DIFFICULTY.normal) {
+      if (currentDifficulty == DIFFICULTY.normal) {
         currentDifficulty = DIFFICULTY.easy;
         currentHighScore = easyHighScore;
       } else {

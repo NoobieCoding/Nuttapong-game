@@ -38,7 +38,7 @@ var Picture = cc.Sprite.extend({
   },
 
   doPressAction: function(event) {
-    if(event.getButton() == cc.EventMouse.BUTTON_LEFT && this.clickAroundPic(event))
+    if (event.getButton() == cc.EventMouse.BUTTON_LEFT && this.clickAroundPic(event))
       this.turnSound();
   },
 
@@ -53,7 +53,7 @@ var Picture = cc.Sprite.extend({
   },
 
   turnSound: function() {
-    if(soundStatus == SOUND.enable) {
+    if (soundStatus == SOUND.enable) {
       soundStatus = SOUND.disable;
       this.initWithFile('res/images/soundOffIcon.png')
     }

@@ -6,11 +6,11 @@ var Barrier = cc.Sprite.extend({
   },
 
   setPos: function() {
-    if(this.order == 1)
+    if (this.order == 1)
       this.setPosition(new cc.Point(Barrier.FIRSTPOS.X, Barrier.FIRSTPOS.Y));
-    else if(this.order == 2)
+    else if (this.order == 2)
       this.setPosition(new cc.Point(Barrier.SECONDPOS.X, Barrier.SECONDPOS.Y));
-    else if(this.order == 3)
+    else if (this.order == 3)
       this.setPosition(new cc.Point(Barrier.THIRDPOS.X, Barrier.THIRDPOS.Y));
 }
 });

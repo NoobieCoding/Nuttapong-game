@@ -29,7 +29,7 @@ var Player = cc.Sprite.extend({
   },
 
   movePlayer: function(pos) {
-    if(this.direction != Player.DIR.STILL) {
+    if (this.direction != Player.DIR.STILL) {
       switch (this.direction) {
         case Player.DIR.UP:
           this.moveup(pos);
@@ -49,29 +49,29 @@ var Player = cc.Sprite.extend({
   },
 
   moveup: function(pos) {
-    if(pos.y <= GameLayer.SCREENHEIGHT - 150)
+    if (pos.y <= GameLayer.SCREENHEIGHT - 150)
       pos.y += this.speed;
   },
 
   moveDown: function(pos) {
-    if(pos.y >= 160)
+    if (pos.y >= 160)
       pos.y -= this.speed;
   },
 
   moveLeft: function(pos) {
-    if(pos.x >= 120)
+    if (pos.x >= 120)
       pos.x -= this.speed;
   },
 
   moveRight: function(pos) {
-    if(pos.x <= GameLayer.SCREENWIDTH - 120)
+    if (pos.x <= GameLayer.SCREENWIDTH - 120)
       pos.x += this.speed;
   },
 
   creathBarrierBar: function() {
     this.barrier = 3;
     this.barrierBar = new Array(3);
-    for(var i = 0; i < this.barrierBar.length; i++) {
+    for (var i = 0; i < this.barrierBar.length; i++) {
       this.barrierBar[i] = new Barrier(i + 1);
       this.barrierBar[i].setPos();
       this.addChild(this.barrierBar[i]);
@@ -84,27 +84,27 @@ var Player = cc.Sprite.extend({
   },
 
   reduceBarrierSprite: function() {
-    if(this.barrier == 2)
+    if (this.barrier == 2)
       this.removeChild(this.barrierBar[2]);
-    else if(this.barrier == 1)
+    else if (this.barrier == 1)
       this.removeChild(this.barrierBar[1]);
-    else if(this.barrier == 0)
+    else if (this.barrier == 0)
       this.removeChild(this.barrierBar[0]);
   },
 
   addBarrier: function() {
-    if(this.barrier < 3) {
+    if (this.barrier < 3) {
       this.barrier += 1
       this.addbarrierSprite();
     }
   },
 
   addbarrierSprite: function() {
-    if(this.barrier == 1)
+    if (this.barrier == 1)
       this.addChild(this.barrierBar[0]);
     else if (this.barrier == 2)
       this.addChild(this.barrierBar[1]);
-    else if(this.barrier == 3)
+    else if (this.barrier == 3)
       this.addChild(this.barrierBar[2]);
   },
 
@@ -119,20 +119,20 @@ var Player = cc.Sprite.extend({
   },
 
   checkBonusBulletEnd: function() {
-    if(this.bulletBonusTimer > 0) {
+    if (this.bulletBonusTimer > 0) {
       this.bulletBonusTimer -= 0.2;
     }
 
-    if(this.bulletBonusTimer <= 0)
+    if (this.bulletBonusTimer <= 0)
       GameLayer.bulletDelay = 5;
   },
 
   checkBonusSpeedEnd: function() {
-    if(this.speedBonusTimer > 0) {
+    if (this.speedBonusTimer > 0) {
       this.speedBonusTimer -= 0.2;
     }
 
-    if(this.speedBonusTimer <= 0)
+    if (this.speedBonusTimer <= 0)
       this.turnOffTurbo();
   },
 

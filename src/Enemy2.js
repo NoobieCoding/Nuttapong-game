@@ -6,12 +6,12 @@ var EnemyType2 = Enemy.extend({
     this.hp = this.originalHP;
     this.speed = 20;
     this.order = order;
-    this.score = 150;
+    this.score = 350;
     this.setDifficulty();
   },
 
   setPos: function() {
-    if(this.order == 1)
+    if (this.order == 1)
       this.setPosition(EnemyType2.LANE.XLEFTSIDE, EnemyType2.LANE.YPOSITION);
     else
       this.setPosition(EnemyType2.LANE.XRIGHTSIDE, EnemyType2.LANE.YPOSITION);
@@ -19,7 +19,7 @@ var EnemyType2 = Enemy.extend({
 
   update: function(dt) {
     this.changePosition();
-    if(this.y <= EnemyType2.LANE.YREPOSITION)
+    if (this.y <= EnemyType2.LANE.YREPOSITION)
       this.rePosition();
   },
 
@@ -36,4 +36,4 @@ EnemyType2.LANE = {
   YPOSITION: 2500,
   YREPOSITION: -300
 };
-EnemyType2.HP = 7;
+EnemyType2.HP = 14;

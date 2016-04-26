@@ -13,14 +13,14 @@ var EnemyType3 = Enemy.extend({
   },
 
   determineSide: function() {
-    if(this.order == 1)
+    if (this.order == 1)
       this.side = EnemyType3.LANESIDE.LEFT;
     else
       this.side = EnemyType3.LANESIDE.RIGHT;
   },
 
   setPos: function() {
-    if(this.order == 1)
+    if (this.order == 1)
       this.setPosition(EnemyType3.LANEPOS.FIRST_ENEMY_POSX, EnemyType3.LANEPOS.START_POSY);
     else
       this.setPosition(EnemyType3.LANEPOS.SECOND_ENEMY_POSX, EnemyType3.LANEPOS.START_POSY);
@@ -31,22 +31,22 @@ var EnemyType3 = Enemy.extend({
     this.changePosition();
     this.setPosition(new cc.Point(this.x, this.y));
     this.checkBounce();
-    if(this.y <= EnemyType3.LANEPOS.RE_POSY)
+    if (this.y <= EnemyType3.LANEPOS.RE_POSY)
       this.rePosition();
   },
 
   changeXPosition: function() {
-    if(this.side == EnemyType3.LANESIDE.LEFT)
+    if (this.side == EnemyType3.LANESIDE.LEFT)
       this.x += this.xSpeed;
     else
       this.x -= this.xSpeed;
   },
 
   checkBounce: function() {
-    if(this.x <= EnemyType3.BOARDER.LEFT)
+    if (this.x <= EnemyType3.BOARDER.LEFT)
       this.side = EnemyType3.LANESIDE.LEFT;
 
-    if(this.x >= EnemyType3.BOARDER.RIGHT)
+    if (this.x >= EnemyType3.BOARDER.RIGHT)
       this.side = EnemyType3.LANESIDE.RIGHT;
   }
 });

@@ -1,19 +1,19 @@
 var checkPlayerEnemyCollision = function(player, enemy) {
-  if(playerEnemyCollisionCondition(player, enemy))
+  if (playerEnemyCollisionCondition(player, enemy))
     return true;
   else
     return false;
 };
 
 var checkBulletEnemyCollision = function(bullet, enemy) {
-  if(bulletEnemyCollisionCondition(bullet, enemy))
+  if (bulletEnemyCollisionCondition(bullet, enemy))
     return true;
   else
     return false;
 };
 
 var checkPlayerBonusItemCollision = function(player, bonusItem) {
-  if(playerBonusItemCollisionCondition(player, bonusItem))
+  if (playerBonusItemCollisionCondition(player, bonusItem))
     return true;
   else
     return false;
@@ -25,7 +25,7 @@ var playerEnemyCollisionCondition = function(player, enemy) {
 };
 
 var bulletEnemyCollisionCondition = function(bullet, enemy) {
-  if(bullet.y >= bulletMaxY)
+  if (bullet.y >= bulletMaxY)
     return false;
   return Math.abs(bullet.x - enemy.x) <= enemyAndBulletDistanceX &&
   Math.abs(bullet.y - enemy.y) <= enemyAndBulletDistanceY && bullet.y < GameLayer.SCREENHEIGHT - bulletRadiusY;

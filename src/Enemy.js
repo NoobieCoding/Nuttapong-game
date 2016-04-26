@@ -5,7 +5,7 @@ var Enemy = cc.Sprite.extend({
   },
 
   setDifficulty: function() {
-    if(currentDifficulty == DIFFICULTY.easy) {
+    if (currentDifficulty == DIFFICULTY.easy) {
       this.speed -= 5;
     }
   },
@@ -16,36 +16,34 @@ var Enemy = cc.Sprite.extend({
   },
 
   rePosition: function() {
-      this.respawn();
-      this.setPos();
+    this.respawn();
+    this.setPos();
   },
 
   hit: function(focusObject) {
-    if(focusObject instanceof Player)
+    if (focusObject instanceof Player)
       return this.hitBetweenPlayerAndThisEnemy(focusObject);
     else
       return this.hitBetweenBulletAndThisEnemy(focusObject);
   },
 
   hitBetweenPlayerAndThisEnemy: function(player) {
-    if(checkPlayerEnemyCollision(player, this)) {
+    if (checkPlayerEnemyCollision(player, this))
       return true;
-    }
     else
       return false;
   },
 
   hitBetweenBulletAndThisEnemy: function(bullet) {
-    if(checkBulletEnemyCollision(bullet, this)) {
+    if (checkBulletEnemyCollision(bullet, this))
       return true;
-    }
     else
       return false;
   },
 
   gotHit: function() {
     this.hp -= 1;
-    if(this.hp <= 0)
+    if (this.hp <= 0)
       this.gotDestroyed();
   },
 

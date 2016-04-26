@@ -19,7 +19,7 @@ var MenuLayer = cc.LayerColor.extend({
   onKeyDown: function(keyCode, event) {
       if (keyCode == ENTER)
         cc.director.pushScene(new GameScene());
-      else if(keyCode == MenuLayer.HKEY)
+      else if (keyCode == MenuLayer.HKEY)
         this.showMessageBox();
   },
 
@@ -83,10 +83,10 @@ var MenuLayer = cc.LayerColor.extend({
   },
 
   addHighScoreLabel: function(difficulty) {
-    if(difficulty == DIFFICULTY.easy) {
+    if (difficulty == DIFFICULTY.easy) {
       this.createEasyHighScoreHeadLineLabel();
       this.createEasyHighScoreNumberLabel();
-    } else if(difficulty == DIFFICULTY.normal) {
+    } else if (difficulty == DIFFICULTY.normal) {
       this.createNormalHighScoreHeadLineLabel();
       this.createNormalHighScoreNumberLabel();
     }

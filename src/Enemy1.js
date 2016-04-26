@@ -21,7 +21,7 @@ var EnemyType1 = Enemy.extend({
   },
 
   determineSide: function() {
-    if(this.randomPosX <= EnemyType1.ENEMY1.MID_LANE_X)
+    if (this.randomPosX <= EnemyType1.ENEMY1.MID_LANE_X)
       this.side = EnemyType1.ENEMY1.LEFTSIDE;
     else
       this.side = EnemyType1.ENEMY1.RIGHTSIDE;
@@ -41,14 +41,14 @@ var EnemyType1 = Enemy.extend({
   },
 
   changeXPosition: function() {
-    if(this.side == EnemyType1.ENEMY1.LEFTSIDE)
+    if (this.side == EnemyType1.ENEMY1.LEFTSIDE)
       this.x += this.xSpeed;
     else
       this.x -= this.xSpeed;
   },
 
   rePosition: function() {
-    if(this.canRe) {
+    if (this.canRe) {
       this.respawn();
       this.setPos();
       this.canRe = false;
@@ -56,10 +56,10 @@ var EnemyType1 = Enemy.extend({
   },
 
   checkBounce: function() {
-    if(this.x <= EnemyType1.ENEMY1.LEFT_BOARDER) {
+    if (this.x <= EnemyType1.ENEMY1.LEFT_BOARDER) {
       this.side = EnemyType1.ENEMY1.LEFTSIDE;
     }
-    if(this.x >= EnemyType1.ENEMY1.RIGHT_BOARDER)
+    if (this.x >= EnemyType1.ENEMY1.RIGHT_BOARDER)
       this.side = EnemyType1.ENEMY1.RIGHTSIDE;
   }
 });

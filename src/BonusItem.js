@@ -49,7 +49,7 @@ var BonusItem = cc.Sprite.extend({
   },
 
   hit: function(player) {
-    if(checkPlayerBonusItemCollision(player, this)) {
+    if (checkPlayerBonusItemCollision(player, this)) {
       return true;
     }
     else
