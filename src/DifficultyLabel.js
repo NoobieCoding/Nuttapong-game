@@ -7,12 +7,12 @@ var DifficultyLabel = cc.Sprite.extend({
 
   initwithImages: function() {
     switch (currentDifficulty) {
-      case DIFFICULTY.normal:
-        this.initWithFile('res/images/normal.png');
-        break;
-      case DIFFICULTY.easy:
-        this.initWithFile('res/images/easy.png');
-        break;
+    case DIFFICULTY.normal:
+      this.initWithFile('res/images/normal.png');
+      break;
+    case DIFFICULTY.easy:
+      this.initWithFile('res/images/easy.png');
+      break;
     }
   },
 

@@ -7,15 +7,15 @@ var Background = cc.Sprite.extend({
 
   initFiles: function() {
     switch (this.order) {
-      case Background.ORDER.FIRST:
-        this.initWithFile('res/images/background1.png');
-        break;
-      case Background.ORDER.SECOND:
-        this.initWithFile('res/images/background2.png');
-        break;
-      case Background.ORDER.THIRD:
-        this.initWithFile('res/images/background3.png');
-        break;
+    case Background.ORDER.FIRST:
+      this.initWithFile('res/images/background1.png');
+      break;
+    case Background.ORDER.SECOND:
+      this.initWithFile('res/images/background2.png');
+      break;
+    case Background.ORDER.THIRD:
+      this.initWithFile('res/images/background3.png');
+      break;
     }
   },
 
@@ -23,15 +23,15 @@ var Background = cc.Sprite.extend({
     var posX = GameLayer.SCREENWIDTH / 2;
     var posY;
     switch (this.order) {
-      case Background.ORDER.FIRST:
-        posY = GameLayer.SCREENHEIGHT / 2;
-        break;
-      case Background.ORDER.SECOND:
-        posY = GameLayer.SCREENHEIGHT * 3 / 2;
-        break;
-      case Background.ORDER.THIRD:
-        posY = GameLayer.SCREENHEIGHT * 5 / 2;
-        break;
+    case Background.ORDER.FIRST:
+      posY = GameLayer.SCREENHEIGHT / 2;
+      break;
+    case Background.ORDER.SECOND:
+      posY = GameLayer.SCREENHEIGHT * 3 / 2;
+      break;
+    case Background.ORDER.THIRD:
+      posY = GameLayer.SCREENHEIGHT * 5 / 2;
+      break;
     }
     this.setPosition(new cc.Point(posX, posY));
   },

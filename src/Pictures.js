@@ -7,19 +7,19 @@ var Picture = cc.Sprite.extend({
 
   initwithImages: function() {
     switch (this.type) {
-      case Picture.PIC.gameOverPic:
-        this.initWithFile('res/images/gameovertext.png');
-        break;
-      case Picture.PIC.titlePic:
-        this.initWithFile('res/images/logo.png');
-        break;
-      case Picture.PIC.pressEnterPic:
-        this.initWithFile('res/images/enterLabel.png');
-        break;
-      case Picture.PIC.soundOptionPic:
-        this.initWithFile('res/images/soundIcon.png');
-        break;
-      case Picture.PIC.howToPlayPic:
+    case Picture.PIC.gameOverPic:
+      this.initWithFile('res/images/gameovertext.png');
+      break;
+    case Picture.PIC.titlePic:
+      this.initWithFile('res/images/logo.png');
+      break;
+    case Picture.PIC.pressEnterPic:
+      this.initWithFile('res/images/enterLabel.png');
+      break;
+    case Picture.PIC.soundOptionPic:
+      this.initWithFile('res/images/soundIcon.png');
+      break;
+    case Picture.PIC.howToPlayPic:
       this.initWithFile('res/images/howToPlayLabel.png');
       break;
     }

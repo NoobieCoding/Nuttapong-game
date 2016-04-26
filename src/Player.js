@@ -31,18 +31,18 @@ var Player = cc.Sprite.extend({
   movePlayer: function(pos) {
     if (this.direction != Player.DIR.STILL) {
       switch (this.direction) {
-        case Player.DIR.UP:
-          this.moveup(pos);
-          break;
-        case Player.DIR.DOWN:
-          this.moveDown(pos);
-          break;
-        case Player.DIR.LEFT:
-          this.moveLeft(pos);
-          break;
-        case Player.DIR.RIGHT:
-          this.moveRight(pos);
-          break;
+      case Player.DIR.UP:
+        this.moveup(pos);
+        break;
+      case Player.DIR.DOWN:
+        this.moveDown(pos);
+        break;
+      case Player.DIR.LEFT:
+        this.moveLeft(pos);
+        break;
+      case Player.DIR.RIGHT:
+        this.moveRight(pos);
+        break;
       }
     }
     return pos;
@@ -100,12 +100,16 @@ var Player = cc.Sprite.extend({
   },
 
   addbarrierSprite: function() {
-    if (this.barrier == 1)
+    if (this.barrier == 1) {
       this.addChild(this.barrierBar[0]);
-    else if (this.barrier == 2)
+      this.barrierBar[0].runAnimation();
+    } else if (this.barrier == 2) {
       this.addChild(this.barrierBar[1]);
-    else if (this.barrier == 3)
+      this.barrierBar[1].runAnimation();
+    } else if (this.barrier == 3) {
       this.addChild(this.barrierBar[2]);
+      this.barrierBar[2].runAnimation();
+    }
   },
 
   addSpeed: function() {

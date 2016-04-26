@@ -6,7 +6,6 @@ var res = {
   enemy2_png: 'res/images/enemy2.png',
   enemy3_png: 'res/images/enemy3.png',
   player_png: 'res/images/player.png',
-  hearth_png: 'res/images/barrier.png',
   bonus_item1_png: 'res/images/bonus item.png',
   bonus_item2_png: 'res/images/bonus item2.png',
   bonus_item3_png: 'res/images/bonus item3.png',

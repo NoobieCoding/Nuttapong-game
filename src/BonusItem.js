@@ -20,15 +20,15 @@ var BonusItem = cc.Sprite.extend({
 
   initPicture: function() {
     switch (this.type) {
-      case 1:
-        this.initWithFile('res/images/bonus item.png');
-        break;
-      case 2:
-        this.initWithFile('res/images/bonus item2.png');
-        break;
-      case 3:
-        this.initWithFile('res/images/bonus item3.png');
-        break;
+    case 1:
+      this.initWithFile('res/images/bonus item.png');
+      break;
+    case 2:
+      this.initWithFile('res/images/bonus item2.png');
+      break;
+    case 3:
+      this.initWithFile('res/images/bonus item3.png');
+      break;
     }
   },
 
@@ -58,15 +58,15 @@ var BonusItem = cc.Sprite.extend({
 
   applyEffect: function() {
     switch (this.type) {
-      case 1:
-        this.player.addBarrier();
-        break;
-      case 2:
-        this.player.addSpeed();
-        break;
-      case 3:
-        this.player.addBulletSpeed();
-        break;
+    case 1:
+      this.player.addBarrier();
+      break;
+    case 2:
+      this.player.addSpeed();
+      break;
+    case 3:
+      this.player.addBulletSpeed();
+      break;
     }
   }
 });
