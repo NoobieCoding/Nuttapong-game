@@ -17,7 +17,7 @@ var Picture = cc.Sprite.extend({
       this.initWithFile('res/images/enterLabel.png');
       break;
     case Picture.PIC.soundOptionPic:
-      this.initWithFile('res/images/soundIcon.png');
+      this.initwithSoundPic();
       break;
     case Picture.PIC.howToPlayPic:
       this.initWithFile('res/images/howToPlayLabel.png');
@@ -38,7 +38,7 @@ var Picture = cc.Sprite.extend({
   },
 
   doPressAction: function(event) {
-    if (event.getButton() == cc.EventMouse.BUTTON_LEFT && this.clickAroundPic(event))
+    if (event.getButton() === cc.EventMouse.BUTTON_LEFT && this.clickAroundPic(event))
       this.turnSound();
   },
 
@@ -53,14 +53,22 @@ var Picture = cc.Sprite.extend({
   },
 
   turnSound: function() {
-    if (soundStatus == SOUND.enable) {
+    if (soundStatus === SOUND.enable) {
+      cc.audioEngine.stopMusic();
       soundStatus = SOUND.disable;
-      this.initWithFile('res/images/soundOffIcon.png')
-    }
-    else {
+    } else {
+      cc.audioEngine.playMusic(res.menuBGM_mp3);
       soundStatus = SOUND.enable;
-      this.initWithFile('res/images/soundIcon.png')
     }
+
+    this.initwithSoundPic();
+  },
+
+  initwithSoundPic: function() {
+    if (soundStatus === SOUND.enable)
+      this.initWithFile('res/images/soundIcon.png');
+    else if(soundStatus === SOUND.disable)
+      this.initWithFile('res/images/soundOffIcon.png');
   }
 });
 

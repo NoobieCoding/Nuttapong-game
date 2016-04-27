@@ -7,6 +7,7 @@ var GameLayer = cc.LayerColor.extend({
     this.addKeyboardHandlers();
     this.updateObject();
     this.scheduleUpdate();
+    this.addSound();
     this.keyboardHandler = GameLayer.keyboard;
     this.pauseStat = GameLayer.playStatus.play;
     this.keyboardHandler = GameLayer.keyboardStatus.enable;
@@ -143,16 +144,16 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   keyActionWhenPaused: function() {
-    if (this.keys[KEYCODE.P])
+    if (this.keys[KEYCODE.P]) {
         this.pauseGame();
-    else if (this.keys[KEYCODE.R]) {
+    } else if (this.keys[KEYCODE.R]) {
         this.removeChild(this.player);
         this.resetGame();
-    }
-    else if (this.keys[KEYCODE.ESC]) {
-      cc.director.pushScene(new MenuScene());
+    } else if (this.keys[KEYCODE.ESC]) {
       this.resetBulletDelay();
       cc.director.resume();
+      cc.audioEngine
+      cc.director.pushScene(new MenuScene());
     }
   },
 
@@ -181,11 +182,13 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   pauseGame: function() {
-    if (this.pauseStat == GameLayer.playStatus.play) {
+    if (this.pauseStat === GameLayer.playStatus.play) {
+      cc.audioEngine.pauseMusic();
       cc.director.pause();
       this.pauseStat = GameLayer.playStatus.pause;
       this.keyboardHandler = GameLayer.keyboardStatus.disable;
     } else {
+      cc.audioEngine.resumeMusic();
       cc.director.resume();
       this.pauseStat = GameLayer.playStatus.play;
       if(this.player.state == Player.ALIVE)
@@ -328,6 +331,7 @@ var GameLayer = cc.LayerColor.extend({
     this.resetBackgroundsPos();
     this.resetAllEnemiesPos();
     this.clearObjectsInScreen();
+    cc.audioEngine.rewindMusic();
   },
 
   createGameOverText: function() {
@@ -453,6 +457,16 @@ var GameLayer = cc.LayerColor.extend({
 
   resetBulletDelay: function() {
     GameLayer.bulletDelay = 5;
+  },
+
+  addSound: function() {
+    if (soundStatus === SOUND.enable)
+      this.createBGM();
+  },
+
+  createBGM: function() {
+    cc.audioEngine.playMusic(res.gameBGM_mp3, true);
+    cc.audioEngine.setMusicVolume((0.25));
   }
 });
 

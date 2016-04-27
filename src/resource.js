@@ -19,7 +19,9 @@ var res = {
   normal_png: 'res/images/normal.png',
   playerTurboMode_png: 'res/images/playerTurboMode.png',
   soundIcon_png: 'res/images/soundIcon.png',
-  soundOffIcon_png: 'res/images/soundOffIcon.png'
+  soundOffIcon_png: 'res/images/soundOffIcon.png',
+  gameBGM_mp3: 'res/effects/game bgm.mp3',
+  menuBGM_mp3: 'res/effects/menu bgm.mp3'
 
 };
 

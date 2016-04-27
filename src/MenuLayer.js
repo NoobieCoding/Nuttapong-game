@@ -4,6 +4,8 @@ var MenuLayer = cc.LayerColor.extend({
     this.setPosition(new cc.Point(0, 0));
     this.addKeyboardHandlers();
     this.addComponents();
+    cc.audioEngine.stopMusic();
+    this.addSound();
   },
 
   addKeyboardHandlers: function() {
@@ -118,6 +120,16 @@ var MenuLayer = cc.LayerColor.extend({
     this.normalHighScoreNumberLabel.setPosition(new cc.Point(MenuLayer.HIGH_SCORE.normalXPos,
     MenuLayer.HIGH_SCORE.yPos - MenuLayer.HIGH_SCORE.gap));
     this.addChild(this.normalHighScoreNumberLabel);
+  },
+
+  addSound: function() {
+    if (soundStatus === SOUND.enable)
+      this.createBGM();
+  },
+
+  createBGM: function() {
+    cc.audioEngine.playMusic(res.menuBGM_mp3, true);
+    cc.audioEngine.setMusicVolume((0.25));
   }
 });
 
