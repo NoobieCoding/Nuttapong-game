@@ -61,7 +61,22 @@ var Enemy = cc.Sprite.extend({
 
   getScore: function() {
     return this.score;
-  }
+  },
+
+  createAnimation: function() {
+    var animation = new cc.Animation.create();
+    this.addImagesToAnimation(animation);
+    animation.setDelayPerUnit(0.1);
+    this.animation = cc.Animate.create(animation);
+  },
+
+  addImagesToAnimation: function(animation) {
+    animation.addSpriteFrameWithFile(res.barrier1_1_png);
+    animation.addSpriteFrameWithFile(res.barrier1_2_png);
+    animation.addSpriteFrameWithFile(res.barrier1_3_png);
+    animation.addSpriteFrameWithFile(res.barrier1_2_png);
+    animation.addSpriteFrameWithFile(res.barrier1_1_png);
+  },
 });
 Enemy.STATE = {
   normal: 1,

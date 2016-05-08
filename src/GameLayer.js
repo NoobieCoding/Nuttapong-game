@@ -152,7 +152,7 @@ var GameLayer = cc.LayerColor.extend({
         this.removeChild(this.player);
         this.resetGame();
     } else if (this.keys[KEYCODE.ESC]) {
-      this.resetBulletDelay();
+      this.resetGame();
       cc.director.resume();
       cc.director.pushScene(new MenuScene());
     }
@@ -333,6 +333,7 @@ var GameLayer = cc.LayerColor.extend({
     this.player.state = Player.ALIVE;
     this.score = 0;
     this.gameTimer = 0;
+    Player.poweredUp = false;
     this.resetBulletDelay();
     this.removeGameOverText();
     this.setScore();
