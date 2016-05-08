@@ -34,6 +34,12 @@ var res = {
   barrier3_4_png: 'res/images/barrier3-4.png',
   barrier3_5_png: 'res/images/barrier3-5.png',
 
+  enemyExplosion1_png: 'res/images/enemy explosion1.png',
+  enemyExplosion2_png: 'res/images/enemy explosion2.png',
+  enemyExplosion3_png: 'res/images/enemy explosion3.png',
+  enemyExplosion4_png: 'res/images/enemy explosion4.png',
+  enemyExplosion5_png: 'res/images/enemy explosion5.png',
+
   menuBackground_jpg: 'res/images/menu background.jpg',
   enterLabel_png: 'res/images/enterLabel.png',
   gameOverText_png: 'res/images/gameovertext.png',

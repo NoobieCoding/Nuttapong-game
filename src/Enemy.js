@@ -2,6 +2,7 @@ var Enemy = cc.Sprite.extend({
   ctor: function() {
     this._super();
     this.state = Enemy.STATE.normal;
+    this.createAnimation();
   },
 
   setDifficulty: function() {
@@ -48,12 +49,20 @@ var Enemy = cc.Sprite.extend({
   },
 
   gotDestroyed: function() {
+    this.explosionTimer = 0;
+    this.runAction(this.animation);
     playEffect(res.enemyExploded_wav);
     this.state = Enemy.STATE.destroyed;
-    this.setVisible(false);
+    //this.setVisible(false);
+  },
+
+  checkEnemyInvisible: function() {
+    if (this.state === Enemy.STATE.destroyed && this.isVisible() && this.explosionTimer > 25)
+        this.setVisible(false);
   },
 
   respawn: function() {
+    this.initWithPic();
     this.setVisible(true);
     this.state = Enemy.STATE.normal;
     this.hp = this.originalHP;
@@ -71,11 +80,11 @@ var Enemy = cc.Sprite.extend({
   },
 
   addImagesToAnimation: function(animation) {
-    animation.addSpriteFrameWithFile(res.barrier1_1_png);
-    animation.addSpriteFrameWithFile(res.barrier1_2_png);
-    animation.addSpriteFrameWithFile(res.barrier1_3_png);
-    animation.addSpriteFrameWithFile(res.barrier1_2_png);
-    animation.addSpriteFrameWithFile(res.barrier1_1_png);
+    animation.addSpriteFrameWithFile(res.enemyExplosion1_png);
+    animation.addSpriteFrameWithFile(res.enemyExplosion2_png);
+    animation.addSpriteFrameWithFile(res.enemyExplosion3_png);
+    animation.addSpriteFrameWithFile(res.enemyExplosion4_png);
+    animation.addSpriteFrameWithFile(res.enemyExplosion5_png);
   },
 });
 Enemy.STATE = {

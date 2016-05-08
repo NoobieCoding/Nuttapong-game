@@ -332,6 +332,8 @@ var GameLayer = cc.LayerColor.extend({
     cc.director.resume();
     this.player.state = Player.ALIVE;
     this.score = 0;
+    this.highScore = currentHighScore;
+    this.highScoreNumberLabel.setString(this.highScore);
     this.gameTimer = 0;
     Player.poweredUp = false;
     this.resetBulletDelay();

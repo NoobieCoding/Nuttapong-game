@@ -1,7 +1,7 @@
 var EnemyType3 = Enemy.extend({
   ctor: function(thisEnemyOrder) {
     this._super();
-    this.initWithFile(res.enemy3_png);
+    this.initWithPic();
     this.order = thisEnemyOrder;
     this.originalHP = EnemyType3.HP;
     this.hp = this.originalHP;
@@ -10,6 +10,10 @@ var EnemyType3 = Enemy.extend({
     this.score = 250;// magic number
     this.determineSide();
     this.setDifficulty();
+  },
+
+  initWithPic: function() {
+    this.initWithFile(res.enemy3_png);
   },
 
   determineSide: function() {
@@ -31,7 +35,9 @@ var EnemyType3 = Enemy.extend({
   },
 
   update: function(dt) {
+    this.explosionTimer += 1;
     this.changePosition();
+    this.checkEnemyInvisible();
     this.setPosition(new cc.Point(this.x, this.y));
     this.checkBounce();
     if (this.y <= EnemyType3.LANEPOS.RE_POSY)

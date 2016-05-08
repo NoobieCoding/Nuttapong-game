@@ -1,7 +1,7 @@
 var EnemyType1 = Enemy.extend({
   ctor: function(order) {
     this._super();
-    this.initWithFile(res.enemy1_png);
+    this.initWithPic();
     this.order = order;
     this.randomPosition();
     this.determineSide();
@@ -12,6 +12,10 @@ var EnemyType1 = Enemy.extend({
     this.score = 100;// magic number
     this.setDifficulty();
     this.canRe = false;
+  },
+
+  initWithPic: function() {
+    this.initWithFile(res.enemy1_png);
   },
 
   randomPosition: function() {
@@ -34,10 +38,12 @@ var EnemyType1 = Enemy.extend({
   },
 
   update: function(dt) {
+    this.explosionTimer += 1;
     this.changePosition();
     this.setPosition(new cc.Point(this.x, this.y));
     this.checkBounce();
     this.rePosition();
+    this.checkEnemyInvisible();
   },
 
   changeXPosition: function() {
