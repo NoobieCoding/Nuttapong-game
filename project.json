@@ -27,6 +27,7 @@
     "src/BonusItem.js",
     "src/Pictures.js",
     "src/DifficultyLabel.js",
+    "src/Instruction.js",
     "src/SoundPlayer.js"
   ]
 }

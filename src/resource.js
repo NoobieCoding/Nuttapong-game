@@ -34,6 +34,7 @@ var res = {
   barrier3_4_png: 'res/images/barrier3-4.png',
   barrier3_5_png: 'res/images/barrier3-5.png',
 
+  menuBackground_jpg: 'res/images/menu background.jpg',
   enterLabel_png: 'res/images/enterLabel.png',
   gameOverText_png: 'res/images/gameovertext.png',
   howToPlayLabel_png: 'res/images/howToPlayLabel.png',
@@ -42,6 +43,7 @@ var res = {
   easy_png: 'res/images/easy.png',
   soundIcon_png: 'res/images/soundIcon.png',
   soundOffIcon_png: 'res/images/soundOffIcon.png',
+  instruction_png: 'res/images/instruction.png',
 
   gameBGM_mp3: 'res/effects/game bgm.mp3',
   menuBGM_mp3: 'res/effects/menu bgm.mp3',

@@ -22,10 +22,11 @@ var MenuLayer = cc.LayerColor.extend({
       if (keyCode === MenuLayer.ENTER)
         cc.director.pushScene(new GameScene());
       else if (keyCode === MenuLayer.HKEY)
-        this.showMessageBox();
+        this.instruction.openOrClose();
   },
 
   addComponents: function() {
+    this.addBackground();
     this.addTitle();
     this.addDifficultyOption();
     this.addPressEnterToStartSprite();
@@ -33,6 +34,13 @@ var MenuLayer = cc.LayerColor.extend({
     this.addHowtoPlaySprite();
     this.addHighScoreLabel(DIFFICULTY.easy);
     this.addHighScoreLabel(DIFFICULTY.normal);
+    this.addInstruction();
+  },
+
+  addBackground: function() {
+    this.background = new Background(Background.ORDER.menuBackground);
+    this.background.setPos();
+    this.addChild(this.background);
   },
 
   addTitle: function() {
@@ -75,15 +83,6 @@ var MenuLayer = cc.LayerColor.extend({
     this.addChild(this.howToPlaySprite);
   },
 
-  showMessageBox: function() {
-    alert('-Press AWSD to move the player \n'
-        + '-Press SPACEBAR to shoot \n'
-        + '-Press P to pause or resume the game \n'
-        + '-When the game is pause press R to restart or ESC to exit to menu screen \n'
-        + '-You can change the difficulty of the game by clicking at the difficulty text below title \n'
-        + '-You can click at a sound icon to turn on/off the sound');
-  },
-
   addHighScoreLabel: function(difficulty) {
     if (difficulty === DIFFICULTY.easy) {
       this.createEasyHighScoreHeadLineLabel();
@@ -124,6 +123,11 @@ var MenuLayer = cc.LayerColor.extend({
     MenuLayer.HIGH_SCORE.yPos - MenuLayer.HIGH_SCORE.gap));
     this.normalHighScoreNumberLabel.setColor(new cc.Color(213, 20, 78, 255));
     this.addChild(this.normalHighScoreNumberLabel);
+  },
+
+  addInstruction: function() {
+    this.instruction = new Instruction();
+    this.addChild(this.instruction);
   },
 
   playBGM: function() {
