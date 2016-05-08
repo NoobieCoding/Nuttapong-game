@@ -60,6 +60,7 @@
     enable: true,
     disable: false
   };
+
   var currentDifficulty = DIFFICULTY.normal;
 
   var soundStatus = SOUND.enable;
@@ -91,9 +92,9 @@ cc.game.onStart = function(){
 cc.game.run();
 
 determineDifficultyOfCurrentHighScore = function() {
-  if(currentDifficulty == DIFFICULTY.easy)
+  if (currentDifficulty === DIFFICULTY.easy)
     easyHighScore = currentHighScore;
-  else if(currentDifficulty == DIFFICULTY.normal)
+  else if (currentDifficulty === DIFFICULTY.normal)
     normalHighScore = currentHighScore;
 };
 

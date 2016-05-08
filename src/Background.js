@@ -8,13 +8,13 @@ var Background = cc.Sprite.extend({
   initFiles: function() {
     switch (this.order) {
     case Background.ORDER.FIRST:
-      this.initWithFile('res/images/background1.png');
+      this.initWithFile(res.background1_png);
       break;
     case Background.ORDER.SECOND:
-      this.initWithFile('res/images/background2.png');
+      this.initWithFile(res.background2_png);
       break;
     case Background.ORDER.THIRD:
-      this.initWithFile('res/images/background3.png');
+      this.initWithFile(res.background3_png);
       break;
     }
   },

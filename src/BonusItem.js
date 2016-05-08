@@ -3,7 +3,7 @@ var BonusItem = cc.Sprite.extend({
     this._super();
     this.randomType();
     this.setPos();
-    this.speed = 10;
+    this.speed = 10;// magic number
     this.scheduleUpdate();
   },
 
@@ -21,13 +21,13 @@ var BonusItem = cc.Sprite.extend({
   initPicture: function() {
     switch (this.type) {
     case 1:
-      this.initWithFile('res/images/bonus item.png');
+      this.initWithFile(res.bonus_item1_png);
       break;
     case 2:
-      this.initWithFile('res/images/bonus item2.png');
+      this.initWithFile(res.bonus_item2_png);
       break;
     case 3:
-      this.initWithFile('res/images/bonus item3.png');
+      this.initWithFile(res.bonus_item3_png);
       break;
     }
   },
@@ -38,8 +38,8 @@ var BonusItem = cc.Sprite.extend({
   },
 
   randomPosX: function() {
-    var range = 1880;
-    var min = 20;
+    var range = 1880;// magic number
+    var min = 20;// magic number
     return random(range, min);
   },
 

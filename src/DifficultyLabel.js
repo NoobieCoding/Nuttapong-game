@@ -8,10 +8,10 @@ var DifficultyLabel = cc.Sprite.extend({
   initwithImages: function() {
     switch (currentDifficulty) {
     case DIFFICULTY.normal:
-      this.initWithFile('res/images/normal.png');
+      this.initWithFile(res.normal_png);
       break;
     case DIFFICULTY.easy:
-      this.initWithFile('res/images/easy.png');
+      this.initWithFile(res.easy_png);
       break;
     }
   },
@@ -21,14 +21,14 @@ var DifficultyLabel = cc.Sprite.extend({
     cc.eventManager.addListener({
       event: cc.EventListener.MOUSE,
       onMouseDown: function(event) {
-        if (event.getButton() == cc.EventMouse.BUTTON_LEFT)
+        if (event.getButton() === cc.EventMouse.BUTTON_LEFT)
           self.doPressAction(event);
       }
     }, this);
   },
 
   doPressAction: function(event) {
-    if (event.getButton() == cc.EventMouse.BUTTON_LEFT && this.clickAroundThisLabel(event))
+    if (event.getButton() === cc.EventMouse.BUTTON_LEFT && this.clickAroundThisLabel(event))
       this.changeDifficulty();
   },
 
@@ -43,7 +43,7 @@ var DifficultyLabel = cc.Sprite.extend({
   },
 
   changeDifficulty: function() {
-      if (currentDifficulty == DIFFICULTY.normal) {
+      if (currentDifficulty === DIFFICULTY.normal) {
         currentDifficulty = DIFFICULTY.easy;
         currentHighScore = easyHighScore;
       } else {

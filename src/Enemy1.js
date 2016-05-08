@@ -1,22 +1,22 @@
 var EnemyType1 = Enemy.extend({
   ctor: function(order) {
     this._super();
-    this.initWithFile('res/images/enemy1.png');
+    this.initWithFile(res.enemy1_png);
     this.order = order;
     this.randomPosition();
     this.determineSide();
     this.originalHP = EnemyType1.HP;
     this.hp = this.originalHP;
-    this.speed  = 8
-    this.xSpeed = 15;
-    this.score = 100;
+    this.speed  = 8// magic number
+    this.xSpeed = 15;// magic number
+    this.score = 100;// magic number
     this.setDifficulty();
     this.canRe = false;
   },
 
   randomPosition: function() {
-    var range = 1520;
-    var min = 200;
+    var range = 1520;// magic number
+    var min = 200;// magic number
     this.randomPosX = Math.floor(Math.random() * (range + 1)) + min;
   },
 
@@ -41,7 +41,7 @@ var EnemyType1 = Enemy.extend({
   },
 
   changeXPosition: function() {
-    if (this.side == EnemyType1.ENEMY1.LEFTSIDE)
+    if (this.side === EnemyType1.ENEMY1.LEFTSIDE)
       this.x += this.xSpeed;
     else
       this.x -= this.xSpeed;

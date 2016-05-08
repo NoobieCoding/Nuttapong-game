@@ -5,7 +5,7 @@ var MenuLayer = cc.LayerColor.extend({
     this.addKeyboardHandlers();
     this.addComponents();
     cc.audioEngine.stopMusic();
-    this.addSound();
+    this.playBGM();
   },
 
   addKeyboardHandlers: function() {
@@ -19,9 +19,9 @@ var MenuLayer = cc.LayerColor.extend({
   },
 
   onKeyDown: function(keyCode, event) {
-      if (keyCode == ENTER)
+      if (keyCode === MenuLayer.ENTER)
         cc.director.pushScene(new GameScene());
-      else if (keyCode == MenuLayer.HKEY)
+      else if (keyCode === MenuLayer.HKEY)
         this.showMessageBox();
   },
 
@@ -85,51 +85,50 @@ var MenuLayer = cc.LayerColor.extend({
   },
 
   addHighScoreLabel: function(difficulty) {
-    if (difficulty == DIFFICULTY.easy) {
+    if (difficulty === DIFFICULTY.easy) {
       this.createEasyHighScoreHeadLineLabel();
       this.createEasyHighScoreNumberLabel();
-    } else if (difficulty == DIFFICULTY.normal) {
+    } else if (difficulty === DIFFICULTY.normal) {
       this.createNormalHighScoreHeadLineLabel();
       this.createNormalHighScoreNumberLabel();
     }
   },
 
   createEasyHighScoreHeadLineLabel: function() {
-    this.easyHighScoreHeadLineLabel = new cc.LabelTTF.create('High score<Easy>', 'Arial', 50);
+    this.easyHighScoreHeadLineLabel = new cc.LabelTTF.create('High score [Easy]', 'Arial', 50);
     this.easyHighScoreHeadLineLabel.setPosition(new cc.Point(MenuLayer.HIGH_SCORE.easyXPos,
     MenuLayer.HIGH_SCORE.yPos));
+    this.easyHighScoreHeadLineLabel.setColor(new cc.Color(136, 191, 28, 255));
     this.addChild(this.easyHighScoreHeadLineLabel);
   },
 
   createEasyHighScoreNumberLabel: function() {
-    this.easyHighScoreNumberLabel = new cc.LabelTTF.create(easyHighScore+'', 'Arial', 50);
+    this.easyHighScoreNumberLabel = new cc.LabelTTF.create(easyHighScore + '', 'Arial', 60);
     this.easyHighScoreNumberLabel.setPosition(new cc.Point(MenuLayer.HIGH_SCORE.easyXPos,
     MenuLayer.HIGH_SCORE.yPos - MenuLayer.HIGH_SCORE.gap));
+    this.easyHighScoreNumberLabel.setColor(new cc.Color(194, 229, 31, 255));
     this.addChild(this.easyHighScoreNumberLabel);
   },
 
   createNormalHighScoreHeadLineLabel: function() {
-    this.normalHighScoreHeadLineLabel = new cc.LabelTTF.create('High score<Normal>', 'Arial', 50);
+    this.normalHighScoreHeadLineLabel = new cc.LabelTTF.create('High score [Normal]', 'Arial', 50);
     this.normalHighScoreHeadLineLabel.setPosition(new cc.Point(MenuLayer.HIGH_SCORE.normalXPos,
     MenuLayer.HIGH_SCORE.yPos));
+    this.normalHighScoreHeadLineLabel.setColor(new cc.Color(202, 34, 56, 255));
     this.addChild(this.normalHighScoreHeadLineLabel);
   },
 
   createNormalHighScoreNumberLabel: function() {
-    this.normalHighScoreNumberLabel = new cc.LabelTTF.create(normalHighScore+'', 'Arial', 50);
+    this.normalHighScoreNumberLabel = new cc.LabelTTF.create(normalHighScore + '', 'Arial', 60);
     this.normalHighScoreNumberLabel.setPosition(new cc.Point(MenuLayer.HIGH_SCORE.normalXPos,
     MenuLayer.HIGH_SCORE.yPos - MenuLayer.HIGH_SCORE.gap));
+    this.normalHighScoreNumberLabel.setColor(new cc.Color(213, 20, 78, 255));
     this.addChild(this.normalHighScoreNumberLabel);
   },
 
-  addSound: function() {
-    if (soundStatus === SOUND.enable)
-      this.createBGM();
-  },
-
-  createBGM: function() {
-    cc.audioEngine.playMusic(res.menuBGM_mp3, true);
-    cc.audioEngine.setMusicVolume((0.25));
+  playBGM: function() {
+    setVolume(0.25);
+    playMusic(res.menuBGM_mp3);
   }
 });
 
@@ -141,7 +140,6 @@ var MenuScene = cc.Scene.extend({
     this.addChild(layer);
   }
 });
-var ENTER = 13;
 
 MenuLayer.TITLE = {
   xPos: GameLayer.SCREENWIDTH / 2,
@@ -164,8 +162,8 @@ MenuLayer.SOUND_OPTION = {
 };
 
 MenuLayer.HOW_TO_PIC = {
-  xPos: 1600,
-  yPos: 300
+  xPos: 350,
+  yPos: 200
 };
 
 MenuLayer.HIGH_SCORE = {
@@ -175,4 +173,5 @@ MenuLayer.HIGH_SCORE = {
   gap: 60
 };
 
+MenuLayer.ENTER = 13;
 MenuLayer.HKEY = 72;

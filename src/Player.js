@@ -1,10 +1,10 @@
 var Player = cc.Sprite.extend({
   ctor: function() {
     this._super();
-    this.initWithFile('res/images/player.png');
+    this.initWithFile(res.player_png);
     this.direction = Player.DIR.STILL;
     this.state = Player.ALIVE;
-    this.speed = 38;
+    this.speed = Player.DEFAULT_SPEED;
     this.creathBarrierBar();
     this.setPos();
     this.scheduleUpdate();
@@ -29,7 +29,7 @@ var Player = cc.Sprite.extend({
   },
 
   movePlayer: function(pos) {
-    if (this.direction != Player.DIR.STILL) {
+    if (this.direction !== Player.DIR.STILL) {
       switch (this.direction) {
       case Player.DIR.UP:
         this.moveup(pos);
@@ -54,12 +54,12 @@ var Player = cc.Sprite.extend({
   },
 
   moveDown: function(pos) {
-    if (pos.y >= 160)
+    if (pos.y >= 160)// magic number
       pos.y -= this.speed;
   },
 
   moveLeft: function(pos) {
-    if (pos.x >= 120)
+    if (pos.x >= 120)// magic number
       pos.x -= this.speed;
   },
 
@@ -84,41 +84,45 @@ var Player = cc.Sprite.extend({
   },
 
   reduceBarrierSprite: function() {
-    if (this.barrier == 2)
+    if (this.barrier === 2)
       this.removeChild(this.barrierBar[2]);
-    else if (this.barrier == 1)
+    else if (this.barrier === 1)
       this.removeChild(this.barrierBar[1]);
-    else if (this.barrier == 0)
+    else if (this.barrier === 0)
       this.removeChild(this.barrierBar[0]);
   },
 
   addBarrier: function() {
     if (this.barrier < 3) {
+      playEffect(res.barrierUp_wav);
       this.barrier += 1
       this.addbarrierSprite();
     }
   },
 
   addbarrierSprite: function() {
-    if (this.barrier == 1) {
+    if (this.barrier === 1) {
       this.addChild(this.barrierBar[0]);
       this.barrierBar[0].runAnimation();
-    } else if (this.barrier == 2) {
+    } else if (this.barrier === 2) {
       this.addChild(this.barrierBar[1]);
       this.barrierBar[1].runAnimation();
-    } else if (this.barrier == 3) {
+    } else if (this.barrier === 3) {
       this.addChild(this.barrierBar[2]);
       this.barrierBar[2].runAnimation();
     }
   },
 
   addSpeed: function() {
-    this.speedBonusTimer = 100;
+    playEffect(res.speedUp_mp3);
+    this.speedBonusTimer = 100;// magic number
     this.turnOnTurbo();
   },
 
   addBulletSpeed: function() {
-    GameLayer.bulletDelay = 1;
+    Player.poweredUp = true;
+    playEffect(res.powerUp_wav);
+    GameLayer.bulletDelay = 3.0;
     this.bulletBonusTimer = 100;
   },
 
@@ -127,8 +131,10 @@ var Player = cc.Sprite.extend({
       this.bulletBonusTimer -= 0.2;
     }
 
-    if (this.bulletBonusTimer <= 0)
+    if (this.bulletBonusTimer <= 0) {
+      Player.poweredUp = false;
       GameLayer.bulletDelay = 5;
+    }
   },
 
   checkBonusSpeedEnd: function() {
@@ -141,13 +147,13 @@ var Player = cc.Sprite.extend({
   },
 
   turnOnTurbo: function() {
-    this.speed = 60;
-    this.initWithFile('res/images/playerTurboMode.png')
+    this.speed = 60;// magic number
+    this.initWithFile(res.playerTurboMode_png)
   },
 
   turnOffTurbo: function() {
     this.speed = Player.DEFAULT_SPEED;
-    this.initWithFile('res/images/player.png');
+    this.initWithFile(res.player_png);
   }
 });
 
@@ -158,6 +164,8 @@ Player.DIR = {
   LEFT: 3,
   DOWN: 4
 };
+
+Player.poweredUp = false;
 
 Player.ALIVE = 1;
 Player.DEAD = 2;

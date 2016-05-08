@@ -5,8 +5,8 @@ var Enemy = cc.Sprite.extend({
   },
 
   setDifficulty: function() {
-    if (currentDifficulty == DIFFICULTY.easy) {
-      this.speed -= 5;
+    if (currentDifficulty === DIFFICULTY.easy) {
+      this.speed -= 5;// magic number
     }
   },
 
@@ -48,6 +48,7 @@ var Enemy = cc.Sprite.extend({
   },
 
   gotDestroyed: function() {
+    playEffect(res.enemyExploded_wav);
     this.state = Enemy.STATE.destroyed;
     this.setVisible(false);
   },

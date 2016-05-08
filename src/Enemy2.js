@@ -1,17 +1,17 @@
 var EnemyType2 = Enemy.extend({
   ctor: function(order) {
     this._super();
-    this.initWithFile('res/images/enemy2.png');
+    this.initWithFile(res.enemy2_png);
     this.originalHP = EnemyType2.HP;
     this.hp = this.originalHP;
-    this.speed = 20;
+    this.speed = 20;// magic number
     this.order = order;
-    this.score = 350;
+    this.score = 350;// magic number
     this.setDifficulty();
   },
 
   setPos: function() {
-    if (this.order == 1)
+    if (this.order === 1)
       this.setPosition(EnemyType2.LANE.XLEFTSIDE, EnemyType2.LANE.YPOSITION);
     else
       this.setPosition(EnemyType2.LANE.XRIGHTSIDE, EnemyType2.LANE.YPOSITION);

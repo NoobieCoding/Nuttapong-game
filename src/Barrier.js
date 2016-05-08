@@ -39,39 +39,39 @@ var Barrier = cc.Sprite.extend({
   },
 
   addFirstBarrierImages: function(animation) {
-    animation.addSpriteFrameWithFile('res/images/barrier1-1.png');
-    animation.addSpriteFrameWithFile('res/images/barrier1-2.png');
-    animation.addSpriteFrameWithFile('res/images/barrier1-3.png');
-    animation.addSpriteFrameWithFile('res/images/barrier1-2.png');
-    animation.addSpriteFrameWithFile('res/images/barrier1-1.png');
-    animation.addSpriteFrameWithFile('res/images/barrier1-4.png');
-    animation.addSpriteFrameWithFile('res/images/barrier1-5.png');
-    animation.addSpriteFrameWithFile('res/images/barrier1-4.png');
-    animation.addSpriteFrameWithFile('res/images/barrier1-1.png');
+    animation.addSpriteFrameWithFile(res.barrier1_1_png);
+    animation.addSpriteFrameWithFile(res.barrier1_2_png);
+    animation.addSpriteFrameWithFile(res.barrier1_3_png);
+    animation.addSpriteFrameWithFile(res.barrier1_2_png);
+    animation.addSpriteFrameWithFile(res.barrier1_1_png);
+    animation.addSpriteFrameWithFile(res.barrier1_4_png);
+    animation.addSpriteFrameWithFile(res.barrier1_5_png);
+    animation.addSpriteFrameWithFile(res.barrier1_4_png);
+    animation.addSpriteFrameWithFile(res.barrier1_1_png);
   },
 
   addSecondBarrierImages: function(animation) {
-    animation.addSpriteFrameWithFile('res/images/barrier2-1.png');
-    animation.addSpriteFrameWithFile('res/images/barrier2-2.png');
-    animation.addSpriteFrameWithFile('res/images/barrier2-3.png');
-    animation.addSpriteFrameWithFile('res/images/barrier2-2.png');
-    animation.addSpriteFrameWithFile('res/images/barrier2-1.png');
-    animation.addSpriteFrameWithFile('res/images/barrier2-4.png');
-    animation.addSpriteFrameWithFile('res/images/barrier2-5.png');
-    animation.addSpriteFrameWithFile('res/images/barrier2-4.png');
-    animation.addSpriteFrameWithFile('res/images/barrier2-1.png');
+    animation.addSpriteFrameWithFile(res.barrier2_1_png);
+    animation.addSpriteFrameWithFile(res.barrier2_2_png);
+    animation.addSpriteFrameWithFile(res.barrier2_3_png);
+    animation.addSpriteFrameWithFile(res.barrier2_2_png);
+    animation.addSpriteFrameWithFile(res.barrier2_1_png);
+    animation.addSpriteFrameWithFile(res.barrier2_4_png);
+    animation.addSpriteFrameWithFile(res.barrier2_5_png);
+    animation.addSpriteFrameWithFile(res.barrier2_4_png);
+    animation.addSpriteFrameWithFile(res.barrier2_1_png);
   },
 
   addThirdBarrierImages: function(animation) {
-    animation.addSpriteFrameWithFile('res/images/barrier3-1.png');
-    animation.addSpriteFrameWithFile('res/images/barrier3-2.png');
-    animation.addSpriteFrameWithFile('res/images/barrier3-3.png');
-    animation.addSpriteFrameWithFile('res/images/barrier3-2.png');
-    animation.addSpriteFrameWithFile('res/images/barrier3-1.png');
-    animation.addSpriteFrameWithFile('res/images/barrier3-4.png');
-    animation.addSpriteFrameWithFile('res/images/barrier3-5.png');
-    animation.addSpriteFrameWithFile('res/images/barrier3-4.png');
-    animation.addSpriteFrameWithFile('res/images/barrier3-1.png');
+    animation.addSpriteFrameWithFile(res.barrier3_1_png);
+    animation.addSpriteFrameWithFile(res.barrier3_2_png);
+    animation.addSpriteFrameWithFile(res.barrier3_3_png);
+    animation.addSpriteFrameWithFile(res.barrier3_2_png);
+    animation.addSpriteFrameWithFile(res.barrier3_1_png);
+    animation.addSpriteFrameWithFile(res.barrier3_4_png);
+    animation.addSpriteFrameWithFile(res.barrier3_5_png);
+    animation.addSpriteFrameWithFile(res.barrier3_4_png);
+    animation.addSpriteFrameWithFile(res.barrier3_1_png);
   }
 
 });

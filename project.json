@@ -2,7 +2,7 @@
   "project_type": "javascript",
 
   "debugMode" : 1,
-  "showFPS" : true,
+  "showFPS" : false,
   "frameRate" : 60,
   "noCache" : true,
   "id" : "gameCanvas",
@@ -26,6 +26,7 @@
     "src/Bullet.js",
     "src/BonusItem.js",
     "src/Pictures.js",
-    "src/DifficultyLabel.js"
+    "src/DifficultyLabel.js",
+    "src/SoundPlayer.js"
   ]
 }

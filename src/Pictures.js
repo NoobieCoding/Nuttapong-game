@@ -8,19 +8,19 @@ var Picture = cc.Sprite.extend({
   initwithImages: function() {
     switch (this.type) {
     case Picture.PIC.gameOverPic:
-      this.initWithFile('res/images/gameovertext.png');
+      this.initWithFile(res.gameOverText_png);
       break;
     case Picture.PIC.titlePic:
-      this.initWithFile('res/images/logo.png');
+      this.initWithFile(res.logo_png);
       break;
     case Picture.PIC.pressEnterPic:
-      this.initWithFile('res/images/enterLabel.png');
+      this.initWithFile(res.enterLabel_png);
       break;
     case Picture.PIC.soundOptionPic:
       this.initwithSoundPic();
       break;
     case Picture.PIC.howToPlayPic:
-      this.initWithFile('res/images/howToPlayLabel.png');
+      this.initWithFile(res.howToPlayLabel_png);
       break;
     }
   },
@@ -66,9 +66,9 @@ var Picture = cc.Sprite.extend({
 
   initwithSoundPic: function() {
     if (soundStatus === SOUND.enable)
-      this.initWithFile('res/images/soundIcon.png');
+      this.initWithFile(res.soundIcon_png);
     else if(soundStatus === SOUND.disable)
-      this.initWithFile('res/images/soundOffIcon.png');
+      this.initWithFile(res.soundOffIcon_png);
   }
 });
 
