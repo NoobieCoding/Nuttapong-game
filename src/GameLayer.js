@@ -5,7 +5,7 @@ var GameLayer = cc.LayerColor.extend({
     this.highScore = currentHighScore;
     this.createObjects();
     this.addKeyboardHandlers();
-    this.updateObject();
+    this.updateEnemies();
     this.scheduleUpdate();
     cc.audioEngine.stopMusic();
     this.addSound();
@@ -92,10 +92,6 @@ var GameLayer = cc.LayerColor.extend({
     this.numScoreLabel = cc.LabelTTF.create('0', 'Arial', 50);
     this.numScoreLabel.setPosition(new cc.Point(200, GameLayer.SCREENHEIGHT - 120));
     this.addChild(this.numScoreLabel, 2);
-  },
-
-  updateObject: function() {
-    this.updateEnemies();
   },
 
   updateEnemies: function() {
@@ -333,17 +329,9 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   resetGame: function() {
-    this.keyboardHandler = GameLayer.keyboardStatus.enable;
-    this.score = 0;
     this.highScore = currentHighScore;
-    this.highScoreNumberLabel.setString(this.highScore);
-    this.gameTimer = 0;
     Player.poweredUp = false;
     this.resetBulletDelay();
-    this.removeGameOverText();
-    this.setScore();
-    this.createPlayer();
-    this.setPlayerForEnemy();
     cc.director.runScene(new GameScene());
     cc.director.resume();
     cc.audioEngine.rewindMusic();
@@ -355,58 +343,6 @@ var GameLayer = cc.LayerColor.extend({
     this.addChild(this.gameOverText);
   },
 
-  removeGameOverText: function() {
-    this.removeChild(this.gameOverText, true);
-  },
-
-  resetAllEnemiesPos: function() {
-    this.resetEnemiesPos(this.enemiesType1);
-    this.resetEnemiesPos(this.enemiesType2);
-    this.resetEnemiesPos(this.enemiesType3);
-  },
-
-  resetEnemiesPos: function(enemies) {
-    for (var i = 0; i < enemies.length; i++) {
-      enemies[i].setPos();
-    }
-  },
-
-  resetBackgroundsPos: function() {
-    for (var i = 0; i < this.backgrounds.length; i++) {
-      this.backgrounds[i].setPos();
-    }
-  },
-
-  clearObjectsInScreen: function() {
-    this.clearBullets();
-    this.clearBonusItems();
-  },
-
-  clearBullets: function() {
-    for (var i = 0; i < this.bullets.length;i++) {
-      this.removeChild(this.bullets[i], true);
-    }
-    this.bullets = [];
-  },
-
-  clearEnemyBullets: function() {
-    for (var i = 0; i < this.enemiesType1s.length;i++) {
-      this.enemiesType1[i].removeBullets();
-    }
-  },
-
-  clearBonusItems: function(){
-    for (var i = 0; i < this.bonusItems.length;i++) {
-      this.removeChild(this.bonusItems[i], true);
-    }
-    this.bonusItems = [];
-  },
-
-  setPlayerForEnemy: function() {
-    for (var i = 0; i < this.enemiesType1.length; i++) {
-      this.enemiesType1[i].setPlayer(this.player);
-    }
-  },
   setScore: function() {
     this.numScoreLabel.setString(this.score);
   },

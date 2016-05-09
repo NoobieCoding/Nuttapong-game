@@ -74,10 +74,6 @@ var EnemyType1 = Enemy.extend({
       this.side = EnemyType1.ENEMY1.RIGHTSIDE;
   },
 
-  setPlayer: function(player) {
-    this.player = player;
-  },
-
   shoot: function() {
     if (this.shootCondition()) {
       this.createBullet();
