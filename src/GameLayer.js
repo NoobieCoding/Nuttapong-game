@@ -208,6 +208,11 @@ var GameLayer = cc.LayerColor.extend({
     this.isBulletsCollide();
     this.checkBonusItemsCollision();
     this.checkIncreaseEnemiesSpeed();
+
+    if (this.player.state === Player.DEAD && this.player. explosionTimer <= 50) {
+      this.player.explosionTimer += 1;
+      this.player.checkPlayerExplodingEnd();
+    }
   },
 
   checkPlayerEnemyCollision: function() {
@@ -215,8 +220,10 @@ var GameLayer = cc.LayerColor.extend({
       this.player.reduceBarrier();
       this.scoreFactor = 1;
     }
-    if (this.player.barrier < 0 && this.player.state === Player.ALIVE)
+    if (this.player.barrier < 0 && this.player.state === Player.ALIVE) {
+      this.player.gotDestroyed();
       this.gameOver();
+    }
   },
 
   isCollide: function() {
@@ -319,9 +326,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   gameOver: function() {
-    this.removeChild(this.player, true);
     this.keyboardHandler = GameLayer.keyboardStatus.disable;
-    this.player.state = Player.DEATH;
     this.createGameOverText();
     currentHighScore = this.highScore;
     determineDifficultyOfCurrentHighScore();

@@ -29,7 +29,7 @@ var Enemy = cc.Sprite.extend({
   },
 
   hitBetweenPlayerAndThisEnemy: function(player) {
-    if (checkPlayerEnemyCollision(player, this))
+    if (checkPlayerEnemyCollision(player, this) && player.state === Player.ALIVE)
       return true;
     else
       return false;
@@ -85,7 +85,7 @@ var Enemy = cc.Sprite.extend({
     animation.addSpriteFrameWithFile(res.enemyExplosion3_png);
     animation.addSpriteFrameWithFile(res.enemyExplosion4_png);
     animation.addSpriteFrameWithFile(res.enemyExplosion5_png);
-  },
+  }
 });
 Enemy.STATE = {
   normal: 1,

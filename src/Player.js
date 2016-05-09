@@ -8,6 +8,7 @@ var Player = cc.Sprite.extend({
     this.creathBarrierBar();
     this.setPos();
     this.scheduleUpdate();
+    this.createAnimation();
   },
 
   switchDirection: function(keyboardInput) {
@@ -154,6 +155,35 @@ var Player = cc.Sprite.extend({
   turnOffTurbo: function() {
     this.speed = Player.DEFAULT_SPEED;
     this.initWithFile(res.player_png);
+  },
+
+  gotDestroyed: function() {
+    this.explosionTimer = 0;
+    this.state = Player.DEAD;
+    this.runAction(this.animation);
+  },
+
+  checkPlayerExplodingEnd: function() {
+    if (this.state === Player.DEAD && this.explosionTimer > 50) {
+        this.removeFromParent();
+    }
+  },
+
+  createAnimation: function() {
+    var animation = new cc.Animation.create();
+    this.addImagesToAnimation(animation);
+    animation.setDelayPerUnit(0.1);
+    this.animation = cc.Animate.create(animation);
+  },
+
+  addImagesToAnimation: function(animation) {
+    animation.addSpriteFrameWithFile(res.playerExplosion1_png);
+    animation.addSpriteFrameWithFile(res.playerExplosion2_png);
+    animation.addSpriteFrameWithFile(res.playerExplosion3_png);
+    animation.addSpriteFrameWithFile(res.playerExplosion4_png);
+    animation.addSpriteFrameWithFile(res.playerExplosion5_png);
+    animation.addSpriteFrameWithFile(res.playerExplosion6_png);
+    animation.addSpriteFrameWithFile(res.playerExplosion7_png);
   }
 });
 

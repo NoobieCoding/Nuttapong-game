@@ -40,8 +40,10 @@ var EnemyType3 = Enemy.extend({
     this.checkEnemyInvisible();
     this.setPosition(new cc.Point(this.x, this.y));
     this.checkBounce();
-    if (this.y <= EnemyType3.LANEPOS.RE_POSY)
+    if (this.y <= EnemyType3.LANEPOS.RE_POSY) {
       this.rePosition();
+      this.determineSide();
+    }
   },
 
   changeXPosition: function() {
@@ -55,9 +57,7 @@ var EnemyType3 = Enemy.extend({
     if (this.x <= EnemyType3.BOARDER.LEFT) {
       this.side = EnemyType3.LANESIDE.LEFT;
       this.flip();
-    }
-
-    if (this.x >= EnemyType3.BOARDER.RIGHT) {
+    }  else if (this.x >= EnemyType3.BOARDER.RIGHT) {
       this.side = EnemyType3.LANESIDE.RIGHT;
       this.flip();
     }

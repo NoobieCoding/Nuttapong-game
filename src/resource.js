@@ -34,6 +34,15 @@ var res = {
   barrier3_4_png: 'res/images/barrier3-4.png',
   barrier3_5_png: 'res/images/barrier3-5.png',
 
+  playerExplosion1_png: 'res/images/player explosion1.png',
+  playerExplosion2_png: 'res/images/player explosion2.png',
+  playerExplosion3_png: 'res/images/player explosion3.png',
+  playerExplosion4_png: 'res/images/player explosion4.png',
+  playerExplosion5_png: 'res/images/player explosion5.png',
+  playerExplosion6_png: 'res/images/player explosion6.png',
+  playerExplosion7_png: 'res/images/player explosion7.png',
+
+
   enemyExplosion1_png: 'res/images/enemy explosion1.png',
   enemyExplosion2_png: 'res/images/enemy explosion2.png',
   enemyExplosion3_png: 'res/images/enemy explosion3.png',
