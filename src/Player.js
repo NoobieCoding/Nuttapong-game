@@ -88,6 +88,7 @@ var Player = cc.Sprite.extend({
   },
 
   reduceBarrier: function() {
+    playEffect(res.barrierBreak_wav);
     this.barrier -= 1;
     this.reduceBarrierSprite();
   },

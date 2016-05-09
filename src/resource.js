@@ -68,6 +68,7 @@ var res = {
   playerExploded_wav: 'res/effects/player explosion.wav',
   shootingEffect_wav: 'res/effects/shooting effect.wav',
   barrierUp_wav: 'res/effects/barrier up.wav',
+  barrierBreak_wav: 'res/effects/barrier break.wav',
   powerUp_wav: 'res/effects/power up.wav',
   speedUp_mp3: 'res/effects/speed up.mp3',
   enemyLaser_wav: 'res/effects/enemy laser.wav'

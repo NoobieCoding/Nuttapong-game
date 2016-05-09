@@ -43,15 +43,15 @@ var EnemyBullet = cc.Sprite.extend({
   },
 
   checkHitPlayer: function() {
-    if (checkHitBulletAndPlayer(this, this.player)) {
+    if (checkHitBulletAndPlayer(this, this.player) && this.player.state === Player.ALIVE) {
       this.removeFromParent();
       this.player.reduceBarrier();
-      this.dealDamageToPlayer();
+      this.isPlayerDestroyed();
     }
   },
 
-  dealDamageToPlayer: function() {
-    if (this.player.barrier < 0 && this.player.state === Player.ALIVE) {
+  isPlayerDestroyed: function() {
+    if (this.player.barrier < 0) {
       this.player.gotDestroyed();
       this.gameLayer.gameOver();
     }
