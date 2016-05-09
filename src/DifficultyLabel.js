@@ -43,14 +43,14 @@ var DifficultyLabel = cc.Sprite.extend({
   },
 
   changeDifficulty: function() {
-      if (currentDifficulty === DIFFICULTY.normal) {
-        currentDifficulty = DIFFICULTY.easy;
-        currentHighScore = easyHighScore;
-      } else {
-        currentDifficulty = DIFFICULTY.normal;
-        currentHighScore = normalHighScore;
-      }
-      this.initwithImages();
+    if (currentDifficulty === DIFFICULTY.normal) {
+      currentDifficulty = DIFFICULTY.easy;
+      currentHighScore = easyHighScore;
+    } else {
+      currentDifficulty = DIFFICULTY.normal;
+      currentHighScore = normalHighScore;
+    }
+    this.initwithImages();
   },
 });
 

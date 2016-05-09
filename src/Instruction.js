@@ -14,6 +14,6 @@ var Instruction = cc.Sprite.extend({
     if (this.isVisible())
       this.setVisible(false);
     else
-        this.setVisible(true);
+      this.setVisible(true);
   }
 });

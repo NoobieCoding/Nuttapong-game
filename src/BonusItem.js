@@ -3,7 +3,7 @@ var BonusItem = cc.Sprite.extend({
     this._super();
     this.randomType();
     this.setPos();
-    this.speed = 10;// magic number
+    this.speed = BonusItem.SPEED;
     this.scheduleUpdate();
   },
 
@@ -38,8 +38,8 @@ var BonusItem = cc.Sprite.extend({
   },
 
   randomPosX: function() {
-    var range = 1880;// magic number
-    var min = 20;// magic number
+    var range = BonusItem.MAX_POSX;
+    var min = BonusItem.MIN_POSX;
     return random(range, min);
   },
 
@@ -72,3 +72,6 @@ var BonusItem = cc.Sprite.extend({
 });
 
 BonusItem.START_Y = 1200;
+BonusItem.SPEED = 10;
+BonusItem.MAX_POSX = 1880;
+BonusItem.MIN_POSX = 20;

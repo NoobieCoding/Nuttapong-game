@@ -36,7 +36,9 @@ var EnemyBullet = cc.Sprite.extend({
   },
 
   checkOutOfTheScreen: function() {
-    if (this.x < -100 || this.x > GameLayer.SCREENWIDTH + 100 || this.y < -100)
+    if (this.x < -EnemyBullet.OUT_OF_SCREEN_VALUE ||
+      this.x > GameLayer.SCREENWIDTH + EnemyBullet.OUT_OF_SCREEN_VALUE ||
+      this.y < -EnemyBullet.OUT_OF_SCREEN_VALUE)
       this.removeFromParent();
   },
 
@@ -57,6 +59,8 @@ var EnemyBullet = cc.Sprite.extend({
 });
 
 EnemyBullet.SPEED = 15;
+
+EnemyBullet.OUT_OF_SCREEN_VALUE = 100;
 
 EnemyBullet.TYPE = {
   right: 1,

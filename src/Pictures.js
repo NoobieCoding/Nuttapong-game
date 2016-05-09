@@ -26,15 +26,15 @@ var Picture = cc.Sprite.extend({
   },
 
   addMouseListener: function() {
-      var self = this;
-      cc.eventManager.addListener({
-        event: cc.EventListener.MOUSE,
-        onMouseDown: function(event) {
-          if (event.getButton() == cc.EventMouse.BUTTON_LEFT
-          && self.type == Picture.PIC.soundOptionPic)
-            self.doPressAction(event);
-        }
-      }, this);
+    var self = this;
+    cc.eventManager.addListener({
+      event: cc.EventListener.MOUSE,
+      onMouseDown: function(event) {
+        if (event.getButton() === cc.EventMouse.BUTTON_LEFT
+          && self.type === Picture.PIC.soundOptionPic)
+          self.doPressAction(event);
+      }
+    }, this);
   },
 
   doPressAction: function(event) {
