@@ -6,9 +6,8 @@ var Enemy = cc.Sprite.extend({
   },
 
   setDifficulty: function() {
-    if (currentDifficulty === DIFFICULTY.easy) {
-      this.speed -= 5;// magic number
-    }
+    if (currentDifficulty === DIFFICULTY.easy)
+      this.speed -= Enemy.EASY_SPEED_DECREASE;
   },
 
   changePosition: function() {
@@ -56,8 +55,9 @@ var Enemy = cc.Sprite.extend({
   },
 
   checkEnemyInvisible: function() {
-    if (this.state === Enemy.STATE.destroyed && this.isVisible() && this.explosionTimer > 25)
-        this.setVisible(false);
+    if (this.state === Enemy.STATE.destroyed && this.isVisible() &&
+      this.explosionTimer > Enemy.EXPLOSION_TIME)
+      this.setVisible(false);
   },
 
   respawn: function() {
@@ -90,3 +90,6 @@ Enemy.STATE = {
   normal: 1,
   destroyed: 2
 };
+
+Enemy.EASY_SPEED_DECREASE = 5;
+Enemy.EXPLOSION_TIME = 25;

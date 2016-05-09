@@ -3,27 +3,31 @@ var EnemyType1 = Enemy.extend({
     this._super();
     this.initWithPic();
     this.order = order;
-    this.randomPosition();
-    this.determineSide();
-    this.originalHP = EnemyType1.HP;
-    this.hp = this.originalHP;
-    this.speed  = 8// magic number
-    this.xSpeed = 15;// magic number
-    this.score = 100;// magic number
-    this.bulletTimer = 0;
-    this.setDifficulty();
-    this.canRe = false;
     this.player = player;
     this.gameLayer = gameLayer;
+    this.initializeFields();
+    this.randomPosition();
+    this.determineSide();
+    this.setDifficulty();
   },
 
   initWithPic: function() {
     this.initWithFile(res.enemy1_png);
   },
 
+  initializeFields: function() {
+    this.originalHP = EnemyType1.HP;
+    this.hp = this.originalHP;
+    this.speed  = EnemyType1.SPEED.y;
+    this.xSpeed = EnemyType1.SPEED.x;
+    this.score = EnemyType1.SCORE;
+    this.bulletTimer = 0
+    this.canRe = false;
+  },
+
   randomPosition: function() {
-    var range = 1520;// magic number
-    var min = 200;// magic number
+    var range = EnemyType1.MAX_X;
+    var min = EnemyType1.MIN_X;
     this.randomPosX = Math.floor(Math.random() * (range + 1)) + min;
   },
 
@@ -82,15 +86,15 @@ var EnemyType1 = Enemy.extend({
   },
 
   shootCondition: function() {
-    return this.bulletTimer >= 100 + (this.order * 10) &&
-      this.y < GameLayer.SCREENHEIGHT - 80 && this.y > 160 &&
+    return this.bulletTimer >= EnemyType1.BULLET_DELAY + (this.order * EnemyType1.DELAY_PER_ENEMY)
+      &&  this.y < GameLayer.SCREENHEIGHT - 80 && this.y > 160 &&
       this.state === Enemy.STATE.normal;
   },
 
   createBullet: function() {
     var bulletType = random(1, 1);
     this.bullet = new EnemyBullet(bulletType, this.player, this.gameLayer);
-    this.bullet.setPosition(new cc.Point(this.x, this.y - 40));
+    this.bullet.setPosition(new cc.Point(this.x, this.y - EnemyType1.RADIUS));
     this.gameLayer.addChild(this.bullet);
   }
 });
@@ -104,4 +108,16 @@ EnemyType1.ENEMY1 = {
   LEFT_BOARDER: 40,
   RIGHT_BOARDER: 1880
 };
+
+EnemyType1.SPEED = {
+  x: 15,
+  y: 8
+};
+
 EnemyType1.HP = 2;
+EnemyType1.SCORE = 100;
+EnemyType1.MAX_X = 1520;
+EnemyType1.MIN_X = 200;
+EnemyType1.BULLET_DELAY = 100;
+EnemyType1.DELAY_PER_ENEMY = 10;
+EnemyType1.RADIUS = 40;

@@ -2,9 +2,7 @@ var Player = cc.Sprite.extend({
   ctor: function() {
     this._super();
     this.initWithFile(res.player_png);
-    this.direction = Player.DIR.STILL;
-    this.state = Player.ALIVE;
-    this.speed = Player.DEFAULT_SPEED;
+    this.initializeFields();
     this.creathBarrierBar();
     this.setPos();
     this.scheduleUpdate();
@@ -13,6 +11,12 @@ var Player = cc.Sprite.extend({
 
   switchDirection: function(keyboardInput) {
     this.direction = keyboardInput;
+  },
+
+  initializeFields: function() {
+    this.direction = Player.DIR.STILL;
+    this.state = Player.ALIVE;
+    this.speed = Player.DEFAULT_SPEED;
   },
 
   setPos: function() {
@@ -31,22 +35,26 @@ var Player = cc.Sprite.extend({
 
   movePlayer: function(pos) {
     if (this.direction !== Player.DIR.STILL) {
-      switch (this.direction) {
-      case Player.DIR.UP:
-        this.moveup(pos);
-        break;
-      case Player.DIR.DOWN:
-        this.moveDown(pos);
-        break;
-      case Player.DIR.LEFT:
-        this.moveLeft(pos);
-        break;
-      case Player.DIR.RIGHT:
-        this.moveRight(pos);
-        break;
-      }
+      this.determineDirection(pos);
     }
     return pos;
+  },
+
+  determineDirection: function(pos) {
+    switch (this.direction) {
+    case Player.DIR.UP:
+      this.moveup(pos);
+      break;
+    case Player.DIR.DOWN:
+      this.moveDown(pos);
+      break;
+    case Player.DIR.LEFT:
+      this.moveLeft(pos);
+      break;
+    case Player.DIR.RIGHT:
+      this.moveRight(pos);
+      break;
+    }
   },
 
   moveup: function(pos) {
@@ -55,12 +63,12 @@ var Player = cc.Sprite.extend({
   },
 
   moveDown: function(pos) {
-    if (pos.y >= 160)// magic number
+    if (pos.y >= 160)
       pos.y -= this.speed;
   },
 
   moveLeft: function(pos) {
-    if (pos.x >= 120)// magic number
+    if (pos.x >= 120)
       pos.x -= this.speed;
   },
 
@@ -116,7 +124,7 @@ var Player = cc.Sprite.extend({
 
   addSpeed: function() {
     playEffect(res.speedUp_mp3);
-    this.speedBonusTimer = 100;// magic number
+    this.speedBonusTimer = Player.MAX_BONUS_TIME;
     this.turnOnTurbo();
   },
 
@@ -124,7 +132,7 @@ var Player = cc.Sprite.extend({
     Player.poweredUp = true;
     playEffect(res.powerUp_wav);
     GameLayer.bulletDelay = 3.0;
-    this.bulletBonusTimer = 100;
+    this.bulletBonusTimer = Player.MAX_BONUS_TIME;
   },
 
   checkBonusBulletEnd: function() {
@@ -148,7 +156,7 @@ var Player = cc.Sprite.extend({
   },
 
   turnOnTurbo: function() {
-    this.speed = 60;// magic number
+    this.speed = Player.TURBO_SPEED;
     this.initWithFile(res.playerTurboMode_png)
   },
 
@@ -165,9 +173,8 @@ var Player = cc.Sprite.extend({
   },
 
   checkPlayerExplodingEnd: function() {
-    if (this.state === Player.DEAD && this.explosionTimer > 50) {
-        this.removeFromParent();
-    }
+    if (this.state === Player.DEAD && this.explosionTimer > Player.EXPLOSION_TIME)
+      this.removeFromParent();
   },
 
   createAnimation: function() {
@@ -200,4 +207,7 @@ Player.poweredUp = false;
 
 Player.ALIVE = 1;
 Player.DEAD = 2;
+Player.EXPLOSION_TIME = 50;
 Player.DEFAULT_SPEED = 38;
+Player.TURBO_SPEED = 60;
+Player.MAX_BONUS_TIME = 100;

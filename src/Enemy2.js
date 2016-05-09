@@ -2,16 +2,20 @@ var EnemyType2 = Enemy.extend({
   ctor: function(order) {
     this._super();
     this.initWithPic();
-    this.originalHP = EnemyType2.HP;
-    this.hp = this.originalHP;
-    this.speed = 20;// magic number
     this.order = order;
-    this.score = 350;// magic number
+    this.initializeFields();
     this.setDifficulty();
   },
 
   initWithPic: function() {
     this.initWithFile(res.enemy2_png);
+  },
+
+  initializeFields: function() {
+    this.originalHP = EnemyType2.HP;
+    this.hp = this.originalHP;
+    this.speed = EnemyType2.SPEED;
+    this.score = EnemyType2.SCORE;
   },
 
   setPos: function() {
@@ -42,4 +46,7 @@ EnemyType2.LANE = {
   YPOSITION: 2500,
   YREPOSITION: -300
 };
+
 EnemyType2.HP = 14;
+EnemyType2.SPEED = 20;
+EnemyType2.SCORE = 350;

@@ -2,13 +2,17 @@ var GameLayer = cc.LayerColor.extend({
   init: function() {
     this._super(new cc.Color(127, 127, 127, 255));
     this.setPosition(new cc.Point(0, 0));
-    this.highScore = currentHighScore;
+    this.initializeFields();
     this.createObjects();
     this.addKeyboardHandlers();
     this.updateEnemies();
     this.scheduleUpdate();
-    cc.audioEngine.stopMusic();
     this.addSound();
+    return true;
+  },
+
+  initializeFields: function() {
+    this.highScore = currentHighScore;
     this.keyboardHandler = GameLayer.keyboard;
     this.pauseStat = GameLayer.playStatus.play;
     this.keyboardHandler = GameLayer.keyboardStatus.enable;
@@ -17,7 +21,6 @@ var GameLayer = cc.LayerColor.extend({
     this.timer = 0;
     this.scoreFactor = 1;
     this.gameTimer = 0;
-    return true;
   },
 
   createObjects: function() {
@@ -137,8 +140,6 @@ var GameLayer = cc.LayerColor.extend({
   keyActionWhenNotPaused: function() {
     if (this.keys[KEYCODE.P])
       this.pauseGame();
-    if (this.keys[KEYCODE.TEMP])
-      this.player.addBarrier();
   },
 
   keyActionWhenPaused: function() {
@@ -194,21 +195,29 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   update: function(dt) {
-    this.timer += 1;
-    this.gameTimer += 1;
+    this.increaseTimer();
     this.movementAndShootAction();
     this.checkEnemy1Respawn();
     this.checkPlayerEnemyCollision();
-    this.checkBulletsOutOfScreen();
-    this.checkBonusItemsOutOfScreen();
+    this.checkOutOfScreen();
     this.isBulletsCollide();
     this.checkBonusItemsCollision();
     this.checkIncreaseEnemiesSpeed();
 
-    if (this.player.state === Player.DEAD && this.player. explosionTimer <= 50) {
+    if (this.player.state === Player.DEAD && this.player. explosionTimer <= Player.EXPLOSION_TIME) {
       this.player.explosionTimer += 1;
       this.player.checkPlayerExplodingEnd();
     }
+  },
+
+  increaseTimer: function() {
+    this.timer += 1;
+    this.gameTimer += 1;
+  },
+
+  checkOutOfScreen: function() {
+    this.checkBulletsOutOfScreen();
+    this.checkBonusItemsOutOfScreen();
   },
 
   checkPlayerEnemyCollision: function() {
@@ -223,16 +232,13 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   isCollide: function() {
-    if (this.checkHitCondition(this.player))
-      return true;
-    else
-      return false;
+    return this.checkHitCondition(this.player);
   },
 
   checkHitCondition: function(focusObject) {
     return this.checkHitEnemy(focusObject, this.enemiesType1) ||
-    this.checkHitEnemy(focusObject, this.enemiesType2) ||
-    this.checkHitEnemy(focusObject, this.enemiesType3)
+      this.checkHitEnemy(focusObject, this.enemiesType2) ||
+      this.checkHitEnemy(focusObject, this.enemiesType3)
   },
 
   checkHitEnemy: function(focusObject,enemies) {
@@ -250,18 +256,23 @@ var GameLayer = cc.LayerColor.extend({
       enemy.gotDestroyed();
     else {
       enemy.gotHit();
-      if (enemy.state === Enemy.STATE.destroyed) {
-        this.score = this.score + Math.round(enemy.getScore() * this.scoreFactor);
-        this.afterEnemygotDestroyed();
-      }
+      this.isEnemyDestroyed(enemy);
+    }
+  },
+
+  isEnemyDestroyed: function(enemy) {
+    if (enemy.state === Enemy.STATE.destroyed) {
+      this.score = this.score + Math.round(enemy.getScore() * this.scoreFactor);
+      this.afterEnemygotDestroyed();
     }
   },
 
   checkEnemy1Respawn: function() {
-    if (this.enemiesType1[4].y <= GameLayer.RESPAWNY)
+    if (this.enemiesType1[4].y <= GameLayer.RESPAWNY) {
       for (var i = 0; i < this.enemiesType1.length; i++) {
         this.enemiesType1[i].canRe = true;
       }
+    }
   },
 
   shoot: function() {
@@ -302,10 +313,10 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   afterEnemygotDestroyed: function() {
-      this.randomDropBonusItem();
-      this.scoreFactor += 0.2;
-      this.checkBeatHighScore();
-      this.setScore();
+    this.randomDropBonusItem();
+    this.scoreFactor += GameLayer.SCORE_FACTOR_RATE;
+    this.checkBeatHighScore();
+    this.setScore();
   },
 
   isBulletsCollide: function() {
@@ -348,8 +359,8 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   randomDropBonusItem: function() {
-    var range = 6; //magic number
-    var min = 1;  //magic number
+    var range = 6;
+    var min = 1;
     var randomValue = random(range, min);
     if (randomValue == 1)
       this.dropBonusItem();
@@ -398,15 +409,15 @@ var GameLayer = cc.LayerColor.extend({
 
   createHighScoreHeadLineLabel: function() {
     this.highScoreHeadLineLabel = new cc.LabelTTF.create('High score', 'Arial', 50);
-    this.highScoreHeadLineLabel.setPosition(new cc.Point(GameLayer.HIGH_SCORE.xPos,
-    GameLayer.HIGH_SCORE.yPos));
+    this.highScoreHeadLineLabel.setPosition(new cc.Point(500,
+    GameLayer.SCREENHEIGHT - 60));
     this.addChild(this.highScoreHeadLineLabel,2);
   },
 
   createHighScoreNumberLabel: function() {
     this.highScoreNumberLabel = new cc.LabelTTF.create(this.highScore+'', 'Arial', 50);
-    this.highScoreNumberLabel.setPosition(new cc.Point(GameLayer.HIGH_SCORE.xPos,
-    GameLayer.HIGH_SCORE.yPos - GameLayer.HIGH_SCORE.gap));
+    this.highScoreNumberLabel.setPosition(new cc.Point(500,
+    GameLayer.SCREENHEIGHT - 120));
     this.addChild(this.highScoreNumberLabel,2);
   },
 
@@ -422,14 +433,16 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   addSound: function() {
+    cc.audioEngine.stopMusic();
+
     if (soundStatus === SOUND.enable) {
-      setVolume(0.25);
+      setVolume(GameLayer.VOLUME);
       cc.audioEngine.playMusic(res.gameBGM_mp3, true);
     }
   },
 
   checkIncreaseEnemiesSpeed: function() {
-    if(this.gameTimer % 5400 === 0) { //magic number
+    if(this.gameTimer % GameLayer.HARDER_TIME === 0) {
       this.increaseEnemiesSpeed(this.enemiesType1);
       this.increaseEnemiesSpeed(this.enemiesType2);
       this.increaseEnemiesSpeed(this.enemiesType3);
@@ -438,7 +451,7 @@ var GameLayer = cc.LayerColor.extend({
 
   increaseEnemiesSpeed: function(enemies) {
     for(var i = 0; i < enemies.length; i++) {
-      enemies[i].speed += 1.5;// might be magic number
+      enemies[i].speed += GameLayer.INCREASE_EN_SPEED;
     }
   }
 });
@@ -452,11 +465,6 @@ var GameScene = cc.Scene.extend({
   }
 });
 
-GameLayer.SCREENWIDTH = 1920;
-GameLayer.SCREENHEIGHT = 1080;
-GameLayer.STARTPOSY = 150;
-GameLayer.RESPAWNY = -300;
-
 var KEYCODE = {
   A: 65,
   W: 87,
@@ -466,7 +474,6 @@ var KEYCODE = {
   R: 82,
   SPACEBAR: 32,
   ESC: 27,
-  TEMP: 192
 };
 
 GameLayer.playStatus = {
@@ -479,17 +486,20 @@ GameLayer.keyboardStatus = {
   disable: false
 };
 
-GameLayer.HIGH_SCORE = {
-  xPos: 500,
-  yPos: GameLayer.SCREENHEIGHT - 60,
-  gap: 60
-};
-
 GameLayer.bulletDelay = 5;
 var KEYBOARD = {
   keyDown: true,
   keyReleased: false
 };
+
+GameLayer.SCREENWIDTH = 1920;
+GameLayer.SCREENHEIGHT = 1080;
+GameLayer.STARTPOSY = 150;
+GameLayer.RESPAWNY = -300;
+GameLayer.VOLUME = 0.25;
+GameLayer.INCREASE_EN_SPEED = 1.5;
+GameLayer.HARDER_TIME = 5400;
+GameLayer.SCORE_FACTOR_RATE = 0.2;
 
 var playerYRadius = 120;
 var addedXForBullet = 55;

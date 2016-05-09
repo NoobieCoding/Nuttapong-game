@@ -19,10 +19,10 @@ var MenuLayer = cc.LayerColor.extend({
   },
 
   onKeyDown: function(keyCode, event) {
-      if (keyCode === MenuLayer.ENTER)
-        cc.director.pushScene(new GameScene());
-      else if (keyCode === MenuLayer.HKEY)
-        this.instruction.openOrClose();
+    if (keyCode === MenuLayer.ENTER)
+      cc.director.pushScene(new GameScene());
+    else if (keyCode === MenuLayer.HKEY)
+      this.instruction.openOrClose();
   },
 
   addComponents: function() {
@@ -50,10 +50,6 @@ var MenuLayer = cc.LayerColor.extend({
   },
 
   addDifficultyOption: function() {
-    this.createDifficultyLabel();
-  },
-
-  createDifficultyLabel: function() {
     this.difficultyLabel = new DifficultyLabel();
     this.difficultyLabel.setPosition(new cc.Point(MenuLayer.DIFFICULTY_LABEL.xPos,
     MenuLayer.DIFFICULTY_LABEL.yPos));
@@ -133,7 +129,7 @@ var MenuLayer = cc.LayerColor.extend({
   playBGM: function() {
     if (soundStatus === SOUND.enable) {
       cc.audioEngine.playMusic(res.menuBGM_mp3, true);
-      setVolume(0.25);
+      setVolume(MenuLayer.VOLUME);
     }
   }
 });
@@ -181,3 +177,4 @@ MenuLayer.HIGH_SCORE = {
 
 MenuLayer.ENTER = 13;
 MenuLayer.HKEY = 72;
+MenuLayer.VOLUME = 0.25;
