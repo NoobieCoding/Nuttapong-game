@@ -1,5 +1,5 @@
 var EnemyType1 = Enemy.extend({
-  ctor: function(order) {
+  ctor: function(order, player, gameLayer) {
     this._super();
     this.initWithPic();
     this.order = order;
@@ -10,8 +10,11 @@ var EnemyType1 = Enemy.extend({
     this.speed  = 8// magic number
     this.xSpeed = 15;// magic number
     this.score = 100;// magic number
+    this.bulletTimer = 0;
     this.setDifficulty();
     this.canRe = false;
+    this.player = player;
+    this.gameLayer = gameLayer;
   },
 
   initWithPic: function() {
@@ -39,11 +42,13 @@ var EnemyType1 = Enemy.extend({
 
   update: function(dt) {
     this.explosionTimer += 1;
+    this.bulletTimer += 1;
     this.changePosition();
     this.setPosition(new cc.Point(this.x, this.y));
     this.checkBounce();
     this.rePosition();
     this.checkEnemyInvisible();
+    this.shoot();
   },
 
   changeXPosition: function() {
@@ -67,6 +72,30 @@ var EnemyType1 = Enemy.extend({
     }
     if (this.x >= EnemyType1.ENEMY1.RIGHT_BOARDER)
       this.side = EnemyType1.ENEMY1.RIGHTSIDE;
+  },
+
+  setPlayer: function(player) {
+    this.player = player;
+  },
+
+  shoot: function() {
+    if (this.shootCondition()) {
+      this.createBullet();
+      this.bulletTimer = 0;
+    }
+  },
+
+  shootCondition: function() {
+    return this.bulletTimer >= 100 + (this.order * 10) &&
+      this.y < GameLayer.SCREENHEIGHT - 80 && this.y > 160 &&
+      this.state === Enemy.STATE.normal;
+  },
+
+  createBullet: function() {
+    var bulletType = random(1, 1);
+    this.bullet = new EnemyBullet(bulletType, this.player, this.gameLayer);
+    this.bullet.setPosition(new cc.Point(this.x, this.y - 40));
+    this.gameLayer.addChild(this.bullet);
   }
 });
 

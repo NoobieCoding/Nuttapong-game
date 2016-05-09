@@ -28,6 +28,7 @@
     "src/Pictures.js",
     "src/DifficultyLabel.js",
     "src/Instruction.js",
-    "src/SoundPlayer.js"
+    "src/SoundPlayer.js",
+    "src/EnemyBullet.js"
   ]
 }

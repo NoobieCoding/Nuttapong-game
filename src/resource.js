@@ -13,6 +13,8 @@ var res = {
 
   bullet_png: 'res/images/bullet.png',
   bullet2_png: 'res/images/bullet2.png',
+  enemyBullet1_png: 'res/images/enemyBullet1.png',
+  enemyBullet2_png: 'res/images/enemyBullet2.png',
 
   bonus_item1_png: 'res/images/bonus item1.png',
   bonus_item2_png: 'res/images/bonus item2.png',

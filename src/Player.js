@@ -160,6 +160,7 @@ var Player = cc.Sprite.extend({
   gotDestroyed: function() {
     this.explosionTimer = 0;
     this.state = Player.DEAD;
+    playEffect(res.playerExploded_wav);
     this.runAction(this.animation);
   },
 

@@ -19,7 +19,7 @@ var EnemyType3 = Enemy.extend({
   determineSide: function() {
     if (this.order === 1) {
       this.side = EnemyType3.LANESIDE.LEFT;
-        this.initWithFile(res.enemy3_png);
+      this.initWithFile(res.enemy3_png);
     } else {
       this.side = EnemyType3.LANESIDE.RIGHT;
       this.initWithFile(res.enemy3_2_png);

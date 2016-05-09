@@ -53,7 +53,6 @@ var Enemy = cc.Sprite.extend({
     this.runAction(this.animation);
     playEffect(res.enemyExploded_wav);
     this.state = Enemy.STATE.destroyed;
-    //this.setVisible(false);
   },
 
   checkEnemyInvisible: function() {

@@ -52,7 +52,7 @@ var GameLayer = cc.LayerColor.extend({
   createEnemyType1: function() {
     this.enemiesType1 = new Array(5);
     for (var i = 0; i < this.enemiesType1.length; i++) {
-      this.enemiesType1[i] = new EnemyType1(i);
+      this.enemiesType1[i] = new EnemyType1(i, this.player, this);
       this.enemiesType1[i].setPos();
       this.addChild(this.enemiesType1[i], 1);
     }
@@ -334,8 +334,6 @@ var GameLayer = cc.LayerColor.extend({
 
   resetGame: function() {
     this.keyboardHandler = GameLayer.keyboardStatus.enable;
-    cc.director.resume();
-    this.player.state = Player.ALIVE;
     this.score = 0;
     this.highScore = currentHighScore;
     this.highScoreNumberLabel.setString(this.highScore);
@@ -345,9 +343,9 @@ var GameLayer = cc.LayerColor.extend({
     this.removeGameOverText();
     this.setScore();
     this.createPlayer();
-    this.resetBackgroundsPos();
-    this.resetAllEnemiesPos();
-    this.clearObjectsInScreen();
+    this.setPlayerForEnemy();
+    cc.director.runScene(new GameScene());
+    cc.director.resume();
     cc.audioEngine.rewindMusic();
   },
 
@@ -391,6 +389,12 @@ var GameLayer = cc.LayerColor.extend({
     this.bullets = [];
   },
 
+  clearEnemyBullets: function() {
+    for (var i = 0; i < this.enemiesType1s.length;i++) {
+      this.enemiesType1[i].removeBullets();
+    }
+  },
+
   clearBonusItems: function(){
     for (var i = 0; i < this.bonusItems.length;i++) {
       this.removeChild(this.bonusItems[i], true);
@@ -398,6 +402,11 @@ var GameLayer = cc.LayerColor.extend({
     this.bonusItems = [];
   },
 
+  setPlayerForEnemy: function() {
+    for (var i = 0; i < this.enemiesType1.length; i++) {
+      this.enemiesType1[i].setPlayer(this.player);
+    }
+  },
   setScore: function() {
     this.numScoreLabel.setString(this.score);
   },
