@@ -442,7 +442,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   checkIncreaseEnemiesSpeed: function() {
-    if(this.gameTimer % GameLayer.HARDER_TIME === 0) {
+    if (this.gameTimer % GameLayer.HARDER_TIME === 0) {
       this.increaseEnemiesSpeed(this.enemiesType1);
       this.increaseEnemiesSpeed(this.enemiesType2);
       this.increaseEnemiesSpeed(this.enemiesType3);
@@ -450,7 +450,7 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   increaseEnemiesSpeed: function(enemies) {
-    for(var i = 0; i < enemies.length; i++) {
+    for (var i = 0; i < enemies.length; i++) {
       enemies[i].speed += GameLayer.INCREASE_EN_SPEED;
     }
   }
@@ -486,11 +486,12 @@ GameLayer.keyboardStatus = {
   disable: false
 };
 
-GameLayer.bulletDelay = 5;
 var KEYBOARD = {
   keyDown: true,
   keyReleased: false
 };
+
+GameLayer.bulletDelay = 5;
 
 GameLayer.SCREENWIDTH = 1920;
 GameLayer.SCREENHEIGHT = 1080;
