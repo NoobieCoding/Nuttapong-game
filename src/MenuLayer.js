@@ -131,8 +131,10 @@ var MenuLayer = cc.LayerColor.extend({
   },
 
   playBGM: function() {
-    setVolume(0.25);
-    playMusic(res.menuBGM_mp3);
+    if (soundStatus === SOUND.enable) {
+      cc.audioEngine.playMusic(res.menuBGM_mp3, true);
+      setVolume(0.25);
+    }
   }
 });
 

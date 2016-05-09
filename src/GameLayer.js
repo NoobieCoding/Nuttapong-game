@@ -422,7 +422,10 @@ var GameLayer = cc.LayerColor.extend({
   },
 
   addSound: function() {
-    playEffect(res.gameBGM_mp3);
+    if (soundStatus === SOUND.enable) {
+      setVolume(0.25);
+      cc.audioEngine.playMusic(res.gameBGM_mp3, true);
+    }
   },
 
   checkIncreaseEnemiesSpeed: function() {
