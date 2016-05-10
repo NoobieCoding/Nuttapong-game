@@ -58,7 +58,7 @@ var EnemyBullet = cc.Sprite.extend({
   },
 });
 
-EnemyBullet.SPEED = 15;
+EnemyBullet.SPEED = 10;
 
 EnemyBullet.OUT_OF_SCREEN_VALUE = 100;
 

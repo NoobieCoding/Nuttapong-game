@@ -150,8 +150,8 @@ var Player = cc.Sprite.extend({
   checkBonusSpeedEnd: function() {
     if (this.speedBonusTimer > 0) {
       this.speedBonusTimer -= 0.2;
-    }
 
+    }
     if (this.speedBonusTimer <= 0)
       this.turnOffTurbo();
   },
@@ -171,6 +171,7 @@ var Player = cc.Sprite.extend({
     this.state = Player.DEAD;
     playEffect(res.playerExploded_wav);
     this.runAction(this.animation);
+    this.unscheduleUpdate();
   },
 
   checkPlayerExplodingEnd: function() {

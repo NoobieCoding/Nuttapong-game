@@ -388,7 +388,7 @@ var GameLayer = cc.LayerColor.extend({
 
   checkBonusItemsCollision: function() {
     for (var i = this.bonusItems.indexOf(null); i < this.bonusItems.length; i++) {
-      if (this.bonusItems[i] != null)
+      if (this.bonusItems[i] != null && this.player.state === Player.ALIVE)
         this.bonusItems[i] = this.checkEachBonusItemCollision(this.bonusItems[i]);
     }
   },
